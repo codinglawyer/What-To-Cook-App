@@ -1,5 +1,5 @@
 import React from 'react';
-import addRecipe from '../actions/index'
+import * as actions from '../actions/index'
 import { connect } from 'react-redux';
 
 class Input extends React.Component {
@@ -11,17 +11,20 @@ class Input extends React.Component {
     }
 
     handleChange(e) {
-        console.log(this.state);
         e.preventDefault();
         this.setState({value: e.target.value});
     }
 
     handleClick(e){
         e.preventDefault();
-        this.props.dispatch(addRecipe(this.state.value))
+        this.props.dispatch(actions.addRecipe(this.state.value))
+    }
+    handleDelete(id){
+        console.log(id)
+        this.props.dispatch(actions.deleteRecipe(id))
+
     }
     render() {
-        console.log("PROPS", this.props);
         return (
             <div>
                 <input
@@ -35,7 +38,10 @@ class Input extends React.Component {
                 />
                 <ul>
                     {this.props.recipes.map(recipe => (
-                        <li key={Math.random()}>{recipe.recipe}</li>
+                        <li
+                            key={Math.random()}
+                            onClick={e => this.handleDelete(recipe.id)}
+                        >{recipe.recipe}</li>
                     ))}
                 </ul>
             </div>

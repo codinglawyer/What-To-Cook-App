@@ -1,9 +1,13 @@
 import uuidV4 from 'uuid';
 
-const addRecipe = (text) => ({
+export const addRecipe = (text) => ({
     type: 'ADD_RECIPE',
     id: uuidV4(),
     text,
 });
 
-export default addRecipe;
+export const deleteRecipe = (id) => ({
+    type: 'DELETE_RECIPE',
+    id,
+});
+
