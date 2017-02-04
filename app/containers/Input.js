@@ -35,7 +35,7 @@ class Input extends React.Component {
                 />
                 <ul>
                     {this.props.recipes.map(recipe => (
-                        <li key={Math.random()}>{recipe}</li>
+                        <li key={Math.random()}>{recipe.recipe}</li>
                     ))}
                 </ul>
             </div>
@@ -56,4 +56,4 @@ const mapStateToProps = (state) => {
 // }
 
 
-export default connect (mapStateToProps)(Input);
+export default connect(mapStateToProps)(Input);

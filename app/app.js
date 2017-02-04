@@ -6,7 +6,7 @@ import Recipes from './reducers/recipes';
 import Input from './containers/Input'
 
 
-let store = createStore(Recipes, ["david"]);
+let store = createStore(Recipes);
 
 ReactDOM.render(
     <Provider store={store}>
