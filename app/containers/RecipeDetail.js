@@ -7,7 +7,7 @@ const RecipeDetail = ({ recipe }) => {
         <div>
             {recipe.map(recipe => (
                 <div key={recipe.id}>
-                    {recipe.recipe}
+                    {recipe.title}
                 </div>
             ))}
         </div>
@@ -16,7 +16,7 @@ const RecipeDetail = ({ recipe }) => {
 
 const mapStateToProps = (state) => {
     return {
-        recipe: state.Recipe
+        recipe: state.recipe
     }
 };
 

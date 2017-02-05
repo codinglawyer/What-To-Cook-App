@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
 
-const Recipe = (state = [], action) => {
+const recipe = (state = [], action) => {
     switch(action.type) {
         case 'ADD_RECIPE':
             return [
@@ -17,5 +17,5 @@ const Recipe = (state = [], action) => {
     }
 };
 
-const Recipes = combineReducers({Recipe, form: formReducer})
+const Recipes = combineReducers({recipe, form: formReducer})
 export default Recipes;
