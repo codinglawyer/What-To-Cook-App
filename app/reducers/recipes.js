@@ -1,12 +1,12 @@
-const Recipes = (state = [], action) => {
+import { combineReducers } from 'redux'
+import { reducer as formReducer } from 'redux-form'
+
+const Recipe = (state = [], action) => {
     switch(action.type) {
         case 'ADD_RECIPE':
             return [
                 ...state,
-                {
-                    'id': action.id,
-                    'recipe': action.text
-                }
+                action.recipeData,
             ];
         case 'DELETE_RECIPE':
             return state.filter(recipe => {
@@ -17,4 +17,5 @@ const Recipes = (state = [], action) => {
     }
 };
 
+const Recipes = combineReducers({Recipe, form: formReducer})
 export default Recipes;

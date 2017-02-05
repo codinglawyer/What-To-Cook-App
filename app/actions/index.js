@@ -1,9 +1,6 @@
-import uuidV4 from 'uuid';
-
-export const addRecipe = (text) => ({
+export const addRecipe = (recipeData) => ({
     type: 'ADD_RECIPE',
-    id: uuidV4(),
-    text,
+    recipeData,
 });
 
 export const deleteRecipe = (id) => ({
