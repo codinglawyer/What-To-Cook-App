@@ -1,6 +1,10 @@
 import React from 'react';
 import uuidV4 from 'uuid';
 import { Field, FieldArray, reduxForm } from 'redux-form';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+
 import * as actions from '../actions/index';
 
 
@@ -9,7 +13,7 @@ const renderField = ({ input, label }) => {
         <div>
             <label>{label}</label>
             <div>
-                <input
+                <TextField
                     {...input}
                     type="text"
                     placeholder={label}
@@ -23,16 +27,20 @@ const renderIngredients = ({ fields }) => {
     return (
         <div>
             <div>
-                <button
+                <RaisedButton
+                    className="addIngredient"
+                    labelStyle={{fontSize: '12px'}}
+                    label="Add Ingredient"
+                    secondary={true}
                     type="button"
                     onClick={() => fields.push({})}
-                >
-                    Add Ingredient
-                </button>
+                />
             </div>
             {fields.map((ingredient, index) =>
                 <div key={index}>
-                    <button
+                    <FlatButton
+                        label="Delete Ingredient"
+                        secondary={true}
                         type="button"
                         title="remove"
                         onClick={() => fields.remove(index)}
@@ -41,7 +49,7 @@ const renderIngredients = ({ fields }) => {
                         name={`${ingredient}.ingredient`}
                         type="text"
                         component={renderField}
-                        label="ingredient"
+                        label={`#${index + 1} Ingredient`}
                     />
                 </div>
             )}
@@ -63,8 +71,19 @@ const RecipeForm = ({ handleSubmit, pristine, submitting, reset }) => {
                 component={renderIngredients}
             />
             <div>
-                <button type="submit" disabled={submitting}>Submit</button>
-                <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
+                <RaisedButton
+                    className="submitButton"
+                    label="Submit"
+                    primary={true}
+                    type="submit"
+                    disabled={submitting} />
+                <RaisedButton
+                    className="clearButton"
+                    label="Clear Values"
+                    default={true}
+                    type="button"
+                    disabled={pristine || submitting}
+                    onClick={reset} />
             </div>
         </form>
     )
@@ -78,3 +97,4 @@ export default reduxForm({
         dispatch(actions.addRecipe(recipeData))
     }
 })(RecipeForm)
+

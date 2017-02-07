@@ -8,6 +8,11 @@ import createLogger from 'redux-logger';
 import Recipes from './reducers/recipes';
 import Main from './components/Main';
 
+import './global-styles';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+
 let localStorageState = JSON.parse(localStorage.getItem('recipes'));
 localStorageState = localStorageState ? localStorageState : [];
 
@@ -22,11 +27,16 @@ setInterval(() => {
     console.log(store.getState())
 },5000);
 
+injectTapEventPlugin();
+
 ReactDOM.render(
     <Provider store={store}>
+        <MuiThemeProvider>
         <Router history={browserHistory}>
             <Route path="/" component={Main} />
         </Router>
+        </MuiThemeProvider>
     </Provider>,
     document.getElementById('app')
 );
+
