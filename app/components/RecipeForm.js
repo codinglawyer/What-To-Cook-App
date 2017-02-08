@@ -57,35 +57,39 @@ const renderIngredients = ({ fields }) => {
     )
 };
 
-const RecipeForm = ({ handleSubmit, pristine, submitting, reset }) => {
+const RecipeForm = ({ handleSubmit, pristine, submitting, reset, ownProps }) => {
     return (
-        <form onSubmit={handleSubmit}>
-            <Field
-                name="title"
-                type="text"
-                component={renderField}
-                label="Title"
-            />
-            <FieldArray
-                name="ingredients"
-                component={renderIngredients}
-            />
-            <div>
-                <RaisedButton
-                    className="submitButton"
-                    label="Submit"
-                    primary={true}
-                    type="submit"
-                    disabled={submitting} />
-                <RaisedButton
-                    className="clearButton"
-                    label="Clear Values"
-                    default={true}
-                    type="button"
-                    disabled={pristine || submitting}
-                    onClick={reset} />
-            </div>
-        </form>
+        <div>
+            {ownProps.formDisplayed ? (
+                <form onSubmit={handleSubmit}>
+                    <Field
+                        name="title"
+                        type="text"
+                        component={renderField}
+                        label="Title"
+                    />
+                    <FieldArray
+                        name="ingredients"
+                        component={renderIngredients}
+                    />
+                    <div>
+                        <RaisedButton
+                            className="submitButton"
+                            label="Submit"
+                            primary={true}
+                            type="submit"
+                            disabled={submitting} />
+                        <RaisedButton
+                            className="clearButton"
+                            label="Clear Values"
+                            default={true}
+                            type="button"
+                            disabled={pristine || submitting}
+                            onClick={reset} />
+                    </div>
+                </form>
+            ) : null}
+        </div>
     )
 };
 

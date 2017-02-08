@@ -23,6 +23,10 @@ injectGlobal`
     text-align: center;
   }
 
+  .title {
+    font-weight: normal;
+    font-size: 40px;
+  }
   p,
   label {
     font-family: 'Roboto', Georgia, Times, 'Times New Roman', serif;
@@ -30,16 +34,16 @@ injectGlobal`
   }
   
   .addIngredient {
-    margin: 20px
+    margin: 20px;
   }
   
   .submitButton {
-        margin: 20px
+    margin: 20px;
 
   }
   
   .clearButton {
-        margin: 20px
+        margin: 20px;
 s
   }
 `;

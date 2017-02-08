@@ -8,3 +8,7 @@ export const deleteRecipe = (id) => ({
     id,
 });
 
+export const displayRecipeForm = (isDisplayed) => ({
+    type: 'DISPLAY_RECIPE_FORM',
+    isDisplayed,
+})

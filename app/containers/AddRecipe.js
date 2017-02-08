@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import RecipeForm from '../components/RecipeForm'
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
     return {
-        recipes: state.Recipe
+        ownProps
     }
 }
 
