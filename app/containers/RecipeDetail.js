@@ -1,11 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const RecipeDetail = ({ recipe }) => {
-    console.log(recipe);
+const RecipeDetail = ({ recipes }) => {
     return (
         <div>
-            {recipe.map(recipe => (
+            {recipes.map(recipe => (
                 <div key={recipe.id}>
                     {recipe.title}
                 </div>
@@ -16,7 +15,7 @@ const RecipeDetail = ({ recipe }) => {
 
 const mapStateToProps = (state) => {
     return {
-        recipe: state.recipe
+        recipes: state.recipes
     }
 };
 

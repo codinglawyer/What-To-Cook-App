@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
 
-const recipe = (state = [], action) => {
+const recipes = (state = [], action) => {
     switch(action.type) {
         case 'ADD_RECIPE':
             return [
@@ -12,6 +12,15 @@ const recipe = (state = [], action) => {
             return state.filter(recipe => {
                 return recipe.id !== action.id
             });
+        case 'DISPLAY_RECIPE':
+            let updatedRecipe = state.filter(recipe => {
+                return recipe.id === action.recipeId
+            });
+            updatedRecipe[0].displayed = !updatedRecipe[0].displayed
+            let otherRecipes = state.filter(recipe => {
+                return recipe.id !== action.recipeId
+            });
+            return [...otherRecipes, updatedRecipe[0]]
         default:
             return state;
     }
@@ -27,11 +36,12 @@ const displayRecipeForm = (state = false, action) => {
 }
 
 
-const Recipes = combineReducers(
+const RecipeApp = combineReducers(
         {
-            recipe,
+            recipes,
             displayRecipeForm,
             form: formReducer,
         }
     )
-export default Recipes;
+
+export default RecipeApp;

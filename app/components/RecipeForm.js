@@ -57,10 +57,10 @@ const renderIngredients = ({ fields }) => {
     )
 };
 
-const RecipeForm = ({ handleSubmit, pristine, submitting, reset, ownProps }) => {
+const RecipeForm = ({ handleSubmit, pristine, submitting, reset, formDisplayed }) => {
     return (
         <div>
-            {ownProps.formDisplayed ? (
+            {formDisplayed ? (
                 <form onSubmit={handleSubmit}>
                     <Field
                         name="title"
@@ -98,6 +98,7 @@ export default reduxForm({
     fields: ['recipe', 'ingredients'],
     onSubmit: (recipeData, dispatch) => {
         recipeData.id = uuidV4();
+        recipeData.displayed = false;
         dispatch(actions.addRecipe(recipeData))
     }
 })(RecipeForm)

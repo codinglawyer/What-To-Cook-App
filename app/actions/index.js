@@ -12,3 +12,8 @@ export const displayRecipeForm = (isDisplayed) => ({
     type: 'DISPLAY_RECIPE_FORM',
     isDisplayed,
 })
+
+export const displayRecipe = (recipeId) => ({
+    type: 'DISPLAY_RECIPE',
+    recipeId,
+})

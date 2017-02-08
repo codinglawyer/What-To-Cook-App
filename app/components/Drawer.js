@@ -2,6 +2,9 @@ import React from 'react';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
+import { compose, withState } from 'recompose';
+
+import * as actions from '../actions/index'
 
 export default class DrawerUndockedExample extends React.Component {
 
@@ -12,13 +15,17 @@ export default class DrawerUndockedExample extends React.Component {
 
     handleToggle = () => this.setState({open: !this.state.open});
 
-    handleClose = () => this.setState({open: false});
+    handleClose = (recipeID) => {
+        this.props.dispatch(actions.displayRecipe(recipeID))
+        this.setState({open: false})
+
+    };
 
     render() {
         return (
             <div>
                 <RaisedButton
-                    label="Open Drawer"
+                    label="Find A Recipe"
                     onTouchTap={this.handleToggle}
                 />
                 <Drawer
@@ -27,8 +34,14 @@ export default class DrawerUndockedExample extends React.Component {
                     open={this.state.open}
                     onRequestChange={(open) => this.setState({open})}
                 >
-                    <MenuItem onTouchTap={this.handleClose}>Menu Item</MenuItem>
-                    <MenuItem onTouchTap={this.handleClose}>Menu Item 2</MenuItem>
+                {this.props.recipes.map(recipe => (
+                    <MenuItem
+                        key={recipe.id}
+                        onTouchTap={() => this.handleClose(recipe.id)}
+                    >
+                        {recipe.title}
+                    </MenuItem>
+                ))}
                 </Drawer>
             </div>
         );
