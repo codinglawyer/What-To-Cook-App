@@ -1,6 +1,3 @@
-import { combineReducers } from 'redux'
-import { reducer as formReducer } from 'redux-form'
-
 const recipes = (state = [], action) => {
     switch(action.type) {
         case 'ADD_RECIPE':
@@ -26,22 +23,4 @@ const recipes = (state = [], action) => {
     }
 };
 
-const displayRecipeForm = (state = false, action) => {
-    switch(action.type) {
-        case 'DISPLAY_RECIPE_FORM':
-            return action.isDisplayed
-        default:
-            return state;
-    }
-}
-
-
-const RecipeApp = combineReducers(
-        {
-            recipes,
-            displayRecipeForm,
-            form: formReducer,
-        }
-    )
-
-export default RecipeApp;
+export default recipes;

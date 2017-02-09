@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { Router, Route, browserHistory } from 'react-router'
 import createLogger from 'redux-logger';
 
-import RecipeApp from './reducers/recipes';
+import RecipeApp from './reducers/recipeApp';
 import Main from './components/Main';
 
 import './global-styles';
@@ -17,7 +17,9 @@ let localStorageState = JSON.parse(localStorage.getItem('recipes'));
 localStorageState = localStorageState ? localStorageState : [];
 
 const logger = createLogger();
-let store = createStore(RecipeApp, localStorageState, applyMiddleware(logger));
+let store = createStore(RecipeApp,
+    localStorageState,
+    applyMiddleware(logger));
 
 setInterval(() => {
     localStorage.setItem('recipes', JSON.stringify(store.getState()))
