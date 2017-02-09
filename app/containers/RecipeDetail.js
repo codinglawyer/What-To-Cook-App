@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 const RecipeDetail = ({ recipes }) => {
     return (
         <div>
-            {recipes.map(recipe => (
-                <div key={recipe.id}>
-                    {recipe.title}
-                </div>
-            ))}
+            {/*{recipes.map(recipe => (*/}
+                {/*<div key={recipe.id}>*/}
+                    {/*{recipe.title}*/}
+                {/*</div>*/}
+            {/*))}*/}
         </div>
     )
 };

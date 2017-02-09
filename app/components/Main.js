@@ -8,7 +8,7 @@ import Drawer from '../components/Drawer'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import * as actions from '../actions/index'
-import { getRecipesList } from '../reducers/recipeApp';
+import { getAllRecipes } from '../reducers/recipeApp';
 import { getDisplayRecipeState } from '../reducers/recipeApp';
 
 const style = {
@@ -40,16 +40,16 @@ const Main = ({ dispatch, formDisplayed, recipes, displayedRecipe }) => {
             />
             <h5>OR</h5>
                 <div>
-                {displayedRecipe[0] && displayedRecipe[0].displayed? (
-                        <div>
-                            <div>{displayedRecipe[0].title}</div>
-                        </div>
-                    ) : (
+                {/*{displayedRecipe[0] && displayedRecipe[0].displayed? (*/}
+                        {/*<div>*/}
+                            {/*<div>{displayedRecipe[0].title}</div>*/}
+                        {/*</div>*/}
+                    {/*) : (*/}
                         <div>
                             <NewRecipeButton dispatch={dispatch} formDisplayed={formDisplayed} />
                             <RecipeForm dispatch={dispatch} formDisplayed={formDisplayed} />
                         </div>
-                    )}
+                    {/*)}*/}
                 </div>
             <RecipeDetail />
         </div>
@@ -57,13 +57,13 @@ const Main = ({ dispatch, formDisplayed, recipes, displayedRecipe }) => {
 }
 
 const mapStateToProps = (state) => {
-    let displayedRecipe = state.recipes.filter(recipe => {
-        return recipe.displayed
-    })
-    console.log("disp", displayedRecipe);
+    // let displayedRecipe = state.recipes.filter(recipe => {
+    //     return recipe.displayed
+    // })
+    // console.log("disp", displayedRecipe);
     return {
-        displayedRecipe,
-        recipes: getRecipesList(state),
+        // displayedRecipe,
+        recipes: getAllRecipes(state),
         formDisplayed: getDisplayRecipeState(state)
     }
 }
