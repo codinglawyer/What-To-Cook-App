@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 
-import recipes from './recipes';
+import recipes, * as fromRecipes from './recipes';
 import byIds from './byIds';
-import displayRecipeForm from './displayRecipeForm';
+import displayRecipeForm, * as fromDisplayForm from './displayRecipeForm';
 
 const RecipeApp = combineReducers(
     {
@@ -15,3 +15,6 @@ const RecipeApp = combineReducers(
 );
 
 export default RecipeApp;
+
+export const getRecipesList = (state) => fromRecipes.getRecipesList(state.recipes);
+export const getDisplayRecipeState = (state) => fromDisplayForm.getDisplayRecipeState(state.displayRecipeForm);

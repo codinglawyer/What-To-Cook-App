@@ -8,3 +8,5 @@ const displayRecipeForm = (state = false, action) => {
 };
 
 export default displayRecipeForm;
+
+export const getDisplayRecipeState = (state) => state;

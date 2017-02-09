@@ -24,3 +24,5 @@ const recipes = (state = [], action) => {
 };
 
 export default recipes;
+
+export const getRecipesList = (state) => state;
