@@ -43,7 +43,7 @@ injectGlobal`
   }
   
   .clearButton {
-        margin: 20px;
-s
+    margin: 20px;
   }
+  
 `;

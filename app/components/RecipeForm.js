@@ -19,6 +19,8 @@ const renderField = ({ input, label, multiLine, rows }) => {
                     placeholder={label}
                     multiLine={multiLine}
                     rows={rows}
+                    className="textField"
+                    style={{width:'30%'}}
                 />
             </div>
         </div>
@@ -112,7 +114,6 @@ export default reduxForm({
     fields: ['recipe', 'ingredients'],
     onSubmit: (recipeData, dispatch) => {
         recipeData.id = uuidV4();
-        recipeData.displayed = false;
         dispatch(actions.addRecipe(recipeData))
     }
 })(RecipeForm)

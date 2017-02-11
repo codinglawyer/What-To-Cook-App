@@ -1,16 +1,16 @@
 import { combineReducers } from 'redux';
 
-const updateRecipeDisplayState = (state, action) => {
-    switch(action.type) {
-        case 'DISPLAY_RECIPE':
-            return {
-                ...state,
-                displayed: !state.displayed
-            };
-        default:
-            return state;
-    }
-};
+// const updateRecipeDisplayState = (state, action) => {
+//     switch(action.type) {
+//         case 'DISPLAY_RECIPE':
+//             return {
+//                 ...state,
+//                 displayed: !state.displayed
+//             };
+//         default:
+//             return state;
+//     }
+// };
 
 const byId = (state = {}, action) => {
     switch(action.type) {
@@ -23,11 +23,11 @@ const byId = (state = {}, action) => {
             return state.filter(recipe => {
                 return recipe.id !== action.id
             });
-        case 'DISPLAY_RECIPE':
-            return {
-                ...state,
-                [action.recipeId]: updateRecipeDisplayState(state[action.recipeId], action)
-            };
+        // case 'DISPLAY_RECIPE':
+        //     return {
+        //         ...state,
+        //         [action.recipeId]: updateRecipeDisplayState(state[action.recipeId], action)
+        //     };
         default:
             return state;
     }
@@ -42,6 +42,7 @@ const allIds = (state = [], action) => {
     }
 };
 
+
 const recipes = combineReducers({
     byId,
     allIds,
@@ -54,3 +55,5 @@ export const getAllRecipes = (state) =>
 
 export const getDisplayedRecipe = (recipes) =>
     recipes.filter(recipe => recipe.displayed);
+
+
