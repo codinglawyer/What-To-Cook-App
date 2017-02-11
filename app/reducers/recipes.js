@@ -1,5 +1,17 @@
 import { combineReducers } from 'redux';
 
+const updateRecipeDisplayState = (state, action) => {
+    switch(action.type) {
+        case 'DISPLAY_RECIPE':
+            return {
+                ...state,
+                displayed: !state.displayed
+            };
+        default:
+            return state;
+    }
+};
+
 const byId = (state = {}, action) => {
     switch(action.type) {
         case 'ADD_RECIPE':
@@ -12,14 +24,10 @@ const byId = (state = {}, action) => {
                 return recipe.id !== action.id
             });
         case 'DISPLAY_RECIPE':
-            let updatedRecipe = state.filter(recipe => {
-                return recipe.id === action.recipeId
-            });
-            updatedRecipe[0].displayed = !updatedRecipe[0].displayed
-            let otherRecipes = state.filter(recipe => {
-                return recipe.id !== action.recipeId
-            });
-            return [...otherRecipes, updatedRecipe[0]]
+            return {
+                ...state,
+                [action.recipeId]: updateRecipeDisplayState(state[action.recipeId], action)
+            };
         default:
             return state;
     }
@@ -28,7 +36,7 @@ const byId = (state = {}, action) => {
 const allIds = (state = [], action) => {
     switch(action.type) {
         case 'ADD_RECIPE':
-            return [...state, action.recipeData.id]
+            return [...state, action.recipeData.id];
         default:
             return state;
     }
@@ -37,10 +45,11 @@ const allIds = (state = [], action) => {
 const recipes = combineReducers({
     byId,
     allIds,
-})
+});
 
 export default recipes;
 
 export const getAllRecipes = (state) =>
     state.allIds.map(id => state.byId[id]);
 
+export const getDisplayedRecipe = (recipes) => recipes.filter(recipe => recipe.displayed);

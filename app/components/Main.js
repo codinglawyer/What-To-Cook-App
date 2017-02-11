@@ -9,7 +9,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import * as actions from '../actions/index'
 import { getAllRecipes } from '../reducers/recipeApp';
-import { getDisplayRecipeState } from '../reducers/recipeApp';
+import { getDisplayFormState, getDisplayedRecipe } from '../reducers/recipeApp';
 
 const style = {
     marginRight: 20,
@@ -62,9 +62,9 @@ const mapStateToProps = (state) => {
     // })
     // console.log("disp", displayedRecipe);
     return {
-        // displayedRecipe,
+        displayedRecipe: getDisplayedRecipe(state),
         recipes: getAllRecipes(state),
-        formDisplayed: getDisplayRecipeState(state)
+        formDisplayed: getDisplayFormState(state)
     }
 }
 

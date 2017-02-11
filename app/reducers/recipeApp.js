@@ -15,4 +15,6 @@ const RecipeApp = combineReducers(
 export default RecipeApp;
 
 export const getAllRecipes = (state) => fromRecipes.getAllRecipes(state.recipes);
-export const getDisplayRecipeState = (state) => fromDisplayForm.getDisplayRecipeState(state.displayRecipeForm);
+export const getDisplayFormState = (state) => fromDisplayForm.getDisplayFormState(state.displayRecipeForm);
+
+export const getDisplayedRecipe = (state) => fromRecipes.getDisplayedRecipe(fromRecipes.getAllRecipes(state.recipes));

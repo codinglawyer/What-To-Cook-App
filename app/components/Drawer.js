@@ -15,8 +15,8 @@ export default class DrawerUndockedExample extends React.Component {
 
     handleToggle = () => this.setState({open: !this.state.open});
 
-    handleClose = (recipeID) => {
-        this.props.dispatch(actions.displayRecipe(recipeID))
+    handleClose = (recipeId) => {
+        this.props.dispatch(actions.displayRecipe(recipeId))
         this.setState({open: false})
 
     };
@@ -34,14 +34,14 @@ export default class DrawerUndockedExample extends React.Component {
                     open={this.state.open}
                     onRequestChange={(open) => this.setState({open})}
                 >
-                {/*{this.props.recipes.map(recipe => (*/}
-                    {/*<MenuItem*/}
-                        {/*key={recipe.id}*/}
-                        {/*onTouchTap={() => this.handleClose(recipe.id)}*/}
-                    {/*>*/}
-                        {/*{recipe.title}*/}
-                    {/*</MenuItem>*/}
-                {/*))}*/}
+                {this.props.recipes.map(recipe => (
+                    <MenuItem
+                        key={recipe.id}
+                        onTouchTap={() => this.handleClose(recipe.id)}
+                    >
+                        {recipe.title}
+                    </MenuItem>
+                ))}
                 </Drawer>
             </div>
         );

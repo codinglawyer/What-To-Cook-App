@@ -18,6 +18,7 @@ localStorageState = localStorageState ? localStorageState : [];
 
 const logger = createLogger();
 let store = createStore(RecipeApp,
+    localStorageState,
     applyMiddleware(logger));
 
 setInterval(() => {

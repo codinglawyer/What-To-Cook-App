@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 const RecipeDetail = ({ recipes }) => {
     return (
@@ -13,10 +12,4 @@ const RecipeDetail = ({ recipes }) => {
     )
 };
 
-const mapStateToProps = (state) => {
-    return {
-        recipes: state.recipes
-    }
-};
-
-export default connect(mapStateToProps)(RecipeDetail);
+export default RecipeDetail;
