@@ -8,7 +8,7 @@ import FlatButton from 'material-ui/FlatButton';
 import * as actions from '../actions/index';
 
 
-const renderField = ({ input, label }) => {
+const renderField = ({ input, label, multiLine, rows }) => {
     return (
         <div>
             <label>{label}</label>
@@ -17,6 +17,8 @@ const renderField = ({ input, label }) => {
                     {...input}
                     type="text"
                     placeholder={label}
+                    multiLine={multiLine}
+                    rows={rows}
                 />
             </div>
         </div>
@@ -33,7 +35,11 @@ const renderIngredients = ({ fields }) => {
                     label="Add Ingredient"
                     secondary={true}
                     type="button"
-                    onClick={() => fields.push({})}
+                    onClick={() => fields.push(
+                        {
+                            id:uuidV4()
+                        }
+                    )}
                 />
             </div>
             {fields.map((ingredient, index) =>
@@ -67,6 +73,14 @@ const RecipeForm = ({ handleSubmit, pristine, submitting, reset, formDisplayed }
                         type="text"
                         component={renderField}
                         label="Title"
+                    />
+                    <Field
+                        name="directions"
+                        type="text"
+                        component={renderField}
+                        label="Directions"
+                        multiLine={true}
+                        rows={3}
                     />
                     <FieldArray
                         name="ingredients"

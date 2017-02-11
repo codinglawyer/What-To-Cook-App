@@ -52,4 +52,5 @@ export default recipes;
 export const getAllRecipes = (state) =>
     state.allIds.map(id => state.byId[id]);
 
-export const getDisplayedRecipe = (recipes) => recipes.filter(recipe => recipe.displayed);
+export const getDisplayedRecipe = (recipes) =>
+    recipes.filter(recipe => recipe.displayed);

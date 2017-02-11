@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import RecipeDetail from '../containers/RecipeDetail';
 import RecipeForm from '../components/RecipeForm'
-
 
 import Drawer from '../components/Drawer'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
@@ -27,10 +25,9 @@ const NewRecipeButton = ({ dispatch, formDisplayed }) => {
             </FloatingActionButton>
         </div>
     )
-}
+};
 
 const Main = ({ dispatch, formDisplayed, recipes, displayedRecipe }) => {
-    console.log("displa", displayedRecipe);
     return(
         <div>
             <h1 className="title">What To Cook?</h1>
@@ -40,32 +37,32 @@ const Main = ({ dispatch, formDisplayed, recipes, displayedRecipe }) => {
             />
             <h5>OR</h5>
                 <div>
-                {/*{displayedRecipe[0] && displayedRecipe[0].displayed? (*/}
-                        {/*<div>*/}
-                            {/*<div>{displayedRecipe[0].title}</div>*/}
-                        {/*</div>*/}
-                    {/*) : (*/}
+                {displayedRecipe && displayedRecipe.displayed ? (
+                        <div>
+                            <div>{displayedRecipe.title}</div>
+                            <ul>
+                                {displayedRecipe.ingredients.map(ingredient => (
+                                    <li key={ingredient.id}>{ingredient.ingredient}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    ) : (
                         <div>
                             <NewRecipeButton dispatch={dispatch} formDisplayed={formDisplayed} />
                             <RecipeForm dispatch={dispatch} formDisplayed={formDisplayed} />
                         </div>
-                    {/*)}*/}
+                    )}
                 </div>
-            <RecipeDetail />
         </div>
     )
-}
+};
 
 const mapStateToProps = (state) => {
-    // let displayedRecipe = state.recipes.filter(recipe => {
-    //     return recipe.displayed
-    // })
-    // console.log("disp", displayedRecipe);
     return {
-        displayedRecipe: getDisplayedRecipe(state),
+        displayedRecipe: getDisplayedRecipe(state)[0],
         recipes: getAllRecipes(state),
-        formDisplayed: getDisplayFormState(state)
+        formDisplayed: getDisplayFormState(state),
     }
-}
+};
 
 export default connect(mapStateToProps, null)(Main);
