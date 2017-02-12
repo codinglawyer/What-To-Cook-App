@@ -50,6 +50,11 @@ injectGlobal`
   
   
   
+  .recipeForm {
+    text-align: center;
+  }
+  
+  
   
 
   .recipeDetail{

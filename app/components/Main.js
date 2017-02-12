@@ -2,34 +2,25 @@ import React from 'react';
 import { connect } from 'react-redux';
 import RecipeForm from '../components/RecipeForm'
 
-import LeftDrawer from '../components/LeftDrawer'
 import RecipeDetail from '../components/RecipeDetail'
-import RaisedButton from 'material-ui/RaisedButton';
+import Sidebar from './Sidebar'
 import * as actions from '../actions/index'
 import { getAllRecipes, getDisplayFormState, getDisplayedRecipe } from '../reducers/recipeApp';
 
 const Main = ({ dispatch, formDisplayed, recipes, displayedRecipe }) => {
     return(
         <div>
-            <h1 className="title">What To Cook?</h1>
-            <LeftDrawer
-                recipes={recipes}
+            <Sidebar
                 dispatch={dispatch}
-            />
-            <div>OR</div>
-            <RaisedButton
-                className="newRecipe"
-                labelStyle={{fontSize: '16px'}}
-                label="Add A New Recipe"
-                primary={true}
-                type="button"
-                onClick={() => dispatch(actions.displayRecipeForm(!formDisplayed))}
+                actions={actions}
+                formDisplayed={formDisplayed}
+                recipes={recipes}
             />
             <div>
                 {displayedRecipe ? (
                         <RecipeDetail displayedRecipe={displayedRecipe}/>
                     ) : (
-                        <div>
+                        <div className="recipeForm">
                             <RecipeForm
                                 dispatch={dispatch}
                                 formDisplayed={formDisplayed}

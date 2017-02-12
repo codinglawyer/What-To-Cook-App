@@ -10,7 +10,7 @@ const RenderLeftDrawer = ({ isOpen, setIsOpen, dispatch, recipes}) => {
     return (
         <div>
             <RaisedButton
-                label="Find A Recipe"
+                label="Browse Recipes"
                 onTouchTap={() => setIsOpen(true)}
                 labelStyle={{fontSize: '16px'}}
             />
