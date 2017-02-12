@@ -11,6 +11,11 @@ import Main from './components/Main';
 import './global-styles';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import { fetchRecipes } from './api/index'
+
+fetchRecipes().then(recipes =>
+    console.log(recipes)
+);
 
 
 let localStorageState = JSON.parse(localStorage.getItem('recipes'));
@@ -23,6 +28,9 @@ let store = createStore(
     localStorageState,
     applyMiddleware(logger)
 );
+
+// store.dispatch(fetchRecipes())
+
 
 setInterval(() => {
     localStorage.setItem('recipes', JSON.stringify(store.getState()))

@@ -17,3 +17,8 @@ export const displayRecipe = (recipeId) => ({
     type: 'DISPLAY_RECIPE',
     recipeId,
 });
+
+export const fetchRecipes = (recipes) => ({
+    type: 'FETCH_RECIPES',
+    recipes,
+});

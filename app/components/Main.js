@@ -20,7 +20,7 @@ const Main = ({ dispatch, formDisplayed, recipes, displayedRecipe }) => {
                 {displayedRecipe ? (
                         <RecipeDetail displayedRecipe={displayedRecipe}/>
                     ) : (
-                        <div className="recipeForm">
+                        <div className="recipeForm"api>
                             <RecipeForm
                                 dispatch={dispatch}
                                 formDisplayed={formDisplayed}
