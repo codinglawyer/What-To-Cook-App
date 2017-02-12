@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import RecipeForm from '../components/RecipeForm'
 
-import Drawer from '../components/Drawer'
+import LeftDrawer from '../components/LeftDrawer'
 import DisplayedRecipe from '../components/DisplayedRecipe'
 import RaisedButton from 'material-ui/RaisedButton';
 import * as actions from '../actions/index'
@@ -12,7 +12,7 @@ const Main = ({ dispatch, formDisplayed, recipes, displayedRecipe }) => {
     return(
         <div>
             <h1 className="title">What To Cook?</h1>
-            <Drawer
+            <LeftDrawer
                 recipes={recipes}
                 dispatch={dispatch}
             />
@@ -30,8 +30,10 @@ const Main = ({ dispatch, formDisplayed, recipes, displayedRecipe }) => {
                         <DisplayedRecipe displayedRecipe={displayedRecipe}/>
                     ) : (
                         <div>
-
-                            <RecipeForm dispatch={dispatch} formDisplayed={formDisplayed} />
+                            <RecipeForm
+                                dispatch={dispatch}
+                                formDisplayed={formDisplayed}
+                            />
                         </div>
                     )
                 }

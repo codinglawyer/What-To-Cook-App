@@ -69,43 +69,46 @@ const RecipeForm = ({ handleSubmit, pristine, submitting, reset, formDisplayed }
     return (
         <div>
             {formDisplayed ? (
-                <form onSubmit={handleSubmit}>
-                    <Field
-                        name="title"
-                        type="text"
-                        component={renderField}
-                        label="Title"
-                    />
-                    <Field
-                        name="directions"
-                        type="text"
-                        component={renderField}
-                        label="Directions"
-                        multiLine={true}
-                        rows={3}
-                    />
-                    <FieldArray
-                        name="ingredients"
-                        component={renderIngredients}
-                    />
-                    <div>
-                        <RaisedButton
-                            className="submitButton"
-                            label="Submit"
-                            primary={true}
-                            type="submit"
-                            disabled={submitting}
+                <div>
+                    <h3>Fill Recipe Information</h3>
+                    <form onSubmit={handleSubmit}>
+                        <Field
+                            name="title"
+                            type="text"
+                            component={renderField}
+                            label="Title"
                         />
-                        <RaisedButton
-                            className="clearButton"
-                            label="Clear Values"
-                            default={true}
-                            type="button"
-                            disabled={pristine || submitting}
-                            onClick={reset}
+                        <Field
+                            name="directions"
+                            type="text"
+                            component={renderField}
+                            label="Directions"
+                            multiLine={true}
+                            rows={3}
                         />
-                    </div>
-                </form>
+                        <FieldArray
+                            name="ingredients"
+                            component={renderIngredients}
+                        />
+                        <div>
+                            <RaisedButton
+                                className="submitButton"
+                                label="Submit"
+                                primary={true}
+                                type="submit"
+                                disabled={submitting}
+                            />
+                            <RaisedButton
+                                className="clearButton"
+                                label="Clear Values"
+                                default={true}
+                                type="button"
+                                disabled={pristine || submitting}
+                                onClick={reset}
+                            />
+                        </div>
+                    </form>
+                </div>
             ) : null}
         </div>
     )
