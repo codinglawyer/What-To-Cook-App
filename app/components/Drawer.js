@@ -27,6 +27,7 @@ export default class DrawerUndockedExample extends React.Component {
                 <RaisedButton
                     label="Find A Recipe"
                     onTouchTap={this.handleToggle}
+                    labelStyle={{fontSize: '16px'}}
                 />
                 <Drawer
                     docked={false}

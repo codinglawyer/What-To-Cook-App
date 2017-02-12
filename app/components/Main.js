@@ -3,28 +3,10 @@ import { connect } from 'react-redux';
 import RecipeForm from '../components/RecipeForm'
 
 import Drawer from '../components/Drawer'
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
+import DisplayedRecipe from '../components/DisplayedRecipe'
+import RaisedButton from 'material-ui/RaisedButton';
 import * as actions from '../actions/index'
 import { getAllRecipes, getDisplayFormState, getDisplayedRecipe } from '../reducers/recipeApp';
-
-const style = {
-    marginRight: 20,
-};
-
-const NewRecipeButton = ({ dispatch, formDisplayed }) => {
-    return (
-        <div>
-            <h4>Add New Recipe</h4>
-            <FloatingActionButton
-                style={style}
-                onClick={() => dispatch(actions.displayRecipeForm(!formDisplayed))}
-            >
-                <ContentAdd />
-            </FloatingActionButton>
-        </div>
-    )
-};
 
 const Main = ({ dispatch, formDisplayed, recipes, displayedRecipe }) => {
     return(
@@ -34,24 +16,26 @@ const Main = ({ dispatch, formDisplayed, recipes, displayedRecipe }) => {
                 recipes={recipes}
                 dispatch={dispatch}
             />
-            <h5>OR</h5>
-                <div>
+            <div>OR</div>
+            <RaisedButton
+                className="newRecipe"
+                labelStyle={{fontSize: '16px'}}
+                label="Add A New Recipe"
+                primary={true}
+                type="button"
+                onClick={() => dispatch(actions.displayRecipeForm(!formDisplayed))}
+            />
+            <div>
                 {displayedRecipe ? (
-                        <div>
-                            <div>{displayedRecipe.title}</div>
-                            <ul>
-                                {displayedRecipe.ingredients.map(ingredient => (
-                                    <li key={ingredient.id}>{ingredient.ingredient}</li>
-                                ))}
-                            </ul>
-                        </div>
+                        <DisplayedRecipe displayedRecipe={displayedRecipe}/>
                     ) : (
                         <div>
-                            <NewRecipeButton dispatch={dispatch} formDisplayed={formDisplayed} />
+
                             <RecipeForm dispatch={dispatch} formDisplayed={formDisplayed} />
                         </div>
-                    )}
-                </div>
+                    )
+                }
+            </div>
         </div>
     )
 };

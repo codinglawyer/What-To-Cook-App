@@ -5,6 +5,8 @@ const displayedRecipe = (state = false, action) => {
                 return false;
             }
             return action.recipeId;
+        case 'DISPLAY_RECIPE_FORM':
+            return false;
         default:
             return state;
     }

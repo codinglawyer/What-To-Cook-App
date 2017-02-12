@@ -94,14 +94,16 @@ const RecipeForm = ({ handleSubmit, pristine, submitting, reset, formDisplayed }
                             label="Submit"
                             primary={true}
                             type="submit"
-                            disabled={submitting} />
+                            disabled={submitting}
+                        />
                         <RaisedButton
                             className="clearButton"
                             label="Clear Values"
                             default={true}
                             type="button"
                             disabled={pristine || submitting}
-                            onClick={reset} />
+                            onClick={reset}
+                        />
                     </div>
                 </form>
             ) : null}
