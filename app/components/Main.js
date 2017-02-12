@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import RecipeForm from '../components/RecipeForm'
 
 import LeftDrawer from '../components/LeftDrawer'
-import DisplayedRecipe from '../components/DisplayedRecipe'
+import RecipeDetail from '../components/RecipeDetail'
 import RaisedButton from 'material-ui/RaisedButton';
 import * as actions from '../actions/index'
 import { getAllRecipes, getDisplayFormState, getDisplayedRecipe } from '../reducers/recipeApp';
@@ -27,7 +27,7 @@ const Main = ({ dispatch, formDisplayed, recipes, displayedRecipe }) => {
             />
             <div>
                 {displayedRecipe ? (
-                        <DisplayedRecipe displayedRecipe={displayedRecipe}/>
+                        <RecipeDetail displayedRecipe={displayedRecipe}/>
                     ) : (
                         <div>
                             <RecipeForm

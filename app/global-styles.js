@@ -6,6 +6,7 @@ injectGlobal`
   body {
     height: 100%;
     width: 100%;
+    font-size: 16px;
   }
 
   body {
@@ -20,13 +21,14 @@ injectGlobal`
     background-color: #fafafa;
     min-height: 100%;
     min-width: 100%;
-    text-align: center;
+    // text-align: center;
   }
 
   .title {
     font-weight: normal;
     font-size: 40px;
   }
+  
   p,
   label {
     font-family: 'Roboto', Georgia, Times, 'Times New Roman', serif;
@@ -46,4 +48,29 @@ injectGlobal`
     margin: 20px;
   }
   
+  
+  
+  
+
+  .recipeDetail{
+  
+  }
+  .recipeTitle {
+    font-weight: 500;
+    font-size: 50px;
+  }
+  
+  .recipeDirectionsTitle, .ingredientsTitle {
+    font-weight: 400;
+    font-size: 25px;
+    margin: 10px auto;
+  }
+  
+  .recipeDirections{
+    font-style: italic;
+  }
+  
+  .ingredients{
+    
+  }
 `;
