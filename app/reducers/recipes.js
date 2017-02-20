@@ -14,6 +14,12 @@ import { combineReducers } from 'redux';
 
 const byId = (state = {}, action) => {
     switch(action.type) {
+        case 'FETCH_RECIPES':
+            let newState = {};
+            for(let key in action.recipes){
+                newState[action.recipes[key].id] = action.recipes[key]
+            }
+            return newState
         case 'ADD_RECIPE':
             return {
                 ...state,
@@ -35,6 +41,8 @@ const byId = (state = {}, action) => {
 
 const allIds = (state = [], action) => {
     switch(action.type) {
+        case 'FETCH_RECIPES':
+            return action.recipes.map(recipe => recipe.id)
         case 'ADD_RECIPE':
             return [...state, action.recipeData.id];
         default:
