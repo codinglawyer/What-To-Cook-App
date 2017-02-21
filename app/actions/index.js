@@ -22,3 +22,7 @@ export const fetchRecipes = (recipes) => ({
     type: 'FETCH_RECIPES',
     recipes,
 });
+
+export const recipesAsync = () => ({
+    type: 'RECIPES_ASYNC',
+});

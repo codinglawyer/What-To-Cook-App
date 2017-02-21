@@ -4,9 +4,8 @@ import { fetchRecipes } from './api/index'
 import * as actions from './actions/index'
 
 export function* fetchRecipe() {
-    const recipes =  yield fetchRecipes()
+    const recipes =  yield fetchRecipes();
     yield put(actions.fetchRecipes(recipes))
-   console.log("RECIPE", recipes);
 }
 
 export function* watchFetchRecipes() {

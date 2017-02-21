@@ -8,13 +8,12 @@ import createSagaMiddleware from 'redux-saga';
 
 import RecipeApp from './reducers/recipeApp';
 import Main from './components/Main';
-
+import * as actions from './actions/index'
 import rootSaga from './sagas'
 
 import './global-styles';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-
 
 const logger = createLogger();
 const sagaMiddleware = createSagaMiddleware();
@@ -23,7 +22,10 @@ export let store = createStore(
     RecipeApp,
     applyMiddleware(logger, sagaMiddleware)
 );
-sagaMiddleware.run(rootSaga)
+sagaMiddleware.run(rootSaga);
+
+//fetch recipes
+store.dispatch(actions.recipesAsync());
 
 injectTapEventPlugin();
 
