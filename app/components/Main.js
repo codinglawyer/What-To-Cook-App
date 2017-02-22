@@ -19,7 +19,10 @@ const Main = ({ dispatch, formDisplayed, recipes, displayedRecipe }) => {
             />
             <div>
                 {displayedRecipe ? (
-                        <RecipeDetail displayedRecipe={displayedRecipe}/>
+                        <RecipeDetail
+                            displayedRecipe={displayedRecipe}
+                            dispatch={dispatch}
+                        />
                     ) : (
                         <div className="recipeForm">
                             <RecipeForm

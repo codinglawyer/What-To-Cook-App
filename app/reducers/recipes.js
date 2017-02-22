@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { omit } from 'lodash';
 
 // const updateRecipeDisplayState = (state, action) => {
 //     switch(action.type) {
@@ -13,6 +14,7 @@ import { combineReducers } from 'redux';
 // };
 
 const byId = (state = {}, action) => {
+    console.log(action.id);
     switch(action.type) {
         case 'FETCH_RECIPES':
             let newState = {};
@@ -26,9 +28,7 @@ const byId = (state = {}, action) => {
                 [action.recipeData.id]: action.recipeData
             };
         case 'DELETE_RECIPE':
-            return state.filter(recipe => {
-                return recipe.id !== action.id
-            });
+            return omit(state, action.id);
         // case 'DISPLAY_RECIPE':
         //     return {
         //         ...state,
@@ -45,6 +45,8 @@ const allIds = (state = [], action) => {
             return action.recipes.map(recipe => recipe.id);
         case 'ADD_RECIPE':
             return [...state, action.recipeData.id];
+        case 'DELETE_RECIPE':
+            return state.filter(id => id !== action.id);
         default:
             return state;
     }
