@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import RecipeForm from '../components/RecipeForm';
+import RecipeForm from './forms/RecipeForm';
 
 import RecipeDetail from '../components/RecipeDetail';
 import Sidebar from './Sidebar';

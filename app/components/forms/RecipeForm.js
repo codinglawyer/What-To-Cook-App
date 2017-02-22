@@ -1,13 +1,12 @@
 import React from 'react';
 import uuidV4 from 'uuid';
 import { Field, FieldArray, reduxForm } from 'redux-form';
+import { toArray } from 'lodash';
+
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
-import { toArray } from 'lodash';
-
-import * as actions from '../actions/index';
-
+import * as actions from '../../actions/index';
 
 const renderField = ({
     input,
@@ -40,11 +39,7 @@ const renderIngredients = ({ fields }) => (
                 label="Add Ingredient"
                 secondary={true}
                 type="button"
-                onClick={() => fields.push(
-                    {
-                        id:uuidV4()
-                    }
-                )}
+                onClick={() => fields.push()}
             />
         </div>
         {fields.map((ingredient, index) =>
@@ -61,6 +56,12 @@ const renderIngredients = ({ fields }) => (
                     type="text"
                     component={renderField}
                     label={`#${index + 1} Ingredient`}
+                />
+                <Field
+                    name={`${ingredient}.amount`}
+                    type="text"
+                    component={renderField}
+                    label={`#${index + 1} Amount`}
                 />
             </div>
         )}
@@ -89,7 +90,7 @@ const renderDirections = ({ fields }) => (
                     onClick={() => fields.remove(index)}
                 />
                 <Field
-                    name={`${direction}.direction`}
+                    name={`${direction}`}
                     type="text"
                     component={renderField}
                     label={`#${index + 1} Direction`}
@@ -161,13 +162,6 @@ export default reduxForm({
     fields: ['recipe', 'ingredients'],
     onSubmit: (recipeData, dispatch) => {
         recipeData.id = uuidV4();
-        //from object to array
-        let directions = recipeData.directions
-        let arr;
-        if(directions){
-            arr = directions.map(direction => toArray(direction)[0])
-        }
-        recipeData.directions = arr
         dispatch(actions.addRecipe(recipeData))
     }
 })(RecipeForm)
