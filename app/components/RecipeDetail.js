@@ -8,7 +8,11 @@ const DisplayedRecipe = ({displayedRecipe, dispatch}) => {
             <h3 className="recipeDetail">Recipe detail:</h3>
             <h1 className="recipeTitle">{displayedRecipe.title}</h1>
             <div className="recipeDirectionsTitle">Directions:</div>
-                <div className="recipeDirections">{displayedRecipe.directions}</div>
+            <ul className="directions">
+                {displayedRecipe.directions.map(direction => (
+                    <li className="recipeDirections" key={direction}>{direction}</li>
+                ))}
+            </ul>
             <br/>
             <div className="ingredientsTitle">Ingredients:</div>
             <ul className="ingredients">
