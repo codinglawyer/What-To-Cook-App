@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { compose, lifecycle } from 'recompose';
+import { compose } from 'recompose';
+import { lifecycle } from '../utils/lifecycle-fp';
 
 import RecipeForm from '../components/forms/RecipeForm';
 import RecipeDetail from '../components/RecipeDetail';
@@ -11,8 +12,8 @@ import { getAllRecipes, getDisplayFormState, getDisplayedRecipe } from '../reduc
 
 
 const mainLifecycle = {
-    componentDidMount() {
-        this.props.receiveRecipes();
+    componentDidMount({receiveRecipes}) {
+        receiveRecipes();
     }
 };
 
