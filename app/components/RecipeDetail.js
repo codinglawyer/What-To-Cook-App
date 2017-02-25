@@ -1,8 +1,7 @@
 import React from 'react';
-import * as actions from '../actions/index';
 import FlatButton from 'material-ui/FlatButton';
 
-const DisplayedRecipe = ({displayedRecipe, dispatch}) => {
+const DisplayedRecipe = ({displayedRecipe, actions }) => {
     return (
         <div>
             <h3 className="recipeDetail">Recipe detail:</h3>
@@ -23,7 +22,7 @@ const DisplayedRecipe = ({displayedRecipe, dispatch}) => {
             <FlatButton
                 label="Delete Recipe"
                 secondary={true}
-                onClick={() => dispatch(actions.deleteRecipe(displayedRecipe.id))}
+                onClick={() => actions.deleteRecipe(displayedRecipe.id)}
             />
         </div>
     )

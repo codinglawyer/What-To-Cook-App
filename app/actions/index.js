@@ -28,6 +28,6 @@ export const fetchRecipesFailed = (error) => ({
     error,
 });
 
-export const recipesAsync = () => ({
-    type: 'RECIPES_ASYNC',
+export const receiveRecipes = () => ({
+    type: 'RECEIVE_RECIPES',
 });

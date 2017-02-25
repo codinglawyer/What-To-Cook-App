@@ -4,9 +4,8 @@ import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import { compose, withState } from 'recompose';
 
-import * as actions from '../actions/index';
 
-const RenderLeftDrawer = ({ isOpen, setIsOpen, dispatch, recipes}) => {
+const RenderLeftDrawer = ({ isOpen, setIsOpen, recipes, actions}) => {
     return (
         <div>
             <RaisedButton
@@ -23,7 +22,7 @@ const RenderLeftDrawer = ({ isOpen, setIsOpen, dispatch, recipes}) => {
             {recipes.map(recipe => (
                 <MenuItem
                     key={recipe.id}
-                    onTouchTap={() => {dispatch(actions.displayRecipe(recipe.id)); setIsOpen(false)}}
+                    onTouchTap={() => {actions.displayRecipe(recipe.id); setIsOpen(false)}}
                 >
                     {recipe.title}
                 </MenuItem>

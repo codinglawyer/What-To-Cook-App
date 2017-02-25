@@ -14,7 +14,7 @@ export function* fetchRecipe() {
 }
 
 export function* watchFetchRecipes() {
-    yield takeEvery('RECIPES_ASYNC', fetchRecipe)
+    yield takeEvery('RECEIVE_RECIPES', fetchRecipe)
 }
 
 export default function* rootSaga() {

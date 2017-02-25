@@ -7,7 +7,6 @@ import LeftDrawer from '../components/LeftDrawer'
 
 const Sidebar = ({
     recipes,
-    dispatch,
     displayRecipeForm,
     formDisplayed,
     actions,
@@ -25,11 +24,11 @@ const Sidebar = ({
                     label="Add A New Recipe"
                     primary={true}
                     type="button"
-                    onClick={() => dispatch(actions.displayRecipeForm(!formDisplayed))}
+                    onClick={() => actions.displayRecipeForm(!formDisplayed)}
                 />
                 <LeftDrawer
                     recipes={recipes}
-                    dispatch={dispatch}
+                    actions={actions}
                 />
                 <ToolbarSeparator />
             </ToolbarGroup>

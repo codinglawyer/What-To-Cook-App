@@ -76,7 +76,7 @@ const fakeDatabase = {
 const delay = (ms) =>
   new Promise(resolve => setTimeout(resolve, ms));
 
-//fetchTodos returns a promise
+//fetchRecipes returns a promise
 export const fetchRecipes = () =>
   delay(500).then(() => {
         return fakeDatabase.recipes;
