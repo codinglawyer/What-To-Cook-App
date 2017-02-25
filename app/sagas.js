@@ -6,7 +6,7 @@ import * as actions from './actions/index'
 export function* fetchRecipe() {
     try {
         const recipes =  yield fetchRecipes();
-        yield put(actions.fetchRecipesSuccess(recipes))
+        yield put(actions.fetchRecipesSuccess({recipes}))
     }
     catch(error) {
         yield put(actions.fetchRecipesFailed(error))

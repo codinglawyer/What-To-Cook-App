@@ -1,10 +1,10 @@
 const displayedRecipe = (state = false, action) => {
     switch(action.type) {
         case 'DISPLAY_RECIPE':
-            if(action.recipeId === state){
+            if(action.payload === state){
                 return false;
             }
-            return action.recipeId;
+            return action.payload;
         case 'DISPLAY_RECIPE_FORM':
             return false;
         default:

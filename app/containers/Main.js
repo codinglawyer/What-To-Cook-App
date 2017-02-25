@@ -1,20 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { compose, lifecycle } from 'recompose';
+
 import RecipeForm from '../components/forms/RecipeForm';
 import RecipeDetail from '../components/RecipeDetail';
 import Sidebar from '../components/Sidebar';
 import * as actions from '../actions/index';
 import { getAllRecipes, getDisplayFormState, getDisplayedRecipe } from '../reducers/recipeApp';
-import { fetchRecipes } from '../api/index'
 
 
 const mainLifecycle = {
     componentDidMount() {
-        // fetchRecipes().then(recipes =>
-        // console.log(recipes));
+        this.props.receiveRecipes();
     }
-}
+};
 
 const renderMain = ({ formDisplayed, recipes, displayedRecipe, ...props }) => {
     return (
@@ -48,8 +48,10 @@ const mapStateToProps = (state) => ({
     formDisplayed: getDisplayFormState(state),
 });
 
+const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch);
+
 const Main = compose (
-    connect(mapStateToProps, actions),
+    connect(mapStateToProps, mapDispatchToProps),
     lifecycle(mainLifecycle),
 )(renderMain);
 

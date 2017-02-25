@@ -14,21 +14,20 @@ import { omit } from 'lodash';
 // };
 
 const byId = (state = {}, action) => {
-    console.log(action.id);
     switch(action.type) {
         case 'FETCH_RECIPES_SUCCESS':
             let newState = {};
-            for(let key in action.recipes){
-                newState[action.recipes[key].id] = action.recipes[key]
+            for(let key in action.payload){
+                newState[action.payload[key].id] = action.payload[key]
             }
             return newState;
         case 'ADD_RECIPE':
             return {
                 ...state,
-                [action.recipeData.id]: action.recipeData
+                [action.payload.id]: action.payload
             };
         case 'DELETE_RECIPE':
-            return omit(state, action.id);
+            return omit(state, action.payload);
         // case 'DISPLAY_RECIPE':
         //     return {
         //         ...state,
@@ -42,11 +41,11 @@ const byId = (state = {}, action) => {
 const allIds = (state = [], action) => {
     switch(action.type) {
         case 'FETCH_RECIPES_SUCCESS':
-            return action.recipes.map(recipe => recipe.id);
+            return action.payload.map(recipe => recipe.id);
         case 'ADD_RECIPE':
-            return [...state, action.recipeData.id];
+            return [...state, action.payload.id];
         case 'DELETE_RECIPE':
-            return state.filter(id => id !== action.id);
+            return state.filter(id => id !== action.payload);
         default:
             return state;
     }
