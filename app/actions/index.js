@@ -18,9 +18,14 @@ export const displayRecipe = (recipeId) => ({
     recipeId,
 });
 
-export const fetchRecipes = (recipes) => ({
-    type: 'FETCH_RECIPES',
+export const fetchRecipesSuccess = (recipes) => ({
+    type: 'FETCH_RECIPES_SUCCESS',
     recipes,
+});
+
+export const fetchRecipesFailed = (error) => ({
+    type: 'FETCH_RECIPES_FAILED',
+    error,
 });
 
 export const recipesAsync = () => ({

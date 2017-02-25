@@ -37,12 +37,10 @@ const Main = ({ dispatch, formDisplayed, recipes, displayedRecipe }) => {
     )
 };
 
-const mapStateToProps = (state) => {
-    return {
-        displayedRecipe: getDisplayedRecipe(state)[0],
-        recipes: getAllRecipes(state),
-        formDisplayed: getDisplayFormState(state),
-    }
-};
+const mapStateToProps = (state) => ({
+    displayedRecipe: getDisplayedRecipe(state)[0],
+    recipes: getAllRecipes(state),
+    formDisplayed: getDisplayFormState(state),
+});
 
 export default connect(mapStateToProps, null)(Main);

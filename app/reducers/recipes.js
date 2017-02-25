@@ -16,7 +16,7 @@ import { omit } from 'lodash';
 const byId = (state = {}, action) => {
     console.log(action.id);
     switch(action.type) {
-        case 'FETCH_RECIPES':
+        case 'FETCH_RECIPES_SUCCESS':
             let newState = {};
             for(let key in action.recipes){
                 newState[action.recipes[key].id] = action.recipes[key]
@@ -41,7 +41,7 @@ const byId = (state = {}, action) => {
 
 const allIds = (state = [], action) => {
     switch(action.type) {
-        case 'FETCH_RECIPES':
+        case 'FETCH_RECIPES_SUCCESS':
             return action.recipes.map(recipe => recipe.id);
         case 'ADD_RECIPE':
             return [...state, action.recipeData.id];
