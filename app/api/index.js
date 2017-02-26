@@ -79,6 +79,7 @@ const delay = (ms) =>
 //fetchRecipes returns a promise
 export const fetchRecipes = () =>
   delay(500).then(() => {
+        throw new Error('Boom')
         return fakeDatabase.recipes;
   });
 

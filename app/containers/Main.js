@@ -8,7 +8,7 @@ import RecipeForm from '../components/forms/RecipeForm';
 import RecipeDetail from '../components/RecipeDetail';
 import Sidebar from '../components/Sidebar';
 import * as actions from '../actions/index';
-import { getAllRecipes, getDisplayFormState, getDisplayedRecipe } from '../reducers/recipeApp';
+import { getAllRecipes, getDisplayFormState, getDisplayedRecipe } from '../reducers/index';
 
 
 const mainLifecycle = {

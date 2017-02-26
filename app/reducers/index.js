@@ -5,7 +5,7 @@ import recipes, * as fromRecipes from './recipes';
 import displayRecipeForm, * as fromDisplayForm from './displayRecipeForm';
 import displayedRecipe, * as fromDisplayedRecipe from './displayedRecipe'
 
-const RecipeApp = combineReducers(
+const RootReducer = combineReducers(
     {
         recipes,
         displayedRecipe,
@@ -14,7 +14,7 @@ const RecipeApp = combineReducers(
     }
 );
 
-export default RecipeApp;
+export default RootReducer;
 
 export const getAllRecipes = (state) => fromRecipes.getAllRecipes(state.recipes);
 export const getDisplayFormState = (state) => fromDisplayForm.getDisplayFormState(state);

@@ -18,9 +18,9 @@ export const displayRecipe = ({recipeId}) => ({
     payload: recipeId,
 });
 
-export const fetchRecipesSuccess = ({recipes}) => ({
+export const fetchRecipesSuccess = ({response}) => ({
     type: 'FETCH_RECIPES_SUCCESS',
-    payload: recipes,
+    payload: response,
 });
 
 export const fetchRecipesFailed = ({error}) => ({
