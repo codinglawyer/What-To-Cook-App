@@ -22,7 +22,7 @@ const RenderLeftDrawer = ({ isOpen, setIsOpen, recipes, actions}) => {
             {recipes.map(recipe => (
                 <MenuItem
                     key={recipe.id}
-                    onTouchTap={() => {actions.displayRecipe(recipe.id); setIsOpen(false)}}
+                    onTouchTap={() => {actions.displayRecipe({recipeId: recipe.id}); setIsOpen(false)}}
                 >
                     {recipe.title}
                 </MenuItem>

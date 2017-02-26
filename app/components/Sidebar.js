@@ -8,7 +8,7 @@ import LeftDrawer from '../components/LeftDrawer'
 const Sidebar = ({
     recipes,
     displayRecipeForm,
-    formDisplayed,
+    isFormDisplayed,
     actions,
 }) => (
         <Toolbar style={{ marginBottom: "50px"}}>
@@ -24,7 +24,7 @@ const Sidebar = ({
                     label="Add A New Recipe"
                     primary={true}
                     type="button"
-                    onClick={() => actions.displayRecipeForm(!formDisplayed)}
+                    onClick={() => actions.displayRecipeForm({isFormDisplayed: !isFormDisplayed})}
                 />
                 <LeftDrawer
                     recipes={recipes}

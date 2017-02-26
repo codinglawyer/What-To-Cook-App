@@ -1,19 +1,19 @@
-export const addRecipe = (recipeData) => ({
+export const addRecipe = ({recipeData}) => ({
     type: 'ADD_RECIPE',
     payload: recipeData,
 });
 
-export const deleteRecipe = (id) => ({
+export const deleteRecipe = ({displayedRecipeId}) => ({
     type: 'DELETE_RECIPE',
-    payload: id,
+    payload: displayedRecipeId,
 });
 
-export const displayRecipeForm = (isDisplayed) => ({
+export const displayRecipeForm = ({isFormDisplayed}) => ({
     type: 'DISPLAY_RECIPE_FORM',
-    payload: isDisplayed,
+    payload: isFormDisplayed,
 });
 
-export const displayRecipe = (recipeId) => ({
+export const displayRecipe = ({recipeId}) => ({
     type: 'DISPLAY_RECIPE',
     payload: recipeId,
 });
@@ -23,7 +23,7 @@ export const fetchRecipesSuccess = ({recipes}) => ({
     payload: recipes,
 });
 
-export const fetchRecipesFailed = (error) => ({
+export const fetchRecipesFailed = ({error}) => ({
     type: 'FETCH_RECIPES_FAILED',
     payload: error,
 });

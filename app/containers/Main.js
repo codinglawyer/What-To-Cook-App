@@ -17,12 +17,12 @@ const mainLifecycle = {
     }
 };
 
-const renderMain = ({ formDisplayed, recipes, displayedRecipe, ...props }) => {
+const renderMain = ({ isFormDisplayed, recipes, displayedRecipe, ...props }) => {
     return (
         <div>
             <Sidebar
                 actions={props}
-                formDisplayed={formDisplayed}
+                isFormDisplayed={isFormDisplayed}
                 recipes={recipes}
             />
             <div>
@@ -34,7 +34,7 @@ const renderMain = ({ formDisplayed, recipes, displayedRecipe, ...props }) => {
                 ) : (
                     <div className="recipeForm">
                         <RecipeForm
-                            formDisplayed={formDisplayed}
+                            formDisplayed={isFormDisplayed}
                         />
                     </div>
                 )}
@@ -46,7 +46,7 @@ const renderMain = ({ formDisplayed, recipes, displayedRecipe, ...props }) => {
 const mapStateToProps = (state) => ({
     displayedRecipe: getDisplayedRecipe(state)[0],
     recipes: getAllRecipes(state),
-    formDisplayed: getDisplayFormState(state),
+    isFormDisplayed: getDisplayFormState(state),
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch);

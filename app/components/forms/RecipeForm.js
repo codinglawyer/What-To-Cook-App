@@ -162,7 +162,7 @@ export default reduxForm({
     fields: ['recipe', 'ingredients'],
     onSubmit: (recipeData, dispatch) => {
         recipeData.id = uuidV4();
-        dispatch(actions.addRecipe(recipeData))
+        dispatch(actions.addRecipe({recipeData}))
     }
 })(RecipeForm)
 
