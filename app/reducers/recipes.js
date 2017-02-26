@@ -51,10 +51,21 @@ const allIds = (state = [], action) => {
     }
 };
 
-
+const isFetching = (state = false, action) => {
+    switch (action.type) {
+        case 'FETCH_RECIPES_REQUEST':
+            return true;
+        case 'FETCH_RECIPES_SUCCESS':
+        case 'FETCH_RECIPES_FAILURE':
+            return false;
+        default:
+            return state;
+    }
+}
 const recipes = combineReducers({
     byId,
     allIds,
+    isFetching,
 });
 
 export default recipes;
@@ -65,4 +76,5 @@ export const getAllRecipes = (state) =>
 export const getDisplayedRecipe = (recipes) =>
     recipes.filter(recipe => recipe.displayed);
 
-
+export const getIsFetching = (state) =>
+    state.isFetching

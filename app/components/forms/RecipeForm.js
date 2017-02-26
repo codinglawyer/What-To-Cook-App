@@ -107,10 +107,10 @@ const RecipeForm = ({
     pristine,
     submitting,
     reset,
-    formDisplayed,
+    isFormDisplayed,
 }) => (
     <div>
-        {formDisplayed ? (
+        {isFormDisplayed ? (
             <div>
                 <h3>Fill Recipe Information</h3>
                 <form onSubmit={handleSubmit}>
