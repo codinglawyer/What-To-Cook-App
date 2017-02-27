@@ -29,5 +29,5 @@ export const fetchRecipesSuccess = ({response}) => ({
 
 export const fetchRecipesFailure = ({error}) => ({
     type: 'FETCH_RECIPES_FAILURE',
-    payload: error,
+    payload: error.message,
 });

@@ -1,18 +1,6 @@
 import { combineReducers } from 'redux';
 import { omit } from 'lodash';
 
-// const updateRecipeDisplayState = (state, action) => {
-//     switch(action.type) {
-//         case 'DISPLAY_RECIPE':
-//             return {
-//                 ...state,
-//                 displayed: !state.displayed
-//             };
-//         default:
-//             return state;
-//     }
-// };
-
 const byId = (state = {}, action) => {
     switch(action.type) {
         case 'FETCH_RECIPES_SUCCESS':
@@ -28,11 +16,6 @@ const byId = (state = {}, action) => {
             };
         case 'DELETE_RECIPE':
             return omit(state, action.payload);
-        // case 'DISPLAY_RECIPE':
-        //     return {
-        //         ...state,
-        //         [action.recipeId]: updateRecipeDisplayState(state[action.recipeId], action)
-        //     };
         default:
             return state;
     }
@@ -62,19 +45,28 @@ const isFetching = (state = false, action) => {
             return state;
     }
 }
+
+const errorMessage = (state = null, action) => {
+    switch (action.type) {
+        case 'FETCH_RECIPES_FAILURE':
+            return action.payload;
+        case 'FETCH_RECIPES_REQUEST':
+        case 'FETCH_RECIPES_SUCCESS':
+            return null;
+        default:
+            return state;
+    }
+}
+
 const recipes = combineReducers({
     byId,
     allIds,
     isFetching,
+    errorMessage,
 });
 
 export default recipes;
 
-export const getAllRecipes = (state) =>
-    state.allIds.map(id => state.byId[id]);
-
-export const getDisplayedRecipe = (recipes) =>
-    recipes.filter(recipe => recipe.displayed);
-
-export const getIsFetching = (state) =>
-    state.isFetching
+export const getAllRecipes = (state) => state.allIds.map(id => state.byId[id]);
+export const getIsFetching = (state) => state.isFetching;
+export const getErrorMessage = (state) => state.errorMessage;

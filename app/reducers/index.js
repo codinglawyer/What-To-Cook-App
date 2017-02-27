@@ -18,5 +18,6 @@ export default RootReducer;
 
 export const getAllRecipes = (state) => fromRecipes.getAllRecipes(state.recipes);
 export const getIsFetching = (state) => fromRecipes.getIsFetching(state.recipes);
+export const getErrorMessage = (state) => fromRecipes.getErrorMessage(state.recipes);
 export const getDisplayFormState = (state) => fromDisplayForm.getDisplayFormState(state);
 export const getDisplayedRecipe = (state) => fromDisplayedRecipe.getDisplayedRecipe(fromDisplayedRecipe.getDisplayedRecipeId(state), fromRecipes.getAllRecipes(state.recipes));

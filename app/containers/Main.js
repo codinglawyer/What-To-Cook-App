@@ -7,8 +7,9 @@ import { lifecycle } from '../utils/lifecycle-fp';
 import RecipeForm from '../components/forms/RecipeForm';
 import RecipeDetail from '../components/RecipeDetail';
 import Sidebar from '../components/Sidebar';
+import FetchError from '../components/FetchError';
 import * as actions from '../actions/index';
-import { getAllRecipes, getDisplayFormState, getDisplayedRecipe, getIsFetching } from '../reducers/index';
+import { getAllRecipes, getDisplayFormState, getDisplayedRecipe, getIsFetching, getErrorMessage } from '../reducers/index';
 
 
 const mainLifecycle = {
@@ -17,7 +18,13 @@ const mainLifecycle = {
     }
 };
 
-const renderMain = ({ isFormDisplayed, recipes, displayedRecipe, isFetching, ...props }) => {
+const renderMain = ({
+    isFormDisplayed,
+    recipes,
+    displayedRecipe,
+    isFetching,
+    errorMessage,
+    ...props }) => {
     return (
         <div>
             <Sidebar
@@ -26,22 +33,30 @@ const renderMain = ({ isFormDisplayed, recipes, displayedRecipe, isFetching, ...
                 recipes={recipes}
             />
             <div>
-                {isFetching && !recipes.byId ? (
+                {isFetching && !recipes.allIds ? (
                         <div>Loading</div>
                     ) : (
                         <div>
-                            {displayedRecipe ? (
-                                <RecipeDetail
-                                    displayedRecipe={displayedRecipe}
-                                    actions={props}
+                            {errorMessage && !recipes.allIds && (
+                                <FetchError
+                                    message={errorMessage}
+                                    onRetry={() => props.fetchRecipesRequest()}
                                 />
-                            ) : (
-                                <div className="recipeForm">
-                                    <RecipeForm
-                                        isFormDisplayed={isFormDisplayed}
-                                    />
-                                </div>
                             )}
+                            <div>
+                                {displayedRecipe ? (
+                                    <RecipeDetail
+                                        displayedRecipe={displayedRecipe}
+                                        actions={props}
+                                    />
+                                ) : (
+                                    <div className="recipeForm">
+                                        <RecipeForm
+                                            isFormDisplayed={isFormDisplayed}
+                                        />
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     )}
             </div>
@@ -54,6 +69,7 @@ const mapStateToProps = (state) => ({
     recipes: getAllRecipes(state),
     isFormDisplayed: getDisplayFormState(state),
     isFetching: getIsFetching(state),
+    errorMessage: getErrorMessage(state),
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch);

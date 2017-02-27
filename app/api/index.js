@@ -78,8 +78,10 @@ const delay = (ms) =>
 
 //fetchRecipes returns a promise
 export const fetchRecipes = () =>
-  delay(5000).then(() => {
-        // throw new Error('Boom')
+  delay(500).then(() => {
+    if(Math.random() > 0.5) {
+        throw new Error('Boom')
+    }
         return fakeDatabase.recipes;
   });
 
