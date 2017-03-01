@@ -76,25 +76,20 @@ const fakeDatabase = {
 const delay = (ms) =>
   new Promise(resolve => setTimeout(resolve, ms));
 
-//fetchRecipes returns a promise
 export const fetchRecipes = () =>
   delay(500).then(() => {
-    if(Math.random() > 0.5) {
-        throw new Error('Boom')
-    }
+    // if(Math.random() > 0.5) {
+    //     throw new Error('Boom')
+    // }
         return fakeDatabase.recipes;
   });
 
-// export const addTodo = (text) =>
-//   delay(500).then(() => {
-//     const todo = {
-//       id: v4(),
-//       text,
-//       completed: false,
-//     };
-//     fakeDatabase.todos.push(todo);
-//     return todo;
-//   });
+export const addRecipe = (recipe) =>
+  delay(500).then(() => {
+    const recipeWithId = {...recipe, id: v4()};
+    fakeDatabase.recipes.push(recipeWithId);
+    return recipeWithId;
+  });
 //
 // export const toggleTodo = (id) =>
 //   delay(500).then(() => {

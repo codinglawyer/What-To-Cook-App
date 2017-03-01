@@ -1,5 +1,4 @@
 import React from 'react';
-import uuidV4 from 'uuid';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 import { toArray } from 'lodash';
 
@@ -160,9 +159,8 @@ const RecipeForm = ({
 export default reduxForm({
     form: 'form',
     fields: ['recipe', 'ingredients'],
-    onSubmit: (recipeData, dispatch) => {
-        recipeData.id = uuidV4();
-        dispatch(actions.addRecipe({recipeData}))
+    onSubmit: (_, dispatch) => {
+        dispatch(actions.addRecipeRequest())
     }
 })(RecipeForm)
 

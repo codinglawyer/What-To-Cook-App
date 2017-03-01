@@ -33,33 +33,32 @@ const renderMain = ({
                 recipes={recipes}
             />
             <div>
-                {isFetching && !recipes.allIds ? (
-                        <div>Loading</div>
-                    ) : (
-                        <div>
-                            {errorMessage && !recipes.allIds && (
-                                <FetchError
-                                    message={errorMessage}
-                                    onRetry={() => props.fetchRecipesRequest()}
-                                />
-                            )}
-                            <div>
-                                {displayedRecipe ? (
-                                    <RecipeDetail
-                                        displayedRecipe={displayedRecipe}
-                                        actions={props}
-                                    />
-                                ) : (
-                                    <div className="recipeForm">
-                                        <RecipeForm
-                                            isFormDisplayed={isFormDisplayed}
-                                        />
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                    )}
+                {isFetching && !recipes.allIds && (
+                    <div>Loading</div>
+                )}
             </div>
+            <div>
+                {errorMessage && !recipes.allIds && (
+                    <FetchError
+                        message={errorMessage}
+                        onRetry={() => props.fetchRecipesRequest()}
+                    />
+                )}
+            </div>
+            <div>
+                {displayedRecipe ? (
+                    <RecipeDetail
+                        displayedRecipe={displayedRecipe}
+                        actions={props}
+                    />
+                ) : (
+                    <div className="recipeForm">
+                        <RecipeForm
+                            isFormDisplayed={isFormDisplayed}
+                        />
+                    </div>
+                )}
+             </div>
         </div>
     )
 };
