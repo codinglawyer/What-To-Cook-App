@@ -1,11 +1,16 @@
+import { normalize } from 'normalizr';
+import * as schema from './schema';
+
 export const fetchRecipesRequest = () => ({
     type: 'FETCH_RECIPES_REQUEST',
 });
 
-export const fetchRecipesSuccess = ({response}) => ({
+export const fetchRecipesSuccess = ({response}) => {
+    console.log(normalize(response, schema.arrayOfRecipes));
+    return {
     type: 'FETCH_RECIPES_SUCCESS',
-    payload: response,
-});
+    payload: normalize(response, schema.arrayOfRecipes),
+}};
 
 export const fetchRecipesFailure = ({error}) => ({
     type: 'FETCH_RECIPES_FAILURE',
@@ -19,7 +24,7 @@ export const addRecipeRequest = () => ({
 
 export const addRecipeSuccess = ({response}) => ({
     type: 'ADD_RECIPE_SUCCESS',
-    payload: response,
+    payload: normalize(response, schema.recipe),
 });
 
 export const addRecipeFailure = ({error}) => ({
@@ -28,10 +33,12 @@ export const addRecipeFailure = ({error}) => ({
 });
 
 
-export const deleteRecipe = ({displayedRecipeId}) => ({
+export const deleteRecipe = ({displayedRecipeId}) => {
+    // console.log(normalize(response, schema.recipe));
+    return{
     type: 'DELETE_RECIPE',
     payload: displayedRecipeId,
-});
+}};
 
 export const displayRecipeForm = ({isFormDisplayed}) => ({
     type: 'DISPLAY_RECIPE_FORM',

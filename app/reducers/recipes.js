@@ -5,15 +5,10 @@ const byId = (state = {}, action) => {
     const {payload} = action;
     switch(action.type) {
         case 'FETCH_RECIPES_SUCCESS':
-            let newState = {};
-            for(let key in payload){
-                newState[payload[key].id] = payload[key]
-            }
-            return newState;
         case 'ADD_RECIPE_SUCCESS':
             return {
                 ...state,
-                [payload.id]: payload
+                ...payload.entities.recipes,
             };
         case 'DELETE_RECIPE':
             return omit(state, payload);
@@ -26,9 +21,9 @@ const allIds = (state = [], action) => {
     const {payload} = action;
     switch(action.type) {
         case 'FETCH_RECIPES_SUCCESS':
-            return payload.map(recipe => recipe.id);
+            return [...state, ...payload.result];
         case 'ADD_RECIPE_SUCCESS':
-            return [...state, payload.id];
+            return [...state, payload.result];
         case 'DELETE_RECIPE':
             return state.filter(id => id !== payload);
         default:
