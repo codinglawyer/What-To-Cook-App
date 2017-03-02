@@ -22,7 +22,7 @@ const DisplayedRecipe = ({displayedRecipe, actions }) => {
             <FlatButton
                 label="Delete Recipe"
                 secondary={true}
-                onClick={() => actions.deleteRecipe({displayedRecipeId: displayedRecipe.id})}
+                onClick={() => actions.deleteRecipeRequest()}
             />
         </div>
     )

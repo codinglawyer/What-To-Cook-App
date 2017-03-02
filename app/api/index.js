@@ -3,8 +3,7 @@ import { v4 } from 'node-uuid';
 // This is a fake in-memory implementation of something
 // that would be implemented by calling a REST server.
 
-const fakeDatabase = {
-  recipes: [{
+let fakeDatabase = [{
     id: v4(),
     servings: 4,
     title: 'Pasta with Tomatoes, Anchovy & Chillies',
@@ -70,8 +69,8 @@ const fakeDatabase = {
     title: 'Chilli Beef Lettuce Wraps',
     directions: [],
     ingredients: [],
-  }],
-};
+}];
+
 
 const delay = (ms) =>
   new Promise(resolve => setTimeout(resolve, ms));
@@ -81,19 +80,18 @@ export const fetchRecipes = () =>
     // if(Math.random() > 0.5) {
     //     throw new Error('Boom')
     // }
-        return fakeDatabase.recipes;
+        return fakeDatabase;
   });
 
 export const addRecipe = (recipe) =>
   delay(500).then(() => {
     const recipeWithId = {...recipe, id: v4()};
-    fakeDatabase.recipes.push(recipeWithId);
+    fakeDatabase.push(recipeWithId);
     return recipeWithId;
   });
-//
-// export const toggleTodo = (id) =>
-//   delay(500).then(() => {
-//     const todo = fakeDatabase.todos.find(t => t.id === id);
-//     todo.completed = !todo.completed;
-//     return todo;
-//   });
+
+export const deleteRecipe = (recipeId) =>
+    delay(500).then(() => {
+        fakeDatabase = fakeDatabase.filter(recipe => recipe.id !== recipeId);
+        return fakeDatabase;
+    });

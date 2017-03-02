@@ -47,10 +47,31 @@ export function* watchAddRecipe() {
 }
 
 
+export function deleteRecipeApi(recipeData) {
+    return api.deleteRecipe(recipeData)
+        .then(response => ({response}))
+        .catch(error => ({error}))
+}
+
+function* deleteRecipe() {
+    const recipeId = yield select(state => state.displayedRecipe);
+    const { response, error } = yield call(deleteRecipeApi, recipeId);
+    if (response) {
+        yield put(actions.deleteRecipeSuccess({response}))
+    }
+    else {
+        yield put(actions.deleteRecipeFailure({error}))
+    }
+}
+
+export function* watchDeleteRecipe() {
+    yield takeEvery('DELETE_RECIPE_REQUEST', deleteRecipe)
+}
 
 export default function* rootSaga() {
     yield [
         watchFetchRecipes(),
         watchAddRecipe(),
+        watchDeleteRecipe(),
     ]
 }

@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import { omit } from 'lodash';
 
 const byId = (state = {}, action) => {
     const {payload} = action;
@@ -10,8 +9,8 @@ const byId = (state = {}, action) => {
                 ...state,
                 ...payload.entities.recipes,
             };
-        case 'DELETE_RECIPE':
-            return omit(state, payload);
+        case 'DELETE_RECIPE_SUCCESS':
+            return payload.entities.recipes;
         default:
             return state;
     }
@@ -24,8 +23,8 @@ const allIds = (state = [], action) => {
             return [...state, ...payload.result];
         case 'ADD_RECIPE_SUCCESS':
             return [...state, payload.result];
-        case 'DELETE_RECIPE':
-            return state.filter(id => id !== payload);
+        case 'DELETE_RECIPE_SUCCESS':
+            return payload.result;
         default:
             return state;
     }
@@ -41,7 +40,7 @@ const isFetching = (state = false, action) => {
         default:
             return state;
     }
-}
+};
 
 const errorMessage = (state = null, action) => {
     const {payload} = action;
@@ -54,7 +53,7 @@ const errorMessage = (state = null, action) => {
         default:
             return state;
     }
-}
+};
 
 const recipes = combineReducers({
     byId,

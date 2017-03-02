@@ -33,12 +33,19 @@ export const addRecipeFailure = ({error}) => ({
 });
 
 
-export const deleteRecipe = ({displayedRecipeId}) => {
-    // console.log(normalize(response, schema.recipe));
-    return{
-    type: 'DELETE_RECIPE',
-    payload: displayedRecipeId,
-}};
+export const deleteRecipeRequest = () => ({
+    type: 'DELETE_RECIPE_REQUEST',
+});
+
+export const deleteRecipeSuccess = ({response}) => ({
+    type: 'DELETE_RECIPE_SUCCESS',
+    payload: normalize(response, schema.arrayOfRecipes),
+});
+
+export const deleteRecipeFailure = ({error}) => ({
+    type: 'DELETE_RECIPE_FAILURE',
+    payload: error.message,
+});
 
 export const displayRecipeForm = ({isFormDisplayed}) => ({
     type: 'DISPLAY_RECIPE_FORM',
