@@ -12,6 +12,7 @@ const renderField = ({
     label,
     multiLine,
     rows,
+    style,
 }) => (
     <div>
         <label>{label}</label>
@@ -23,20 +24,19 @@ const renderField = ({
                 multiLine={multiLine}
                 rows={rows}
                 className="textField"
-                style={{width:'30%'}}
+                style={style}
             />
         </div>
     </div>
 );
 
-const renderIngredients = ({ fields }) => (
+const renderIngredients = ({ fields, style }) => (
     <div>
         <div>
             <RaisedButton
                 className="addIngredient"
                 labelStyle={{fontSize: '12px'}}
                 label="Add Ingredient"
-                secondary={true}
                 type="button"
                 onClick={() => fields.push()}
             />
@@ -49,52 +49,56 @@ const renderIngredients = ({ fields }) => (
                     type="button"
                     title="remove"
                     onClick={() => fields.remove(index)}
+                    labelStyle={{fontSize: 10, width:'30%'}}
                 />
                 <Field
                     name={`${ingredient}.ingredient`}
                     type="text"
                     component={renderField}
                     label={`#${index + 1} Ingredient`}
+                    style={style}
                 />
                 <Field
                     name={`${ingredient}.amount`}
                     type="text"
                     component={renderField}
                     label={`#${index + 1} Amount`}
+                    style={style}
                 />
             </div>
         )}
     </div>
 );
 
-const renderDirections = ({ fields }) => (
+const renderDirections = ({ fields, style }) => (
     <div>
         <div>
             <RaisedButton
-                className="addIngredient"
+                className="addDirection"
                 labelStyle={{fontSize: '12px'}}
                 label="Add Direction"
                 secondary={true}
                 type="button"
                 onClick={() => fields.push()}
+                style={{marginTop: 20, marginBottom: 10}}
             />
         </div>
         {fields.map((direction, index) =>
             <div key={index}>
                 <FlatButton
-                    label="Delete Ingredient"
+                    label="Delete Direction"
                     secondary={true}
                     type="button"
                     title="remove"
                     onClick={() => fields.remove(index)}
+                    labelStyle={{fontSize: 10, width:'30%'}}
                 />
                 <Field
                     name={`${direction}`}
                     type="text"
                     component={renderField}
                     label={`#${index + 1} Direction`}
-                    multiLine={true}
-                    rows={3}
+                    style={style}
                 />
             </div>
         )}
@@ -118,20 +122,25 @@ const RecipeForm = ({
                         type="text"
                         component={renderField}
                         label="Title"
-                    />
-                    <FieldArray
-                        name="directions"
-                        component={renderDirections}
+                        style={{width:'30%'}}
+
                     />
                     <Field
                         name="servings"
                         type="text"
                         component={renderField}
                         label="Servings"
+                        style={{width:'10%'}}
                     />
                     <FieldArray
                         name="ingredients"
                         component={renderIngredients}
+                        style={{width:'30%'}}
+                    />
+                    <FieldArray
+                        name="directions"
+                        component={renderDirections}
+                        style={{width:'80%'}}
                     />
                     <div>
                         <RaisedButton

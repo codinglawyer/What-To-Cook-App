@@ -12,7 +12,6 @@ const Sidebar = ({
     displayRecipeForm,
     isFormDisplayed,
     actions,
-    setMenuOpen,
 }) => (
         <Toolbar style={{ marginBottom: "50px"}}>
             <ToolbarTitle
@@ -43,13 +42,11 @@ const Sidebar = ({
                             value={index + 1}
                             primaryText={recipe.title}
                             onClick={() => {actions.displayRecipe({recipeId: recipe.id})}}
+                            containerElement={<Link to={recipe.id}/>}
                         >
-                            <Link to={recipe.id}>
-                            </Link>
                         </MenuItem>
                     ))}
                 </DropDownMenu>
-                <ToolbarSeparator />
         </Toolbar>
     );
 
