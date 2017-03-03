@@ -24,7 +24,9 @@ const renderMain = ({
     displayedRecipe,
     isFetching,
     errorMessage,
+    params,
     ...props }) => {
+    console.log("PARAMS", params);
     return (
         <div>
             <Sidebar

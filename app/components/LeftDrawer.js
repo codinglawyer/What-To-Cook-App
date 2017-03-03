@@ -3,6 +3,7 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import { compose, withState } from 'recompose';
+import { Link } from 'react-router'
 
 
 const RenderLeftDrawer = ({ isOpen, setIsOpen, recipes, actions}) => {
@@ -20,12 +21,13 @@ const RenderLeftDrawer = ({ isOpen, setIsOpen, recipes, actions}) => {
                 onRequestChange={(isOpen) => setIsOpen(false)}
             >
             {recipes.map(recipe => (
-                <MenuItem
+                <Link
+                    to={recipe.id}
                     key={recipe.id}
-                    onTouchTap={() => {actions.displayRecipe({recipeId: recipe.id}); setIsOpen(false)}}
+                    onClick={() => {actions.displayRecipe({recipeId: recipe.id}); setIsOpen(false)}}
                 >
                     {recipe.title}
-                </MenuItem>
+                </Link>
             ))}
             </Drawer>
         </div>
