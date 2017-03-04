@@ -57,3 +57,8 @@ export const displayRecipe = ({recipeId}) => ({
     payload: recipeId,
 });
 
+
+export const loadRecipeToForm = ({displayedRecipeId}) => ({
+    type: 'LOAD_RECIPE_TO_FORM',
+    payload: displayedRecipeId,
+})

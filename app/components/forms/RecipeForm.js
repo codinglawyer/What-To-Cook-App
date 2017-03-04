@@ -1,11 +1,15 @@
 import React from 'react';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 import { toArray } from 'lodash';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
 
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import * as actions from '../../actions/index';
+
+const data = {title: 'Pasta with Tomatoes, Anchovy & Chillies'}
 
 const renderField = ({
     input,
@@ -105,71 +109,94 @@ const renderDirections = ({ fields, style }) => (
     </div>
 );
 
-const RecipeForm = ({
+const renderRecipeForm = ({
     handleSubmit,
     pristine,
     submitting,
     reset,
     isFormDisplayed,
-}) => (
-    <div>
-        {isFormDisplayed ? (
-            <div>
-                <h3>Fill Recipe Information</h3>
-                <form onSubmit={handleSubmit}>
-                    <Field
-                        name="title"
-                        type="text"
-                        component={renderField}
-                        label="Title"
-                        style={{width:'30%'}}
-
-                    />
-                    <Field
-                        name="servings"
-                        type="text"
-                        component={renderField}
-                        label="Servings"
-                        style={{width:'10%'}}
-                    />
-                    <FieldArray
-                        name="ingredients"
-                        component={renderIngredients}
-                        style={{width:'30%'}}
-                    />
-                    <FieldArray
-                        name="directions"
-                        component={renderDirections}
-                        style={{width:'80%'}}
-                    />
+    recipe,
+}) => {
+    console.log("LOAD", recipe);
+    return(
+        <div>
+            {isFormDisplayed ? (
                     <div>
-                        <RaisedButton
-                            className="submitButton"
-                            label="Submit"
-                            primary={true}
-                            type="submit"
-                            disabled={submitting}
-                        />
-                        <RaisedButton
-                            className="clearButton"
-                            label="Clear Values"
-                            default={true}
-                            type="button"
-                            disabled={pristine || submitting}
-                            onClick={reset}
-                        />
-                    </div>
-                </form>
-            </div>
-        ) : null}
-    </div>
-);
+                        <h3>Fill Recipe Information</h3>
+                        <form onSubmit={handleSubmit}>
+                            <Field
+                                name="title"
+                                type="text"
+                                component={renderField}
+                                label="Title"
+                                style={{width:'30%'}}
 
-export default reduxForm({
-    form: 'form',
-    fields: ['recipe', 'ingredients'],
-    onSubmit: (_, dispatch) => {
-        dispatch(actions.addRecipeRequest())
+                            />
+                            <Field
+                                name="servings"
+                                type="text"
+                                component={renderField}
+                                label="Servings"
+                                style={{width:'10%'}}
+                            />
+                            <FieldArray
+                                name="ingredients"
+                                component={renderIngredients}
+                                style={{width:'30%'}}
+                            />
+                            <FieldArray
+                                name="directions"
+                                component={renderDirections}
+                                style={{width:'80%'}}
+                            />
+                            <div>
+                                <RaisedButton
+                                    className="submitButton"
+                                    label="Submit"
+                                    primary={true}
+                                    type="submit"
+                                    disabled={submitting}
+                                />
+                                <RaisedButton
+                                    className="clearButton"
+                                    label="Clear Values"
+                                    default={true}
+                                    type="button"
+                                    disabled={pristine || submitting}
+                                    onClick={reset}
+                                />
+                            </div>
+                        </form>
+                    </div>
+                ) : null}
+        </div>
+    );
+}
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        initialValues: state.recipes.byId['4f51a525-e89a-415f-ae91-b0d98a217d89']
     }
-})(RecipeForm)
+}
+
+const RecipeForm = compose(
+    connect(mapStateToProps, null),
+    reduxForm({
+        form: 'form',
+        fields: ['recipe', 'ingredients'],
+        onSubmit: (_, dispatch) => {
+            dispatch(actions.addRecipeRequest())
+        }
+    })
+)(renderRecipeForm)
+
+export default RecipeForm;
+
+// export default reduxForm({
+//     form: 'form',
+//     fields: ['recipe', 'ingredients'],
+//     onSubmit: (_, dispatch) => {
+//         dispatch(actions.addRecipeRequest())
+//     }
+// })(RecipeForm)
 

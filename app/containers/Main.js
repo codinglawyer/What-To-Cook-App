@@ -26,7 +26,7 @@ const renderMain = ({
     errorMessage,
     params,
     ...props }) => {
-    console.log("PARAMS", params);
+    // console.log("PARAMS", params);
     return (
         <div>
             <Sidebar
@@ -52,6 +52,7 @@ const renderMain = ({
                     <RecipeDetail
                         displayedRecipe={displayedRecipe}
                         actions={props}
+                        params={params}
                     />
                 ) : (
                     <div className="recipeForm">
