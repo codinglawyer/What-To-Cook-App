@@ -174,12 +174,9 @@ const renderRecipeForm = ({
     );
 }
 
-const mapStateToProps = (state, ownProps) => {
-    console.log("FOMd", ownProps);
-    return {
-        initialValues: state.recipes.byId['4f51a525-e89a-415f-ae91-b0d98a217d89']
-    }
-}
+const mapStateToProps = (state, {params}) => ({
+    initialValues: state.recipes.byId[params.params.id],
+});
 
 const RecipeForm = compose(
     connect(mapStateToProps, null),
@@ -193,12 +190,3 @@ const RecipeForm = compose(
 )(renderRecipeForm)
 
 export default RecipeForm;
-
-// export default reduxForm({
-//     form: 'form',
-//     fields: ['recipe', 'ingredients'],
-//     onSubmit: (_, dispatch) => {
-//         dispatch(actions.addRecipeRequest())
-//     }
-// })(RecipeForm)
-

@@ -14,7 +14,8 @@ const Root = ({ store }) => (
             <Router history={browserHistory}>
                 <Route path="/" component={Navigation}>
                     <IndexRoute component={Home}/>
-                    <Route path="/recipeForm" component={CreateRecipe} />
+                    <Route path="/editRecipe/(:id)" component={CreateRecipe} />
+                    <Route path="/createRecipe" component={CreateRecipe} />
                     <Route path="/:id" component={RecipeDetail} />
                 </Route>
             </Router>

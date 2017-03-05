@@ -8,6 +8,7 @@ import * as actions from '../actions/index';
 
 
 const DisplayedRecipe = ({displayedRecipe, params}) => {
+    console.log("ID", params.id);
     return (
         <div>
             <h3 className="recipeDetail">Recipe detail:</h3>
@@ -30,14 +31,10 @@ const DisplayedRecipe = ({displayedRecipe, params}) => {
                 secondary={true}
                 onClick={() => actions.deleteRecipeRequest()}
             />
-            <Link to="/recipeForm">
-                Click
-            </Link>
             <FlatButton
-                label="Load Values"
-                default={true}
-                type="button"
-                onClick={() => actions.loadRecipeToForm({displayedRecipeId: params.id})}
+                label="Edit Recipe"
+                secondary={true}
+                containerElement={<Link to={`/editRecipe/${params.id}`} />}
             />
         </div>
     )

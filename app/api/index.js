@@ -4,7 +4,7 @@ import { v4 } from 'node-uuid';
 // that would be implemented by calling a REST server.
 
 let fakeDatabase = [{
-    id: '4f51a525-e89a-415f-ae91-b0d98a217d89',
+    id: v4(),
     servings: 4,
     title: 'Pasta with Tomatoes, Anchovy & Chillies',
     directions:

@@ -36,7 +36,7 @@ const renderNavigation = ({
                 className="newRecipe"
                 label="Add A New Recipe"
                 type="button"
-                containerElement={<Link to="/recipeForm"/>}
+                containerElement={<Link to="/createRecipe"/>}
             />
         </ToolbarGroup>
         <ToolbarGroup>
