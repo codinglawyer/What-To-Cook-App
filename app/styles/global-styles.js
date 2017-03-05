@@ -80,7 +80,7 @@ injectGlobal`
   }
   
   .activeLink{
-    color: green;
+    color: green !important;
   }
 `;
 

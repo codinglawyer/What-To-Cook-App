@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import { compose } from 'recompose';
 import { lifecycle } from '../utils/lifecycle-fp';
 
-import Navigation from '../components/Navigation';
 import FetchError from '../components/FetchError';
 import * as actions from '../actions/index';
 import { getAllRecipes, getIsFetching, getErrorMessage } from '../reducers/index';
@@ -20,14 +19,9 @@ const renderHome = ({
     recipes,
     isFetching,
     errorMessage,
-    children,
-    ...props
 }) => {
     return (
         <div>
-            <Navigation
-                recipes={recipes}
-            />
             <div>
                 {isFetching && !recipes.allIds && (
                     <div>Loading</div>
@@ -41,7 +35,6 @@ const renderHome = ({
                     />
                 )}
             </div>
-            {children}
         </div>
     )
 };

@@ -1,25 +1,33 @@
 import React from 'react';
-import { Link } from 'react-router'
+import { Link, IndexLink } from 'react-router';
 import { compose, withState} from 'recompose';
+import { connect } from 'react-redux';
 
 import RaisedButton from 'material-ui/RaisedButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
+import { getAllRecipes } from '../reducers/index';
 
+
+const mapStateToProps = (state) => ({
+    recipes: getAllRecipes(state),
+})
 
 const renderNavigation = ({
     recipes,
     dropdownValue,
     setDropdownValue,
+    children,
 }) => (
+    <div>
     <Toolbar style={{ marginBottom: "50px"}}>
-        <Link to="/">
+        <IndexLink to="/">
             <ToolbarTitle
                 text="What To Cook?"
                 style={{ fontWeight: 500, fontSize: "25px"}}
         />
-        </Link>
+        </IndexLink>
         <ToolbarGroup>
             <ToolbarSeparator />
         </ToolbarGroup>
@@ -43,15 +51,18 @@ const renderNavigation = ({
                         key={recipe.id}
                         value={index}
                         primaryText={recipe.title}
-                        containerElement={<Link to={recipe.id}  activeStyle={{ color: 'red' }}/>}
+                        containerElement={<Link to={recipe.id} activeClassName="activeLink" />}
                     >
                     </MenuItem>
                 ))}
             </DropDownMenu>
     </Toolbar>
+        {children}
+    </div>
 );
 
 const Navigation = compose(
+    connect(mapStateToProps),
     withState('dropdownValue', 'setDropdownValue', 0),
 )(renderNavigation)
 export default Navigation;
