@@ -1,17 +1,18 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { Router, Route, browserHistory } from 'react-router'
-import Main from '../containers/Main';
+import { Router, Route, browserHistory } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import RecipeForm from './forms/RecipeForm'
-import RecipeDetail from './RecipeDetail'
+
+import Home from '../screens/CreateRecipe/Home';
+import CreateRecipe from '../screens/CreateRecipe';
+import RecipeDetail from '../screens/RecipeDetail';
 
 const Root = ({ store }) => (
     <Provider store={store}>
         <MuiThemeProvider>
             <Router history={browserHistory}>
-                <Route path="/" component={Main}>
-                    <Route path="/recipeForm" component={RecipeForm} />
+                <Route path="/" component={Home}>
+                    <Route path="/recipeForm" component={CreateRecipe} />
                     <Route path="/(:id)" component={RecipeDetail} />
                 </Route>
             </Router>

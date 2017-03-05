@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { compose } from 'recompose';
 import { lifecycle } from '../utils/lifecycle-fp';
 
-import Sidebar from '../components/Sidebar';
+import Navigation from '../components/Navigation';
 import FetchError from '../components/FetchError';
 import * as actions from '../actions/index';
 import { getAllRecipes, getIsFetching, getErrorMessage } from '../reducers/index';
@@ -16,17 +16,18 @@ const mainLifecycle = {
     }
 };
 
-const renderMain = ({
+const renderHome = ({
     recipes,
     isFetching,
     errorMessage,
     params,
     children,
-    ...props }) => {
+    ...props
+}) => {
     console.log("PARAMS", params);
     return (
         <div>
-            <Sidebar
+            <Navigation
                 actions={props}
                 recipes={recipes}
             />
@@ -56,9 +57,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch);
 
-const Main = compose (
+const Home = compose (
     connect(mapStateToProps, mapDispatchToProps),
     lifecycle(mainLifecycle),
-)(renderMain);
+)(renderHome);
 
-export default Main;
+export default Home;
