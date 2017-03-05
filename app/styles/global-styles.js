@@ -54,7 +54,7 @@ injectGlobal`
     text-align: center;
   }
   
-  
+ 
   
 
   .recipeDetail{
@@ -78,4 +78,9 @@ injectGlobal`
   .ingredients{
     
   }
+  
+  .activeLink{
+    color: green;
+  }
 `;
+
