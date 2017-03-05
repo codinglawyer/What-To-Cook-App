@@ -114,7 +114,7 @@ const renderRecipeForm = ({
     pristine,
     submitting,
     reset,
-    isFormDisplayed,
+    isFormDisplayed = true,
     recipe,
 }) => {
     console.log("LOAD", recipe);

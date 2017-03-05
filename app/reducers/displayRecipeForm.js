@@ -1,9 +1,9 @@
-const displayRecipeForm = (state = false, action) => {
+const displayRecipeForm = (state = true, action) => {
     switch(action.type) {
         case 'DISPLAY_RECIPE_FORM':
             return action.payload;
         case 'DISPLAY_RECIPE':
-            return false;
+            return true;
         default:
             return state;
     }

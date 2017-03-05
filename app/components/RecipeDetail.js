@@ -1,8 +1,14 @@
 import React from 'react';
 import FlatButton from 'material-ui/FlatButton';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 
-const DisplayedRecipe = ({displayedRecipe, actions, params }) => {
+import { getDisplayedRecipe } from '../reducers/index';
+import * as actions from '../actions/index';
+
+
+const DisplayedRecipe = ({displayedRecipe, params }) => {
     console.log("PARAMS", params);
     return (
         <div>
@@ -14,7 +20,7 @@ const DisplayedRecipe = ({displayedRecipe, actions, params }) => {
                     <li className="recipeDirections" key={direction}>{direction}</li>
                 ))}
             </ul>
-            <br/>
+            <br/>F
             <div className="ingredientsTitle">Ingredients:</div>
             <ul className="ingredients">
                 {displayedRecipe.ingredients.map(ingredient => (
@@ -39,4 +45,11 @@ const DisplayedRecipe = ({displayedRecipe, actions, params }) => {
     )
 };
 
-export default DisplayedRecipe;
+const mapStateToProps = (state) => ({
+    displayedRecipe: getDisplayedRecipe(state)[0],
+});
+
+const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(DisplayedRecipe);
+

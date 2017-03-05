@@ -25,8 +25,9 @@ const renderMain = ({
     isFetching,
     errorMessage,
     params,
+    children,
     ...props }) => {
-    // console.log("PARAMS", params);
+    console.log("PARAMS", params);
     return (
         <div>
             <Sidebar
@@ -47,21 +48,7 @@ const renderMain = ({
                     />
                 )}
             </div>
-            <div>
-                {displayedRecipe ? (
-                    <RecipeDetail
-                        displayedRecipe={displayedRecipe}
-                        actions={props}
-                        params={params}
-                    />
-                ) : (
-                    <div className="recipeForm">
-                        <RecipeForm
-                            isFormDisplayed={isFormDisplayed}
-                        />
-                    </div>
-                )}
-             </div>
+            {children}
         </div>
     )
 };

@@ -23,14 +23,12 @@ const Sidebar = ({
             </ToolbarGroup>
             <ToolbarGroup>
                 <ToolbarSeparator />
-                <Link to="/recipeForm">
                     <RaisedButton
                         className="newRecipe"
                         label="Add A New Recipe"
                         type="button"
-                        onClick={() => actions.displayRecipeForm({isFormDisplayed: !isFormDisplayed})}
+                        containerElement={<Link to="/recipeForm"/>}
                     />
-                </Link>
             </ToolbarGroup>
             <ToolbarGroup>
                 <ToolbarSeparator />
