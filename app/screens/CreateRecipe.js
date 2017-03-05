@@ -1,9 +1,12 @@
 import React from 'react';
 import RecipeForm from '../components/forms/RecipeForm'
 
-const CreateRecipe = () => (
-    <RecipeForm />
-)
+const CreateRecipe = ({ ...props }) => {
+    console.log("PAAAAAA", props);
+    return(
+        <RecipeForm params={props}/>
+    )
+}
 
 export default CreateRecipe;
 

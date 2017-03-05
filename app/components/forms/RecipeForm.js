@@ -116,8 +116,9 @@ const renderRecipeForm = ({
     reset,
     isFormDisplayed = true,
     recipe,
+    params,
 }) => {
-    console.log("LOAD", recipe);
+    console.log("LOAD", params);
     return(
         <div>
             {isFormDisplayed ? (
@@ -174,6 +175,7 @@ const renderRecipeForm = ({
 }
 
 const mapStateToProps = (state, ownProps) => {
+    console.log("FOMd", ownProps);
     return {
         initialValues: state.recipes.byId['4f51a525-e89a-415f-ae91-b0d98a217d89']
     }
