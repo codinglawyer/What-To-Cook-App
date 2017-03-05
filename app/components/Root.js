@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { Router, Route, browserHistory } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import Home from '../screens/CreateRecipe/Home';
+import Home from '../screens/Home';
 import CreateRecipe from '../screens/CreateRecipe';
 import RecipeDetail from '../screens/RecipeDetail';
 

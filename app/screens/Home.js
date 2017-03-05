@@ -20,15 +20,12 @@ const renderHome = ({
     recipes,
     isFetching,
     errorMessage,
-    params,
     children,
     ...props
 }) => {
-    console.log("PARAMS", params);
     return (
         <div>
             <Navigation
-                actions={props}
                 recipes={recipes}
             />
             <div>

@@ -7,10 +7,7 @@ import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 
 
-const Navigation = ({
-    recipes,
-    actions,
-}) => (
+const Navigation = ({ recipes }) => (
         <Toolbar style={{ marginBottom: "50px"}}>
             <Link to="/">
                 <ToolbarTitle
@@ -38,7 +35,6 @@ const Navigation = ({
                             key={recipe.id}
                             value={index + 1}
                             primaryText={recipe.title}
-                            onClick={() => {actions.displayRecipe({recipeId: recipe.id})}}
                             containerElement={<Link to={recipe.id}/>}
                         >
                         </MenuItem>

@@ -47,16 +47,6 @@ export const deleteRecipeFailure = ({error}) => ({
     payload: error.message,
 });
 
-export const displayRecipeForm = ({isFormDisplayed}) => ({
-    type: 'DISPLAY_RECIPE_FORM',
-    payload: isFormDisplayed,
-});
-
-export const displayRecipe = ({recipeId}) => ({
-    type: 'DISPLAY_RECIPE',
-    payload: recipeId,
-});
-
 
 export const loadRecipeToForm = ({displayedRecipeId}) => ({
     type: 'LOAD_RECIPE_TO_FORM',

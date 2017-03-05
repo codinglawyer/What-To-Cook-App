@@ -1,7 +1,7 @@
 import { put, takeEvery, call, select } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
-import * as api from './api/index'
-import * as actions from './actions/index'
+import * as api from '../api/index'
+import * as actions from '../actions/index'
 
 export function fetchRecipesApi() {
     return api.fetchRecipes()

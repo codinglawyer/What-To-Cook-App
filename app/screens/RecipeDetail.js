@@ -18,7 +18,7 @@ const DisplayedRecipe = ({displayedRecipe, params}) => {
                     <li className="recipeDirections" key={direction}>{direction}</li>
                 ))}
             </ul>
-            <br/>F
+            <br/>
             <div className="ingredientsTitle">Ingredients:</div>
             <ul className="ingredients">
                 {displayedRecipe.ingredients.map(ingredient => (
@@ -43,11 +43,9 @@ const DisplayedRecipe = ({displayedRecipe, params}) => {
     )
 };
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        displayedRecipe: state.recipes.byId[ownProps.params.id]
-    }
-}
+const mapStateToProps = (state, ownProps) => ({
+    displayedRecipe: state.recipes.byId[ownProps.params.id],
+})
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch);
 
