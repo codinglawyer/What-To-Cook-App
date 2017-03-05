@@ -4,12 +4,10 @@ import { bindActionCreators } from 'redux';
 import { compose } from 'recompose';
 import { lifecycle } from '../utils/lifecycle-fp';
 
-import RecipeForm from '../components/forms/RecipeForm';
-import RecipeDetail from '../components/RecipeDetail';
 import Sidebar from '../components/Sidebar';
 import FetchError from '../components/FetchError';
 import * as actions from '../actions/index';
-import { getAllRecipes, getDisplayFormState, getDisplayedRecipe, getIsFetching, getErrorMessage } from '../reducers/index';
+import { getAllRecipes, getIsFetching, getErrorMessage } from '../reducers/index';
 
 
 const mainLifecycle = {
@@ -19,9 +17,7 @@ const mainLifecycle = {
 };
 
 const renderMain = ({
-    isFormDisplayed,
     recipes,
-    displayedRecipe,
     isFetching,
     errorMessage,
     params,
@@ -32,7 +28,6 @@ const renderMain = ({
         <div>
             <Sidebar
                 actions={props}
-                isFormDisplayed={isFormDisplayed}
                 recipes={recipes}
             />
             <div>
@@ -54,9 +49,7 @@ const renderMain = ({
 };
 
 const mapStateToProps = (state) => ({
-    displayedRecipe: getDisplayedRecipe(state)[0],
     recipes: getAllRecipes(state),
-    isFormDisplayed: getDisplayFormState(state),
     isFetching: getIsFetching(state),
     errorMessage: getErrorMessage(state),
 });

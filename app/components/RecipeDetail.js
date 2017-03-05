@@ -4,12 +4,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 
-import { getDisplayedRecipe } from '../reducers/index';
 import * as actions from '../actions/index';
 
 
-const DisplayedRecipe = ({displayedRecipe, params }) => {
-    console.log("PARAMS", params);
+const DisplayedRecipe = ({displayedRecipe, params}) => {
     return (
         <div>
             <h3 className="recipeDetail">Recipe detail:</h3>
@@ -45,9 +43,11 @@ const DisplayedRecipe = ({displayedRecipe, params }) => {
     )
 };
 
-const mapStateToProps = (state) => ({
-    displayedRecipe: getDisplayedRecipe(state)[0],
-});
+const mapStateToProps = (state, ownProps) => {
+    return {
+        displayedRecipe: state.recipes.byId[ownProps.params.id]
+    }
+}
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch);
 

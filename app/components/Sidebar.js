@@ -9,8 +9,6 @@ import MenuItem from 'material-ui/MenuItem';
 
 const Sidebar = ({
     recipes,
-    displayRecipeForm,
-    isFormDisplayed,
     actions,
 }) => (
         <Toolbar style={{ marginBottom: "50px"}}>
