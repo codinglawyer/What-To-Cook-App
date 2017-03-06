@@ -104,7 +104,7 @@
     "rules": {
       "arrow-parens": [
         "error",
-        "always"
+        "as-needed"
       ],
       "arrow-body-style": [
         2,
@@ -122,11 +122,8 @@
       "import/no-unresolved": 2,
       "import/prefer-default-export": 0,
       "indent": [
-        2,
-        2,
-        {
-          "SwitchCase": 1
-        }
+        "error",
+        4
       ],
       "jsx-a11y/aria-props": 2,
       "jsx-a11y/heading-has-content": 0,

@@ -9,7 +9,10 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import * as actions from '../../actions/index';
 
-const data = {title: 'Pasta with Tomatoes, Anchovy & Chillies'}
+
+const mapStateToProps = (state, { params }) => ({
+    initialValues: state.recipes.byId[params.params.id],
+});
 
 const renderField = ({
     input,
@@ -17,7 +20,7 @@ const renderField = ({
     multiLine,
     rows,
     style,
-}) => (
+} = {}) => (
     <div>
         <label>{label}</label>
         <div>
@@ -120,7 +123,7 @@ const renderRecipeForm = ({
 }) => {
     console.log("LOAD", params);
     return(
-        <div>
+        <div className="recipeForm">
             {isFormDisplayed ? (
                     <div>
                         <h3>Fill Recipe Information</h3>
@@ -130,7 +133,7 @@ const renderRecipeForm = ({
                                 type="text"
                                 component={renderField}
                                 label="Title"
-                                style={{width:'30%'}}
+                                style={{width:'20%'}}
 
                             />
                             <Field
@@ -148,7 +151,7 @@ const renderRecipeForm = ({
                             <FieldArray
                                 name="directions"
                                 component={renderDirections}
-                                style={{width:'80%'}}
+                                style={{width:'50%'}}
                             />
                             <div>
                                 <RaisedButton
@@ -173,10 +176,6 @@ const renderRecipeForm = ({
         </div>
     );
 }
-
-const mapStateToProps = (state, {params}) => ({
-    initialValues: state.recipes.byId[params.params.id],
-});
 
 const RecipeForm = compose(
     connect(mapStateToProps, null),
