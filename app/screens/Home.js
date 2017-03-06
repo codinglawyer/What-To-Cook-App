@@ -2,23 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { compose } from 'recompose';
-import { lifecycle } from '../utils/lifecycle-fp';
 
 import FetchError from '../components/FetchError';
 import * as actions from '../actions/index';
 import { getAllRecipes, getIsFetching, getErrorMessage } from '../reducers/index';
 
 
-const mainLifecycle = {
-    componentDidMount({fetchRecipesRequest }) {
-        fetchRecipesRequest();
-    }
-};
-
 const renderHome = ({
     recipes,
     isFetching,
     errorMessage,
+    ...props,
 }) => {
     return (
         <div>
@@ -49,7 +43,6 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch);
 
 const Home = compose (
     connect(mapStateToProps, mapDispatchToProps),
-    lifecycle(mainLifecycle),
 )(renderHome);
 
 export default Home;

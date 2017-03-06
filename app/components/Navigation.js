@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link, IndexLink } from 'react-router';
+import { bindActionCreators } from 'redux';
 import { compose, withState} from 'recompose';
+import { lifecycle } from '../utils/lifecycle-fp';
 import { connect } from 'react-redux';
 
+import * as actions from '../actions/index';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import DropDownMenu from 'material-ui/DropDownMenu';
@@ -10,16 +13,24 @@ import MenuItem from 'material-ui/MenuItem';
 import { getAllRecipes } from '../reducers/index';
 
 
+const mainLifecycle = {
+    componentDidMount({fetchRecipesRequest }) {
+        fetchRecipesRequest();
+    },
+};
+
 const mapStateToProps = (state) => ({
     recipes: getAllRecipes(state),
-})
+});
+
+const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch);
 
 const renderNavigation = ({
     recipes,
     dropdownValue,
     setDropdownValue,
     children,
-}) => (
+} = {}) => (
     <div>
     <Toolbar style={{ marginBottom: "50px"}}>
         <IndexLink to="/">
@@ -62,7 +73,8 @@ const renderNavigation = ({
 );
 
 const Navigation = compose(
-    connect(mapStateToProps),
+    connect(mapStateToProps, mapDispatchToProps),
+    lifecycle(mainLifecycle),
     withState('dropdownValue', 'setDropdownValue', 0),
 )(renderNavigation)
 export default Navigation;
