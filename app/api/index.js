@@ -18,19 +18,18 @@ let fakeDatabase = [
         ingredients: [
             {
                 id: v4(),
-                ingredient: '400g dried spaghetti or linguine',
+                ingredient: 'dried spaghetti or linguine',
+                amount: '400g',
             },
             {
                 id: v4(),
                 ingredient: 'Olive oil, for frying and drizzling ',
-            },
-            {
-                id: v4(),
-                ingredient: 'Olive oil, for frying and drizzling ',
+                amount: '',
             },
             {
                 id: v4(),
                 ingredient: '1 dried red chilli, crumbled or chopped into small pieces ',
+                amount: 1,
             },
         ],
     },
@@ -48,19 +47,23 @@ let fakeDatabase = [
         ingredients: [
             {
                 id: v4(),
-                ingredient: '2 garlic cloves, peeled ',
+                ingredient: 'garlic cloves, peeled ',
+                amount: 2,
             },
             {
                 id: v4(),
-                ingredient: '2 tsp paprika',
+                ingredient: 'paprika',
+                amount: '2 tsp',
             },
             {
                 id: v4(),
                 ingredient: 'Olive oil, for frying and drizzling ',
+                amount: '',
             },
             {
                 id: v4(),
-                ingredient: '1 dried red chilli, crumbled or chopped into small pieces ',
+                ingredient: 'dried red chilli, crumbled or chopped into small pieces ',
+                amount: 1,
             },
         ],
     },

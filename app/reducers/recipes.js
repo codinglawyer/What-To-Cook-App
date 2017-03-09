@@ -55,14 +55,14 @@ const errorMessage = (state = null, action) => {
     }
 };
 
-const recipes = combineReducers({
+const recipesEntity = combineReducers({
     byId,
     allIds,
     isFetching,
     errorMessage,
 });
 
-export default recipes;
+export default recipesEntity;
 
 export const getAllRecipes = (state) => state.allIds.map(id => state.byId[id]);
 export const getIsFetching = (state) => state.isFetching;

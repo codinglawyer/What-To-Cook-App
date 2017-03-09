@@ -77,4 +77,5 @@ const Navigation = compose(
     lifecycle(mainLifecycle),
     withState('dropdownValue', 'setDropdownValue', 0),
 )(renderNavigation)
+
 export default Navigation;
