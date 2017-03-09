@@ -13,3 +13,5 @@ const ingredientsEntity = (state = {}, action) => {
 };
 
 export default ingredientsEntity;
+
+export const getAllIngredients = state => state;

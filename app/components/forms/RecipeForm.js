@@ -10,9 +10,11 @@ import FlatButton from 'material-ui/FlatButton';
 import * as actions from '../../actions/index';
 
 
-const mapStateToProps = (state, { params }) => ({
-    initialValues: state.recipes.byId[params.params.id],
-});
+const mapStateToProps = (state, { params }) => {
+    console.log(state.recipesEntity.byId[params.params.id]);
+    return{
+    initialValues: state.recipesEntity.byId[params.params.id],
+}}
 
 const renderField = ({
     input,
@@ -120,62 +122,59 @@ const renderRecipeForm = ({
     isFormDisplayed = true,
     recipe,
     params,
-}) => {
-    console.log("LOAD", params);
-    return(
-        <div className="recipeForm">
-            {isFormDisplayed ? (
-                    <div>
-                        <h3>Fill Recipe Information</h3>
-                        <form onSubmit={handleSubmit}>
-                            <Field
-                                name="title"
-                                type="text"
-                                component={renderField}
-                                label="Title"
-                                style={{width:'20%'}}
+}) => (
+    <div className="recipeForm">
+        {isFormDisplayed ? (
+                <div>
+                    <h3>Fill Recipe Information</h3>
+                    <form onSubmit={handleSubmit}>
+                        <Field
+                            name="title"
+                            type="text"
+                            component={renderField}
+                            label="Title"
+                            style={{width:'20%'}}
 
+                        />
+                        <Field
+                            name="servings"
+                            type="text"
+                            component={renderField}
+                            label="Servings"
+                            style={{width:'10%'}}
+                        />
+                        <FieldArray
+                            name="ingredients"
+                            component={renderIngredients}
+                            style={{width:'30%'}}
+                        />
+                        <FieldArray
+                            name="directions"
+                            component={renderDirections}
+                            style={{width:'50%'}}
+                        />
+                        <div>
+                            <RaisedButton
+                                className="submitButton"
+                                label="Submit"
+                                primary={true}
+                                type="submit"
+                                disabled={submitting}
                             />
-                            <Field
-                                name="servings"
-                                type="text"
-                                component={renderField}
-                                label="Servings"
-                                style={{width:'10%'}}
+                            <RaisedButton
+                                className="clearButton"
+                                label="Clear Values"
+                                default={true}
+                                type="button"
+                                disabled={pristine || submitting}
+                                onClick={reset}
                             />
-                            <FieldArray
-                                name="ingredients"
-                                component={renderIngredients}
-                                style={{width:'30%'}}
-                            />
-                            <FieldArray
-                                name="directions"
-                                component={renderDirections}
-                                style={{width:'50%'}}
-                            />
-                            <div>
-                                <RaisedButton
-                                    className="submitButton"
-                                    label="Submit"
-                                    primary={true}
-                                    type="submit"
-                                    disabled={submitting}
-                                />
-                                <RaisedButton
-                                    className="clearButton"
-                                    label="Clear Values"
-                                    default={true}
-                                    type="button"
-                                    disabled={pristine || submitting}
-                                    onClick={reset}
-                                />
-                            </div>
-                        </form>
-                    </div>
-                ) : null}
-        </div>
-    );
-}
+                        </div>
+                    </form>
+                </div>
+            ) : null}
+    </div>
+);
 
 const RecipeForm = compose(
     connect(mapStateToProps, null),

@@ -5,7 +5,7 @@ import { compose } from 'recompose';
 
 import FetchError from '../components/FetchError';
 import * as actions from '../actions/index';
-import { getAllRecipes, getIsFetching, getErrorMessage } from '../reducers/index';
+import { getAllRecipes, getIsFetching, getErrorMessage, getCompleteRecipes, getAllIngredients } from '../reducers/index';
 
 
 const renderHome = ({
@@ -34,7 +34,7 @@ const renderHome = ({
 };
 
 const mapStateToProps = (state) => ({
-    recipes: getAllRecipes(state),
+    recipes: getCompleteRecipes(state, getAllRecipes, getAllIngredients),
     isFetching: getIsFetching(state),
     errorMessage: getErrorMessage(state),
 });
