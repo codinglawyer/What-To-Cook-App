@@ -2,27 +2,33 @@ import { injectGlobal } from 'styled-components';
 
 /* eslint no-unused-expressions: 0 */
 injectGlobal`
-  html,
-  body {
-    height: 100%;
-    width: 100%;
-    font-size: 16px;
-  }
+    html,
+    body {
+        height: 100%;
+        width: 100%;
+        font-size: 16px;
+        margin: 0;
+    }
 
-  body {
-    font-family: 'Roboto', Helvetica, Arial, sans-serif;
-  }
+    body {
+        font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    }
 
-  body.fontLoaded {
-    font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  }
+    body.fontLoaded {
+        font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
 
-  #app {
-    background-color: #fafafa;
-    min-height: 100%;
-    min-width: 100%;
-    // text-align: center;
-  }
+    #app {
+        background: #fcf4eb;
+        min-height: 100%;
+        min-width: 100%;
+    }
+  
+    a {
+        text-decoration: none   
+    }
+  
+  
 
   .title {
     font-weight: normal;
@@ -73,14 +79,6 @@ injectGlobal`
   
   .recipeDirections{
     font-style: italic;
-  }
-  
-  .ingredients{
-    
-  }
-  
-  .activeLink{
-    color: green !important;
   }
 `;
 

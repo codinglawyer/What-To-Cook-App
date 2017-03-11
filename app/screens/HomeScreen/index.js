@@ -2,13 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { compose } from 'recompose';
+import { Title, Header } from './styles';
 
-import FetchError from '../components/FetchError';
-import * as actions from '../actions/index';
-import { getAllRecipes, getIsFetching, getErrorMessage, getCompleteRecipes, getAllIngredients } from '../reducers/index';
+import FetchError from '../../components/FetchError';
+import * as actions from '../../actions/index';
+import { getAllRecipes, getIsFetching, getErrorMessage, getCompleteRecipes, getAllIngredients } from '../../reducers/index';
 
 
-const renderHome = ({
+const renderHomeScreen = ({
     recipes,
     isFetching,
     errorMessage,
@@ -16,6 +17,8 @@ const renderHome = ({
 }) => {
     return (
         <div>
+            <Title>What do you want to cook?</Title>
+            <Header>asds</Header>
             <div>
                 {isFetching && !recipes.allIds && (
                     <div>Loading</div>
@@ -41,8 +44,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch);
 
-const Home = compose (
+const HomeScreen = compose (
     connect(mapStateToProps, mapDispatchToProps),
-)(renderHome);
+)(renderHomeScreen);
 
-export default Home;
+export default HomeScreen;

@@ -32,15 +32,20 @@ const renderNavigation = ({
     children,
 } = {}) => (
     <div>
-    <Toolbar style={{ marginBottom: "50px"}}>
+    <Toolbar style={{background: '#291705'}}>
         <IndexLink to="/">
             <ToolbarTitle
                 text="What To Cook?"
-                style={{ fontWeight: 500, fontSize: "25px"}}
+                style={{
+                    fontWeight: 500,
+                    fontSize: "25px",
+                    color: '#fff',
+                    textDecoration: 'none'
+                }}
         />
         </IndexLink>
         <ToolbarGroup>
-            <ToolbarSeparator />
+            <ToolbarSeparator style={{ backgroundColor: '#e58f37'}}/>
         </ToolbarGroup>
         <ToolbarGroup>
             <RaisedButton
@@ -48,25 +53,37 @@ const renderNavigation = ({
                 label="Add A New Recipe"
                 type="button"
                 containerElement={<Link to="/createRecipe"/>}
+                backgroundColor="#e58f37"
             />
         </ToolbarGroup>
         <ToolbarGroup>
-            <ToolbarSeparator />
+            <ToolbarSeparator style={{ backgroundColor: '#e58f37'}}/>
         </ToolbarGroup>
-            <DropDownMenu
-                value={dropdownValue}
-                onChange={(event, index, value) => setDropdownValue(value)}
+        <DropDownMenu
+            value={dropdownValue}
+            onChange={(event, index, value) => setDropdownValue(value)}
+            labelStyle={{ color: '#fff' }}
+            listStyle={{ color: '#fff', backgroundColor: '#291705', border: '5px solid #e58f37'}}
+            selectedMenuItemStyle={{ color: '#e58f37' }}
+        >
+            <MenuItem
+                key={0}
+                value={0}
+                primaryText="Select a Recipe"
+                style={{ backgroundColor: '#291705', color: '#fff'}}
             >
-                {recipes.map((recipe, index) => (
-                    <MenuItem
-                        key={recipe.id}
-                        value={index}
-                        primaryText={recipe.title}
-                        containerElement={<Link to={recipe.id} activeClassName="activeLink" />}
-                    >
-                    </MenuItem>
-                ))}
-            </DropDownMenu>
+            </MenuItem>
+            {recipes.map((recipe, index) => (
+                <MenuItem
+                    key={recipe.id}
+                    value={index + 1}
+                    primaryText={recipe.title}
+                    containerElement={<Link to={recipe.id} activeClassName="activeLink" />}
+                    style={{ backgroundColor: '#291705', color: '#fff'}}
+                >
+                </MenuItem>
+            ))}
+        </DropDownMenu>
     </Toolbar>
         {children}
     </div>
