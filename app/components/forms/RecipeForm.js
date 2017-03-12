@@ -7,13 +7,15 @@ import { compose } from 'recompose';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
-import * as actions from '../../actions/index';
+import * as actions from '../../actions/index'
+import { getRecipe } from '../../reducers/index'
 
+import { Header } from '../../styles/global-styles';
 
 const mapStateToProps = (state, { params }) => {
-    console.log(state.recipesEntity.byId[params.params.id]);
     return{
-    initialValues: state.recipesEntity.byId[params.params.id],
+    // initialValues: getRecipe(state, params.params.id),
+    //initialValues: state.recipes.byId[params.params.id],
 }}
 
 const renderField = ({
@@ -42,23 +44,33 @@ const renderField = ({
 const renderIngredients = ({ fields, style }) => (
     <div>
         <div>
-            <RaisedButton
+            <FlatButton
                 className="addIngredient"
                 labelStyle={{fontSize: '12px'}}
                 label="Add Ingredient"
                 type="button"
                 onClick={() => fields.push()}
+                style={{
+                    height: '25px',
+                    lineHeight: 0,
+                }}
+                backgroundColor="#efb982"
+                hoverColor="#f5d2af"
             />
         </div>
         {fields.map((ingredient, index) =>
             <div key={index}>
                 <FlatButton
-                    label="Delete Ingredient"
+                    label="Delete"
                     secondary={true}
                     type="button"
                     title="remove"
                     onClick={() => fields.remove(index)}
-                    labelStyle={{fontSize: 10, width:'30%'}}
+                    labelStyle={{fontSize: 12, width:'30%'}}
+                    style={{
+                        height: '25px',
+                        lineHeight: 0,
+                    }}
                 />
                 <Field
                     name={`${ingredient}.ingredient`}
@@ -82,25 +94,38 @@ const renderIngredients = ({ fields, style }) => (
 const renderDirections = ({ fields, style }) => (
     <div>
         <div>
-            <RaisedButton
+            <FlatButton
                 className="addDirection"
-                labelStyle={{fontSize: '12px'}}
                 label="Add Direction"
-                secondary={true}
                 type="button"
                 onClick={() => fields.push()}
-                style={{marginTop: 20, marginBottom: 10}}
+                style={{
+                    height: '25px',
+                    lineHeight: 0,
+                    marginTop: 20,
+                    marginBottom: 10,
+                }}
+                backgroundColor="#925313"
+                hoverColor="#f5d2af"
+                labelStyle={{
+                    color: '#fff',
+                    fontSize: '12px',
+                }}
             />
         </div>
         {fields.map((direction, index) =>
             <div key={index}>
                 <FlatButton
-                    label="Delete Direction"
+                    label="Delete"
                     secondary={true}
                     type="button"
                     title="remove"
                     onClick={() => fields.remove(index)}
-                    labelStyle={{fontSize: 10, width:'30%'}}
+                    labelStyle={{fontSize: 12, width:'30%'}}
+                    style={{
+                        height: '25px',
+                        lineHeight: 0,
+                    }}
                 />
                 <Field
                     name={`${direction}`}
@@ -126,7 +151,7 @@ const renderRecipeForm = ({
     <div className="recipeForm">
         {isFormDisplayed ? (
                 <div>
-                    <h3>Fill Recipe Information</h3>
+                    <Header>Fill Recipe Information</Header>
                     <form onSubmit={handleSubmit}>
                         <Field
                             name="title"
@@ -157,17 +182,20 @@ const renderRecipeForm = ({
                             <RaisedButton
                                 className="submitButton"
                                 label="Submit"
-                                primary={true}
                                 type="submit"
                                 disabled={submitting}
+                                backgroundColor="#e58f37"
+                                style={{ margin: '20px'}}
                             />
                             <RaisedButton
                                 className="clearButton"
                                 label="Clear Values"
-                                default={true}
                                 type="button"
                                 disabled={pristine || submitting}
                                 onClick={reset}
+                                backgroundColor="#000000"
+                                labelColor="#e58f37"
+                                style={{ margin: '20px'}}
                             />
                         </div>
                     </form>

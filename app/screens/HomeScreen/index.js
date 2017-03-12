@@ -2,12 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { compose } from 'recompose';
-import { Title, Header } from './styles';
 
 import FetchError from '../../components/FetchError';
 import * as actions from '../../actions/index';
 import { getAllRecipes, getIsFetching, getErrorMessage, getCompleteRecipes, getAllIngredients } from '../../reducers/index';
 
+import { HeaderPicture } from './styles';
+import { Header } from '../../styles/global-styles';
 
 const renderHomeScreen = ({
     recipes,
@@ -17,8 +18,8 @@ const renderHomeScreen = ({
 }) => {
     return (
         <div>
-            <Title>What do you want to cook?</Title>
-            <Header>asds</Header>
+            <Header>What do you want to cook?</Header>
+            <HeaderPicture />
             <div>
                 {isFetching && !recipes.allIds && (
                     <div>Loading</div>

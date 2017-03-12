@@ -1,4 +1,5 @@
 import { injectGlobal } from 'styled-components';
+import styled from 'styled-components';
 
 /* eslint no-unused-expressions: 0 */
 injectGlobal`
@@ -45,15 +46,9 @@ injectGlobal`
     margin: 20px;
   }
   
-  .submitButton {
-    margin: 20px;
-
-  }
   
-  .clearButton {
-    margin: 20px;
-  }
   
+ 
   
   
   .recipeForm {
@@ -82,3 +77,10 @@ injectGlobal`
   }
 `;
 
+export const Header = styled.div`
+    font-weight: 500;
+    font-size: 2em;
+    text-align: center;
+    margin: 0;
+    padding: 20px 0;
+`
