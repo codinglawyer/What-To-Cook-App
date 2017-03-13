@@ -31,18 +31,10 @@ export const getCompleteRecipes = (state, getRecipes, getIngredients) => {
 
 export const getRecipe = (state, recipeId) => {
     let ingredients = state.ingredientsEntity
-    console.log("INGRE", ingredients);
     let recipes = state.recipesEntity.byId
-    console.log("RECIPES", recipes);
     let selectedRecipe = recipes[recipeId]
-    console.log("SELECTED", selectedRecipe);
     let selected = cloneDeep(selectedRecipe)
-    if (selectedRecipe){
-        let relevantIngredients = selected.ingredients.map(ingredient => {console.log("ING", ingredient); return ingredients[ingredient] })
-        // selectedRecipe.ingredients = relevantIngredients
-        console.log("RELE", relevantIngredients);
-        console.log("FINAL", selected);
-        console.log("SEMIFILENA", selectedRecipe);
-        return selected
-    }
+    let relevantIngredients = selected.ingredients.map(ingredient => ingredients[ingredient])
+    selected.ingredients = relevantIngredients
+    return selected
 }
