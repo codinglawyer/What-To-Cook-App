@@ -8,15 +8,14 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import * as actions from '../../actions/index'
-import { getRecipe } from '../../reducers/index'
+import { getCompleteRecipe } from '../../reducers/index'
 
 import { Header } from '../../styles/global-styles';
 
-const mapStateToProps = (state, { params }) => {
-    return{
-    // initialValues: getRecipe(state, params.params.id),
-    //initialValues: state.recipes.byId[params.params.id],
-}}
+
+const mapStateToProps = (state, { params }) => ({
+    initialValues: getCompleteRecipe(state, params.params.id),
+});
 
 const renderField = ({
     input,

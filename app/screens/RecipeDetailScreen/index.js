@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 
-import * as actions from '../actions/index';
-import { getRecipe } from '../reducers/index'
+import * as actions from '../../actions/index';
+import { getCompleteRecipe } from '../../reducers/index'
 
 
-const DisplayedRecipe = ({displayedRecipe, params}) => {
+const DisplayedRecipeScreen = ({displayedRecipe, params}) => {
     console.log("DSIS", displayedRecipe);
     return(
         <div>
@@ -42,11 +42,11 @@ const DisplayedRecipe = ({displayedRecipe, params}) => {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-    displayedRecipe: getRecipe(state, ownProps.params.id),
+    displayedRecipe: getCompleteRecipe(state, ownProps.params.id),
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(DisplayedRecipe);
+export default connect(mapStateToProps, mapDispatchToProps)(DisplayedRecipeScreen);
 
 //todo send recipe ID to editRecipe url

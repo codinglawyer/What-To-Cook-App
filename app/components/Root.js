@@ -4,9 +4,9 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import Navigation from './Navigation';
-import HomeScreen from '../screens/HomeScreen/index';
-import CreateRecipeScreen from '../screens/CreateRecipeScreen/index';
-import RecipeDetail from '../screens/RecipeDetail';
+import HomeScreen from '../screens/HomeScreen';
+import CreateRecipeScreen from '../screens/CreateRecipeScreen';
+import RecipeDetailScreen from '../screens/RecipeDetailScreen';
 
 const Root = ({ store }) => (
     <Provider store={store}>
@@ -16,7 +16,7 @@ const Root = ({ store }) => (
                     <IndexRoute component={HomeScreen}/>
                     <Route path="/editRecipe/(:id)" component={CreateRecipeScreen} />
                     <Route path="/createRecipe" component={CreateRecipeScreen} />
-                    <Route path="/:id" component={RecipeDetail} />
+                    <Route path="/:id" component={RecipeDetailScreen} />
                 </Route>
             </Router>
         </MuiThemeProvider>
