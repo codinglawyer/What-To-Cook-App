@@ -1,32 +1,58 @@
 import React from 'react';
-import FlatButton from 'material-ui/FlatButton';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 
 import * as actions from '../../actions/index';
-import { getCompleteRecipe } from '../../reducers/index'
+import { getAllIngredients, getRecipe } from '../../reducers/index';
+import FlatButton from 'material-ui/FlatButton';
 
 
-const DisplayedRecipeScreen = ({displayedRecipe, params}) => {
-    console.log("DSIS", displayedRecipe);
+const mapStateToProps = (state, { params }) => {
+    const recipe = getRecipe(state, params.id);
+    const allIngredients = getAllIngredients(state);
+    const recipeIngredients = recipe.ingredients.map(ingredient => allIngredients[ingredient]);
+    return {
+        recipe,
+        recipeIngredients,
+    };
+};
+
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
+
+const IngredientList = ({ children, ingredients }) => (
+    <div>
+        {children(ingredients)}
+    </div>
+);
+
+const DisplayedRecipeScreen = ({ recipe, recipeIngredients, params }) => {
     return(
         <div>
             <h3 className="recipeDetail">Recipe detail:</h3>
-            <h1 className="recipeTitle">{displayedRecipe.title}</h1>
+            <h1 className="recipeTitle">{recipe.title}</h1>
             <div className="recipeDirectionsTitle">Directions:</div>
             <ul className="directions">
-                {displayedRecipe.directions.map(direction => (
-                    <li className="recipeDirections" key={direction}>{direction}</li>
+                {recipe.directions.map(direction => (
+                    <li className="recipeDirections"
+                        key={direction}
+                    >
+                        {direction}
+                    </li>
                 ))}
             </ul>
             <br/>
             <div className="ingredientsTitle">Ingredients:</div>
-            <ul className="ingredients">
-                {displayedRecipe.ingredients.map(ingredient => (
-                    <li key={ingredient.id}>{ingredient.ingredient}</li>
+            <IngredientList ingredients={recipeIngredients}>
+                {(ingredients) => ingredients.map((ingredient, i) => (
+                    <div
+                        key={`${i}-${ingredient}`}
+                        className="ingredients"
+                    >
+                        {ingredient.ingredient}
+                    </div>
                 ))}
-            </ul>
+            </IngredientList>
             <FlatButton
                 label="Delete Recipe"
                 secondary={true}
@@ -39,14 +65,6 @@ const DisplayedRecipeScreen = ({displayedRecipe, params}) => {
             />
         </div>
     );
-}
-
-const mapStateToProps = (state, ownProps) => ({
-    displayedRecipe: getCompleteRecipe(state, ownProps.params.id),
-})
-
-const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch);
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(DisplayedRecipeScreen);
-
-//todo send recipe ID to editRecipe url

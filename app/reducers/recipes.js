@@ -65,6 +65,7 @@ const recipesEntity = combineReducers({
 export default recipesEntity;
 
 export const getAllRecipes = (state) => state.allIds.map(id => state.byId[id]);
+export const getRecipe = (state, recipeId) => state.byId[recipeId];
 export const getIsFetching = (state) => state.isFetching;
 export const getErrorMessage = (state) => state.errorMessage;
 

@@ -5,33 +5,28 @@ import recipesEntity, * as fromRecipes from './recipes';
 import ingredientsEntity, * as fromIngredients from './ingredients';
 import { cloneDeep } from 'lodash';
 
-const RootReducer = combineReducers(
-    {
-        recipesEntity,
-        ingredientsEntity,
-        form: formReducer,
-    }
-);
+const RootReducer = combineReducers({
+    recipesEntity,
+    ingredientsEntity,
+    form: formReducer,
+});
 
 export default RootReducer;
 
 export const getAllRecipes = state => fromRecipes.getAllRecipes(state.recipesEntity);
+export const getRecipe = (state, recipeId) => fromRecipes.getRecipe(state.recipesEntity, recipeId);
 export const getIsFetching = state => fromRecipes.getIsFetching(state.recipesEntity);
 export const getErrorMessage = state => fromRecipes.getErrorMessage(state.recipesEntity);
 export const getAllIngredients = state => fromIngredients.getAllIngredients(state.ingredientsEntity);
-
-
-//todo refactor
-
 export const getCompleteRecipes = (state, getRecipes, getIngredients) => {
-    let recipes = getRecipes(state);
-    let recipesWithIngredients = cloneDeep(recipes);
-    let allIngredients = getIngredients(state);
-    let relevantIngredients = recipes.map((recipe) => recipe.ingredients.map(elem => ({ [elem]: allIngredients[elem] })));
-    relevantIngredients.map((ing, i) => recipesWithIngredients[i].ingredients = ing);
+    const recipes = getRecipes(state);
+    const allIngredients = getIngredients(state);
+    const relevantIngredients = recipes.map((recipe) => recipe.ingredients.map(elem => ({ [elem]: allIngredients[elem] })));
+    const recipesWithIngredients = relevantIngredients.map((ing, i) => ({ ...recipes[i], ingredients: ing }));
     return recipesWithIngredients;
 };
 
+//todo refactor
 export const getCompleteRecipe = (state, recipeId) => {
     let ingredients = state.ingredientsEntity;
     let recipes = state.recipesEntity.byId;
