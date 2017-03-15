@@ -77,10 +77,10 @@ const renderIngredients = ({ fields, style }) => (
                     }}
                 />
                 <Field
-                    name={`${ingredient}.ingredient`}
+                    name={`${ingredient}.name`}
                     type="text"
                     component={renderField}
-                    label={`#${index + 1} Ingredient`}
+                    label={`#${index + 1} name`}
                     style={style}
                 />
                 <Field

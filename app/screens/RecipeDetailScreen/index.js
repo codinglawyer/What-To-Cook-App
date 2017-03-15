@@ -49,7 +49,7 @@ const DisplayedRecipeScreen = ({ recipe, recipeIngredients, params }) => {
                         key={`${i}-${ingredient}`}
                         className="ingredients"
                     >
-                        {ingredient.ingredient}
+                        {ingredient.name}
                     </div>
                 ))}
             </IngredientList>
