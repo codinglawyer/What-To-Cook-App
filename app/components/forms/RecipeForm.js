@@ -7,15 +7,20 @@ import { compose } from 'recompose';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
-import * as actions from '../../actions/index'
-import { getCompleteRecipe } from '../../reducers/index'
+import * as actions from '../../actions/index';
+import { getRecipe, getAllIngredients } from '../../reducers/index';
 
 import { Header } from '../../styles/global-styles';
 
 
-const mapStateToProps = (state, { params }) => ({
-    initialValues: getCompleteRecipe(state, params.params.id),
-});
+const mapStateToProps = (state, { params }) => {
+    const recipe = getRecipe(state, params.params.id);
+    const allIngredients = getAllIngredients(state);
+    const ingredients = recipe.ingredients.map(ingredient => allIngredients[ingredient]);
+    return {
+        initialValues: { ...recipe, ingredients: [...ingredients] },
+    };
+};
 
 const renderField = ({
     input,
@@ -149,57 +154,57 @@ const renderRecipeForm = ({
 }) => (
     <div className="recipeForm">
         {isFormDisplayed ? (
-                <div>
-                    <Header>Fill Recipe Information</Header>
-                    <form onSubmit={handleSubmit}>
-                        <Field
-                            name="title"
-                            type="text"
-                            component={renderField}
-                            label="Title"
-                            style={{width:'20%'}}
+            <div>
+                <Header>Fill Recipe Information</Header>
+                <form onSubmit={handleSubmit}>
+                    <Field
+                        name="title"
+                        type="text"
+                        component={renderField}
+                        label="Title"
+                        style={{width:'20%'}}
 
+                    />
+                    <Field
+                        name="servings"
+                        type="text"
+                        component={renderField}
+                        label="Servings"
+                        style={{width:'10%'}}
+                    />
+                    <FieldArray
+                        name="ingredients"
+                        component={renderIngredients}
+                        style={{width:'30%'}}
+                    />
+                    <FieldArray
+                        name="directions"
+                        component={renderDirections}
+                        style={{width:'50%'}}
+                    />
+                    <div>
+                        <RaisedButton
+                            className="submitButton"
+                            label="Submit"
+                            type="submit"
+                            disabled={submitting}
+                            backgroundColor="#e58f37"
+                            style={{ margin: '20px'}}
                         />
-                        <Field
-                            name="servings"
-                            type="text"
-                            component={renderField}
-                            label="Servings"
-                            style={{width:'10%'}}
+                        <RaisedButton
+                            className="clearButton"
+                            label="Clear Values"
+                            type="button"
+                            disabled={pristine || submitting}
+                            onClick={reset}
+                            backgroundColor="#000000"
+                            labelColor="#e58f37"
+                            style={{ margin: '20px'}}
                         />
-                        <FieldArray
-                            name="ingredients"
-                            component={renderIngredients}
-                            style={{width:'30%'}}
-                        />
-                        <FieldArray
-                            name="directions"
-                            component={renderDirections}
-                            style={{width:'50%'}}
-                        />
-                        <div>
-                            <RaisedButton
-                                className="submitButton"
-                                label="Submit"
-                                type="submit"
-                                disabled={submitting}
-                                backgroundColor="#e58f37"
-                                style={{ margin: '20px'}}
-                            />
-                            <RaisedButton
-                                className="clearButton"
-                                label="Clear Values"
-                                type="button"
-                                disabled={pristine || submitting}
-                                onClick={reset}
-                                backgroundColor="#000000"
-                                labelColor="#e58f37"
-                                style={{ margin: '20px'}}
-                            />
-                        </div>
-                    </form>
-                </div>
-            ) : null}
+                    </div>
+                </form>
+            </div>
+        ) : null}
     </div>
 );
 
