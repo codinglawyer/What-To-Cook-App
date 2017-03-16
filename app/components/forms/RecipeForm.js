@@ -14,6 +14,9 @@ import { Header } from '../../styles/global-styles';
 
 
 const mapStateToProps = (state, { params }) => {
+    if (!params.params.id) {
+        return {}
+    }
     const recipe = getRecipe(state, params.params.id);
     const allIngredients = getAllIngredients(state);
     const ingredients = recipe.ingredients.map(ingredient => allIngredients[ingredient]);

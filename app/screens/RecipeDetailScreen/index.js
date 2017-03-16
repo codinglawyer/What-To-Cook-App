@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 import * as actions from '../../actions/index';
 import { getAllIngredients, getRecipe } from '../../reducers/index';
 import FlatButton from 'material-ui/FlatButton';
+import { Screen } from '../../styles/global-styles'
 
 
 const mapStateToProps = (state, { params }) => {
@@ -28,8 +29,7 @@ const IngredientList = ({ children, ingredients }) => (
 
 const DisplayedRecipeScreen = ({ recipe, recipeIngredients, params }) => {
     return(
-        <div>
-            <h3 className="recipeDetail">Recipe detail:</h3>
+        <Screen>
             <h1 className="recipeTitle">{recipe.title}</h1>
             <div className="recipeDirectionsTitle">Directions:</div>
             <ul className="directions">
@@ -63,7 +63,7 @@ const DisplayedRecipeScreen = ({ recipe, recipeIngredients, params }) => {
                 secondary={true}
                 containerElement={<Link to={`/editRecipe/${params.id}`} />}
             />
-        </div>
+        </Screen>
     );
 };
 

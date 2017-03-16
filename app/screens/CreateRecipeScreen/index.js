@@ -1,8 +1,12 @@
 import React from 'react';
 import RecipeForm from '../../components/forms/RecipeForm';
+import { Screen } from '../../styles/global-styles';
+
 
 const CreateRecipeScreen = ({ ...props }) => (
-    <RecipeForm params={props}/>
+    <Screen>
+        <RecipeForm params={props}/>
+    </Screen>
 );
 
 export default CreateRecipeScreen;

@@ -9,6 +9,8 @@ import { getAllRecipes, getIsFetching, getErrorMessage, getCompleteRecipes, getA
 
 import { HeaderPicture } from './styles';
 import { Header } from '../../styles/global-styles';
+import { Screen } from '../../styles/global-styles';
+
 
 const renderHomeScreen = ({
     recipes,
@@ -17,7 +19,7 @@ const renderHomeScreen = ({
     ...props,
 }) => {
     return (
-        <div>
+        <Screen>
             <Header>What do you want to cook?</Header>
             <HeaderPicture />
             <div>
@@ -33,7 +35,7 @@ const renderHomeScreen = ({
                     />
                 )}
             </div>
-        </div>
+        </Screen>
     )
 };
 
