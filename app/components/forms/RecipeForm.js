@@ -9,13 +9,20 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import * as actions from '../../actions/index';
 import { getRecipe, getAllIngredients } from '../../reducers/index';
+import { Flex, Box } from 'reflexbox';
 
 import { Header } from '../../styles/global-styles';
+import { RecipeHeading, ButtonContainer, RelativeContainer} from './styles';
 
 
 const mapStateToProps = (state, { params }) => {
     if (!params.params.id) {
-        return {}
+        return {
+            initialValues: {
+                ingredients: [{name: '', amount: ''}],
+                directions: [''],
+            },
+        };
     }
     const recipe = getRecipe(state, params.params.id);
     const allIngredients = getAllIngredients(state);
@@ -43,42 +50,36 @@ const renderField = ({
                 rows={rows}
                 className="textField"
                 style={style}
-            />
+        />
         </div>
     </div>
 );
 
 const renderIngredients = ({ fields, style }) => (
-    <div>
-        <div>
+    <RelativeContainer>
+        <ButtonContainer>
             <FlatButton
-                className="addIngredient"
-                labelStyle={{fontSize: '12px'}}
                 label="Add Ingredient"
                 type="button"
                 onClick={() => fields.push()}
                 style={{
                     height: '25px',
                     lineHeight: 0,
+                    marginTop: 20,
+                    marginBottom: 10,
                 }}
-                backgroundColor="#efb982"
+                backgroundColor="#925313"
                 hoverColor="#f5d2af"
+                labelStyle={{
+                    color: '#fff',
+                    fontSize: '12px',
+                }}
             />
-        </div>
+        </ButtonContainer>
         {fields.map((ingredient, index) =>
-            <div key={index}>
-                <FlatButton
-                    label="Delete"
-                    secondary={true}
-                    type="button"
-                    title="remove"
-                    onClick={() => fields.remove(index)}
-                    labelStyle={{fontSize: 12, width:'30%'}}
-                    style={{
-                        height: '25px',
-                        lineHeight: 0,
-                    }}
-                />
+            <Flex wrap key={index}>
+
+                <Box>
                 <Field
                     name={`${ingredient}.name`}
                     type="text"
@@ -86,6 +87,8 @@ const renderIngredients = ({ fields, style }) => (
                     label={`#${index + 1} name`}
                     style={style}
                 />
+                </Box>
+                <Box>
                 <Field
                     name={`${ingredient}.amount`}
                     type="text"
@@ -93,16 +96,30 @@ const renderIngredients = ({ fields, style }) => (
                     label={`#${index + 1} Amount`}
                     style={style}
                 />
-            </div>
+                </Box>
+                <Box>
+                    <FlatButton
+                        label="Delete"
+                        secondary={true}
+                        type="button"
+                        title="remove"
+                        onClick={() => fields.remove(index)}
+                        labelStyle={{fontSize: 12, width:'30%'}}
+                        style={{
+                            height: '25px',
+                            lineHeight: 0,
+                        }}
+                    />
+                </Box>
+            </Flex>
         )}
-    </div>
+    </RelativeContainer>
 );
 
 const renderDirections = ({ fields, style }) => (
-    <div>
-        <div>
+    <RelativeContainer>
+        <ButtonContainer>
             <FlatButton
-                className="addDirection"
                 label="Add Direction"
                 type="button"
                 onClick={() => fields.push()}
@@ -119,7 +136,7 @@ const renderDirections = ({ fields, style }) => (
                     fontSize: '12px',
                 }}
             />
-        </div>
+        </ButtonContainer>
         {fields.map((direction, index) =>
             <div key={index}>
                 <FlatButton
@@ -143,7 +160,7 @@ const renderDirections = ({ fields, style }) => (
                 />
             </div>
         )}
-    </div>
+    </RelativeContainer>
 );
 
 const renderRecipeForm = ({
@@ -160,31 +177,36 @@ const renderRecipeForm = ({
             <div>
                 <Header>Fill Recipe Information</Header>
                 <form onSubmit={handleSubmit}>
-                    <Field
-                        name="title"
-                        type="text"
-                        component={renderField}
-                        label="Title"
-                        style={{width:'20%'}}
-
-                    />
-                    <Field
-                        name="servings"
-                        type="text"
-                        component={renderField}
-                        label="Servings"
-                        style={{width:'10%'}}
-                    />
-                    <FieldArray
-                        name="ingredients"
-                        component={renderIngredients}
-                        style={{width:'30%'}}
-                    />
-                    <FieldArray
-                        name="directions"
-                        component={renderDirections}
-                        style={{width:'50%'}}
-                    />
+                    <RecipeHeading>
+                        <Field
+                            name="title"
+                            type="text"
+                            component={renderField}
+                            label="Title"
+                            style={{width:'20%'}}
+                        />
+                    </RecipeHeading>
+                    <RecipeHeading>
+                        <Field
+                            name="servings"
+                            type="text"
+                            component={renderField}
+                            label="Servings"
+                            style={{width:'10%'}}
+                        />
+                    </RecipeHeading>
+                    <RecipeHeading>Ingredients</RecipeHeading>
+                        <FieldArray
+                            name="ingredients"
+                            component={renderIngredients}
+                            style={{width:'30%'}}
+                        />
+                    <RecipeHeading>Directions</RecipeHeading>
+                        <FieldArray
+                            name="directions"
+                            component={renderDirections}
+                            style={{width:'50%'}}
+                        />
                     <div>
                         <RaisedButton
                             className="submitButton"

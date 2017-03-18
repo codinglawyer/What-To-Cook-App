@@ -72,65 +72,12 @@ injectGlobal`
     line-height: 1.5em;
   }
   
-  .addIngredient {
-    margin: 20px;
-  }
-  
-  
-  
- 
-  
-  
-  .recipeForm {
-    text-align: center;
-  }
-  
- 
-  
 
-  .recipeTitle {
-    font-weight: 500;
-    font-size: 50px;
-  }
-  
-  .recipeDirectionsTitle, .ingredientsTitle {
-    font-weight: 400;
-    font-size: 25px;
-    margin: 10px auto;
-  }
-  
-  .recipeDirections{
-    font-style: italic;
-  }
-
-    font-size: 40px;
-  }
-  
-  p,
-  label {
-    font-family: 'Roboto', Georgia, Times, 'Times New Roman', serif;
-    line-height: 1.5em;
-  }
-  
-  .addIngredient {
-    margin: 20px;
-  }
-  
   
   
  
-  
-  
-  .recipeForm {
-    text-align: center;
-  }
-  
- 
-  
 
-  .recipeDetail{
   
-  }
   .recipeTitle {
     font-weight: 500;
     font-size: 50px;
