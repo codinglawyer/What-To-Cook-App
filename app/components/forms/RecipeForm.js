@@ -6,13 +6,15 @@ import { compose } from 'recompose';
 
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
 import * as actions from '../../actions/index';
 import { getRecipe, getAllIngredients } from '../../reducers/index';
 import { Flex, Box } from 'reflexbox';
 
 import { Header } from '../../styles/global-styles';
-import { RecipeHeading, ButtonContainer, RelativeContainer} from './styles';
+import { RecipeHeading, ButtonContainer, RelativeContainer, Button } from './styles';
+import plusIcon from '../../styles/icons/plus.svg';
+import trashIcon from '../../styles/icons/trash-can.svg';
+
 
 
 const mapStateToProps = (state, { params }) => {
@@ -58,23 +60,9 @@ const renderField = ({
 const renderIngredients = ({ fields, style }) => (
     <RelativeContainer>
         <ButtonContainer>
-            <FlatButton
-                label="Add Ingredient"
-                type="button"
-                onClick={() => fields.push()}
-                style={{
-                    height: '25px',
-                    lineHeight: 0,
-                    marginTop: 20,
-                    marginBottom: 10,
-                }}
-                backgroundColor="#925313"
-                hoverColor="#f5d2af"
-                labelStyle={{
-                    color: '#fff',
-                    fontSize: '12px',
-                }}
-            />
+            <Button onClick={() => fields.push()}>
+                <img src={plusIcon}/> Add ingredient
+            </Button>
         </ButtonContainer>
         {fields.map((ingredient, index) =>
             <Flex
@@ -112,18 +100,9 @@ const renderIngredients = ({ fields, style }) => (
                     lg={4}
                     sm={6}
                 >
-                    <FlatButton
-                        label="Delete"
-                        secondary={true}
-                        type="button"
-                        title="remove"
-                        onClick={() => fields.remove(index)}
-                        labelStyle={{fontSize: 12, width:'30%'}}
-                        style={{
-                            height: '25px',
-                            lineHeight: 0,
-                        }}
-                    />
+                    <Button onClick={() => fields.remove(index)}>
+                        <img src={trashIcon} />
+                    </Button>
                 </Box>
             </Flex>
         )}
@@ -133,23 +112,9 @@ const renderIngredients = ({ fields, style }) => (
 const renderDirections = ({ fields, style }) => (
     <RelativeContainer>
         <ButtonContainer>
-            <FlatButton
-                label="Add Direction"
-                type="button"
-                onClick={() => fields.push()}
-                style={{
-                    height: '25px',
-                    lineHeight: 0,
-                    marginTop: 20,
-                    marginBottom: 10,
-                }}
-                backgroundColor="#925313"
-                hoverColor="#f5d2af"
-                labelStyle={{
-                    color: '#fff',
-                    fontSize: '12px',
-                }}
-            />
+            <Button onClick={() => fields.push()}>
+                <img src={plusIcon}/> Add direction
+            </Button>
         </ButtonContainer>
         {fields.map((direction, index) =>
             <Flex
@@ -174,18 +139,9 @@ const renderDirections = ({ fields, style }) => (
                     lg={5}
                     sm={6}
                 >
-                    <FlatButton
-                        label="Delete"
-                        secondary={true}
-                        type="button"
-                        title="remove"
-                        onClick={() => fields.remove(index)}
-                        labelStyle={{fontSize: 12, width:'30%'}}
-                        style={{
-                            height: '25px',
-                            lineHeight: 0,
-                        }}
-                    />
+                    <Button onClick={() => fields.remove(index)}>
+                        <img src={trashIcon} />
+                    </Button>
                 </Box>
             </Flex>
         )}
@@ -211,7 +167,7 @@ const renderRecipeForm = ({
                             name="title"
                             type="text"
                             component={renderField}
-                            label="Recipe title"
+                            label="Title"
                             style={{
                                 width: '30%',
                                 fontSize: '20px',
@@ -223,7 +179,7 @@ const renderRecipeForm = ({
                             name="servings"
                             type="text"
                             component={renderField}
-                            label="Recipe servings"
+                            label="Servings"
                             style={{
                                 width: '15%',
                                 fontSize: '20px',
@@ -247,7 +203,7 @@ const renderRecipeForm = ({
                             style={{
                                 fontSize: '20px',
                                 fontWeight: 300,
-                                width: '100%',
+                                width: '90%',
                                 marginBottom: '25px',
                             }}
                         />
