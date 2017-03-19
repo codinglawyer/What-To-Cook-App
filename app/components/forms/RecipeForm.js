@@ -12,9 +12,8 @@ import { Flex, Box } from 'reflexbox';
 
 import { Header } from '../../styles/global-styles';
 import { RecipeHeading, ButtonContainer, RelativeContainer, Button } from './styles';
-import plusIcon from '../../styles/icons/plus.svg';
-import trashIcon from '../../styles/icons/trash-can.svg';
-
+import TrashIcon from '../icons/TrashIcon';
+import PlusIcon from '../icons/PlusIcon';
 
 
 const mapStateToProps = (state, { params }) => {
@@ -61,7 +60,7 @@ const renderIngredients = ({ fields, style }) => (
     <RelativeContainer>
         <ButtonContainer>
             <Button onClick={() => fields.push()}>
-                <img src={plusIcon}/> Add ingredient
+                <PlusIcon /> Add ingredient
             </Button>
         </ButtonContainer>
         {fields.map((ingredient, index) =>
@@ -101,7 +100,7 @@ const renderIngredients = ({ fields, style }) => (
                     sm={6}
                 >
                     <Button onClick={() => fields.remove(index)}>
-                        <img src={trashIcon} />
+                        <TrashIcon />
                     </Button>
                 </Box>
             </Flex>
@@ -113,7 +112,7 @@ const renderDirections = ({ fields, style }) => (
     <RelativeContainer>
         <ButtonContainer>
             <Button onClick={() => fields.push()}>
-                <img src={plusIcon}/> Add direction
+                <PlusIcon /> Add direction
             </Button>
         </ButtonContainer>
         {fields.map((direction, index) =>
@@ -140,7 +139,7 @@ const renderDirections = ({ fields, style }) => (
                     sm={6}
                 >
                     <Button onClick={() => fields.remove(index)}>
-                        <img src={trashIcon} />
+                        <TrashIcon />
                     </Button>
                 </Box>
             </Flex>
