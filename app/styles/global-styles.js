@@ -30,37 +30,6 @@ injectGlobal`
     }
   
   
-
-  .title {
-    font-weight: normal;
-    html,
-    body {
-        height: 100%;
-        width: 100%;
-        font-size: 16px;
-        margin: 0;
-    }
-
-    body {
-        font-family: 'Roboto', Helvetica, Arial, sans-serif;
-    }
-
-    body.fontLoaded {
-        font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    }
-
-    #app {
-        background: #fcf4eb;
-        min-height: 100%;
-        min-width: 100%;
-    }
-  
-    a {
-        text-decoration: none   
-    }
-  
-  
-
   .title {
     font-weight: normal;
     font-size: 40px;
