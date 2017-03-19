@@ -161,7 +161,8 @@ export const fetchRecipes = () =>
 
 export const addRecipe = (recipe) =>
     delay(500).then(() => {
-        const recipeWithId = { ...recipe, id: v4() };
+        const ingredientsWithIds = recipe.ingredients.map(ingredient => ({ ...ingredient, id: v4() }));
+        const recipeWithId = { ...recipe, id: v4(), ingredients: ingredientsWithIds };
         fakeDatabase.push(recipeWithId);
         return recipeWithId;
     });
