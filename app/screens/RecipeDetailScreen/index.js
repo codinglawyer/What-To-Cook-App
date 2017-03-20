@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 import * as actions from '../../actions/index';
 import { getAllIngredients, getRecipe } from '../../reducers/index';
 import FlatButton from 'material-ui/FlatButton';
-import { Screen } from '../../styles/global-styles'
+import { Screen } from '../../styles/global-styles';
 
 
 const mapStateToProps = (state, { params }) => {
@@ -27,7 +27,7 @@ const IngredientList = ({ children, ingredients }) => (
     </div>
 );
 
-const DisplayedRecipeScreen = ({ recipe, recipeIngredients, params }) => {
+const DisplayedRecipeScreen = ({ recipe, recipeIngredients, params, deleteRecipeRequest }) => {
     return(
         <Screen>
             <h1 className="recipeTitle">{recipe.title}</h1>
@@ -56,7 +56,8 @@ const DisplayedRecipeScreen = ({ recipe, recipeIngredients, params }) => {
             <FlatButton
                 label="Delete Recipe"
                 secondary={true}
-                onClick={() => actions.deleteRecipeRequest()}
+                onClick={() => deleteRecipeRequest(params.id)}
+                containerElement={<Link to={`/`} />}
             />
             <FlatButton
                 label="Edit Recipe"

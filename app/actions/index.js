@@ -31,16 +31,20 @@ export const addRecipeFailure = ({ error }) => ({
 });
 
 
-export const deleteRecipeRequest = () => ({
-    type: 'DELETE_RECIPE_REQUEST',
-});
+export const deleteRecipeRequest = (id) => {
+ console.log("REQU")
+    return {
+     type: 'DELETE_RECIPE_REQUEST',
+     payload: id,
+}}
 
 export const deleteRecipeSuccess = ({ response }) => ({
     type: 'DELETE_RECIPE_SUCCESS',
     payload: normalize(response, schema.arrayOfRecipes),
 });
 
-export const deleteRecipeFailure = ({ error }) => ({
-    type: 'DELETE_RECIPE_FAILURE',
+export const deleteRecipeFailure = ({ error }) => {
+console.log("ERROR");
+   return {type: 'DELETE_RECIPE_FAILURE',
     payload: error.message,
-});
+}}
