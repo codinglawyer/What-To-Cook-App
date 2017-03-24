@@ -48,3 +48,16 @@ console.log("ERROR");
    return {type: 'DELETE_RECIPE_FAILURE',
     payload: error.message,
 }}
+
+
+export const connected = () => {
+    return {
+        type: 'FIREBASE_CONNECTED',
+    };
+};
+
+export const disconnected = () => {
+    return {
+        type: 'FIREBASE_DISCONNECTED',
+    };
+};

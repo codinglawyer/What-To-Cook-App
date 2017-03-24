@@ -56,57 +56,60 @@ const renderField = ({
     </div>
 );
 
-const renderIngredients = ({ fields, style }) => (
-    <RelativeContainer>
-        <ButtonContainer>
-            <Button onClick={() => fields.push()}>
-                <PlusIcon /> Add ingredient
-            </Button>
-        </ButtonContainer>
-        {fields.map((ingredient, index) =>
-            <Flex
-                wrap
-                key={index}
-            >
-                <Box
-                    col={12}
-                    lg={4}
-                    sm={6}
+const renderIngredients = ({ fields, style }) => {
+    console.log("FIELDS", fields);
+    return(
+        <RelativeContainer>
+            <ButtonContainer>
+                <Button onClick={() => fields.push()}>
+                    <PlusIcon /> Add ingredient
+                </Button>
+            </ButtonContainer>
+            {fields.map((ingredient, index) =>
+                <Flex
+                    wrap
+                    key={index}
                 >
-                    <Field
-                        name={`${ingredient}.name`}
-                        type="text"
-                        component={renderField}
-                        label="Name"
-                        style={style}
-                    />
-                </Box>
-                <Box
-                    col={12}
-                    lg={4}
-                    sm={6}
-                >
-                    <Field
-                        name={`${ingredient}.amount`}
-                        type="text"
-                        component={renderField}
-                        label="Amount"
-                        style={style}
-                    />
-                </Box>
-                <Box
-                    col={12}
-                    lg={4}
-                    sm={6}
-                >
-                    <Button onClick={() => fields.remove(index)}>
-                        <TrashIcon />
-                    </Button>
-                </Box>
-            </Flex>
-        )}
-    </RelativeContainer>
-);
+                    <Box
+                        col={12}
+                        lg={4}
+                        sm={6}
+                    >
+                        <Field
+                            name={`${ingredient}.name`}
+                            type="text"
+                            component={renderField}
+                            label="Name"
+                            style={style}
+                        />
+                    </Box>
+                    <Box
+                        col={12}
+                        lg={4}
+                        sm={6}
+                    >
+                        <Field
+                            name={`${ingredient}.amount`}
+                            type="text"
+                            component={renderField}
+                            label="Amount"
+                            style={style}
+                        />
+                    </Box>
+                    <Box
+                        col={12}
+                        lg={4}
+                        sm={6}
+                    >
+                        <Button onClick={() => fields.remove(index)}>
+                            <TrashIcon />
+                        </Button>
+                    </Box>
+                </Flex>
+            )}
+        </RelativeContainer>
+    );
+}
 
 const renderDirections = ({ fields, style }) => (
     <RelativeContainer>
@@ -232,15 +235,15 @@ const renderRecipeForm = ({
     </div>
 );
 
-const RecipeForm = compose(
-    connect(mapStateToProps, null),
-    reduxForm({
-        form: 'form',
-        fields: ['recipe', 'ingredients'],
-        onSubmit: (_, dispatch) => {
-            dispatch(actions.addRecipeRequest())
-        }
-    })
-)(renderRecipeForm)
+    const RecipeForm = compose(
+        connect(mapStateToProps, null),
+        reduxForm({
+            form: 'form',
+            fields: ['recipe', 'ingredients'],
+            onSubmit: (_, dispatch) => {
+                dispatch(actions.addRecipeRequest())
+            }
+        })
+    )(renderRecipeForm)
 
 export default RecipeForm;

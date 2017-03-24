@@ -4,10 +4,22 @@ import { reducer as formReducer } from 'redux-form';
 import recipesEntity, * as fromRecipes from './recipes';
 import ingredientsEntity, * as fromIngredients from './ingredients';
 
+const connectionStatus = (state = false, action) => {
+    switch (action.type) {
+        case 'FIREBASE_CONNECTED':
+            return true;
+        case 'FIREBASE_DISCONNECTED':
+            return false;
+        default:
+            return state;
+    }
+};
+
 
 const RootReducer = combineReducers({
     recipesEntity,
     ingredientsEntity,
+    connectionStatus,
     form: formReducer,
 });
 
