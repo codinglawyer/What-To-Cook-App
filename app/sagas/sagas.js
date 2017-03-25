@@ -1,9 +1,9 @@
-import { channel } from 'redux-saga';
 import { put, takeEvery, call, select, take } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import * as api from '../api/index';
 import * as actions from '../actions/index';
-import firebaseApp from '../api/firebase';
+import watchConnectionStatus from './databaseConnection';
+import watchFetchData from './fetchData';
 
 
 export function fetchRecipesApi() {
@@ -74,38 +74,6 @@ export function* watchDeleteRecipe() {
 
 
 
-export function *connectionStatusChange(){
-    const connectionStatusChannel = channel();
-    const connectionStatus = connectionStatusWrapper(connectionStatusChannel);
-    const connectionRef = firebaseApp.database().ref('.info/connected');
-    connectionRef.on('value', connectionStatus);
-
-    while (true) {
-        const action = yield take(connectionStatusChannel);
-        yield put(action);
-    }
-}
-
-// @no-test-needed
-export function *watchConnectionStatus(){
-    yield call(connectionStatusChange);
-}
-
-
-
-function connectionStatusWrapper(channel) {
-    function connectionStatus(snapshot) {
-        if (snapshot.val() === true) {
-            channel.put(actions.connected());
-        }
-        else {
-            channel.put(actions.disconnected());
-        }
-    }
-
-    return connectionStatus;
-}
-
 
 
 
@@ -117,5 +85,6 @@ export default function* rootSaga() {
         watchAddRecipe(),
         watchDeleteRecipe(),
         watchConnectionStatus(),
+        watchFetchData(),
     ];
 }

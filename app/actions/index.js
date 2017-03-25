@@ -61,3 +61,10 @@ export const disconnected = () => {
         type: 'FIREBASE_DISCONNECTED',
     };
 };
+
+export const fetchDataSuccess = (recipe) => {
+    return {
+        type: 'FETCH_DATA_SUCCESS',
+        payload: recipe,
+    };
+};
