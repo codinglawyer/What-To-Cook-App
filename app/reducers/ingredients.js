@@ -1,7 +1,7 @@
 const ingredientsEntity = (state = {}, action) => {
     const { payload } = action;
     switch (action.type) {
-        case 'FETCH_RECIPES_SUCCESS':
+        case 'FETCH_DATA_SUCCESS':
         case 'ADD_RECIPE_SUCCESS':
             return {
                 ...state,

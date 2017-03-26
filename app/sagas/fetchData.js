@@ -1,5 +1,5 @@
 import { channel } from 'redux-saga';
-import { put, call, take } from 'redux-saga/effects';
+import { put, takeEvery, take } from 'redux-saga/effects';
 import firebaseApp from '../api/firebase';
 import * as actions from '../actions/index';
 
@@ -7,8 +7,7 @@ import * as actions from '../actions/index';
 export function *connectionStatusChange(){
     const connectionStatusChannel = channel();
     const connectionStatus = connectionStatusWrapper(connectionStatusChannel);
-    const connectionRef = firebaseApp.database().ref().child(0);
-    const recipeRef = connectionRef.child('react')
+    const connectionRef = firebaseApp.database().ref();
     connectionRef.on('value', connectionStatus);
 
 
@@ -21,18 +20,16 @@ export function *connectionStatusChange(){
 
 function connectionStatusWrapper(channel) {
     function connectionStatus(snapshot) {
-        console.log(snapshot.val())
         if (snapshot.val() === true) {
-            channel.put(actions.connected());
+            channel.put(actions.fetchDataSuccess(snapshot.val()));
         }
         else {
             channel.put(actions.fetchDataSuccess(snapshot.val()));
         }
     }
-
     return connectionStatus;
 }
 
-export default function *watchFetchData(){
-    yield call(connectionStatusChange);
+export default function* watchFetchData() {
+    yield takeEvery('FETCH_DATA_REQUEST', connectionStatusChange);
 }

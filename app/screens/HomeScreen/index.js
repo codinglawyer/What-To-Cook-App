@@ -31,7 +31,7 @@ const renderHomeScreen = ({
                 {errorMessage && !recipes.allIds && (
                     <FetchError
                         message={errorMessage}
-                        onRetry={() => props.fetchRecipesRequest()}
+                        onRetry={() => props.fetchDataRequest()}
                     />
                 )}
             </div>

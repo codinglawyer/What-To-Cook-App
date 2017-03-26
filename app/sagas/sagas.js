@@ -5,29 +5,6 @@ import * as actions from '../actions/index';
 import watchConnectionStatus from './databaseConnection';
 import watchFetchData from './fetchData';
 
-
-export function fetchRecipesApi() {
-    return api.fetchRecipes()
-        .then(response => ({ response }))
-        .catch(error => ({ error }));
-}
-
-function* fetchRecipes() {
-    const { response, error } = yield call(fetchRecipesApi);
-    if (response) {
-        yield put(actions.fetchRecipesSuccess({ response }));
-    }
-    else {
-        yield put(actions.fetchRecipesFailure({ error }));
-    }
-}
-
-export function* watchFetchRecipes() {
-    yield takeEvery('FETCH_RECIPES_REQUEST', fetchRecipes);
-};
-
-
-
 export function addRecipeApi(recipeData) {
     return api.addRecipe(recipeData)
         .then(response => ({ response }))
@@ -73,15 +50,8 @@ export function* watchDeleteRecipe() {
 
 
 
-
-
-
-
-
-
 export default function* rootSaga() {
     yield [
-        watchFetchRecipes(),
         watchAddRecipe(),
         watchDeleteRecipe(),
         watchConnectionStatus(),

@@ -14,8 +14,8 @@ import { getAllRecipes } from '../reducers/index';
 
 
 const mainLifecycle = {
-    componentDidMount({fetchRecipesRequest }) {
-        fetchRecipesRequest();
+    componentDidMount({fetchDataRequest }) {
+        fetchDataRequest()
     },
 };
 
