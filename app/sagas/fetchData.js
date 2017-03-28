@@ -4,7 +4,7 @@ import firebaseApp from '../api/firebase';
 import * as actions from '../actions/index';
 
 
-export function *connectionStatusChange(){
+export function *databaseUpdate(){
     const connectionStatusChannel = channel();
     const connectionStatus = connectionStatusWrapper(connectionStatusChannel);
     const connectionRef = firebaseApp.database().ref();
@@ -31,5 +31,5 @@ function connectionStatusWrapper(channel) {
 }
 
 export default function* watchFetchData() {
-    yield call(connectionStatusChange);
+    yield call(databaseUpdate);
 }

@@ -61,7 +61,10 @@ const renderIngredients = ({ fields, style }) => {
     return(
         <RelativeContainer>
             <ButtonContainer>
-                <Button onClick={() => fields.push()}>
+                <Button
+                    type="button"
+                    onClick={() => fields.push()}
+                >
                     <PlusIcon /> Add ingredient
                 </Button>
             </ButtonContainer>
@@ -114,7 +117,10 @@ const renderIngredients = ({ fields, style }) => {
 const renderDirections = ({ fields, style }) => (
     <RelativeContainer>
         <ButtonContainer>
-            <Button onClick={() => fields.push()}>
+            <Button
+                type="button"
+                onClick={() => fields.push()}
+            >
                 <PlusIcon /> Add direction
             </Button>
         </ButtonContainer>
@@ -241,6 +247,7 @@ const renderRecipeForm = ({
             form: 'form',
             fields: ['recipe', 'ingredients'],
             onSubmit: (_, dispatch) => {
+                console.log("SUBMIT");
                 dispatch(actions.addRecipeRequest())
             }
         })

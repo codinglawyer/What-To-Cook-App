@@ -3,39 +3,33 @@ import { put, takeEvery, take, select } from 'redux-saga/effects';
 import { v4 } from 'node-uuid';
 import firebaseApp from '../api/firebase';
 import * as actions from '../actions/index';
-import * as schema from '../actions/schema';
-import { normalize } from 'normalizr';
-
 
 
 export function *connectionStatusChange(){
     const formData = yield select(state => state.form.form.values);
-    console.log("FORMDATA", formData);
     const connectionStatusChannel = channel();
     const connectionStatus = connectionStatusWrapper(connectionStatusChannel);
-    //const connectionRef = firebaseApp.database().ref();
-    //connectionRef.on('value', connectionStatus);
 
-    // Get a key for a new Post.
-    formData.id = v4()
-    formData.ingredients[0].id = v4()
-    const normalizedData = normalize(formData, schema.recipe)
-    console.log("NORM", normalizedData);
-
-    var newPostKey = firebaseApp.database().ref().child('entities').push().key
-    const connectionRef = firebaseApp.database().ref().child('entities');
-    const newKey = v4()
-    console.log("CONNEC", connectionRef);
-
-    var updates = {};
-    updates['/entities/ingredients/' + formData.ingredients[0].id] = normalizedData.entities.ingredients[formData.ingredients[0].id];
-    updates['/entities/recipes/' + formData.id] = normalizedData.entities.recipes[formData.id];
-    updates['/result/' + 3] = formData.id
+    let updates = {};
+    let ingredientsIds = [];
+    formData.ingredients.map(ingredient => {
+        let ingredientId = v4()
+        updates['/entities/ingredients/' + ingredientId] = ingredient;
+        ingredientsIds.push(ingredientId)
+    })
+    let recipeId = v4()
+    const recipe = {
+        id: recipeId,
+        title: formData.title,
+        directions: formData.directions,
+        servings: formData.servings,
+        ingredients: ingredientsIds,
+    }
+    updates['/entities/recipes/' + recipeId] = recipe;
     firebaseApp.database().ref().update(updates);
 
     while (true) {
         const action = yield take(connectionStatusChannel);
-        console.log("ACTION", action);
         yield put(action);
     }
 }

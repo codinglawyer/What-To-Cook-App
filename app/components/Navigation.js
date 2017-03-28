@@ -75,7 +75,7 @@ const renderNavigation = ({
             </MenuItem>
             {recipes.map((recipe, index) => (
                 <MenuItem
-                    key={recipe.id}
+                    key={`${recipe.id}-${index}`}
                     value={index + 1}
                     primaryText={recipe.title}
                     containerElement={<Link to={recipe.id} activeClassName="activeLink" />}
