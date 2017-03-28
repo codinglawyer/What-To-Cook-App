@@ -26,7 +26,6 @@ export function *connectionStatusChange(){
     const connectionRef = firebaseApp.database().ref().child('entities');
     const newKey = v4()
     console.log("CONNEC", connectionRef);
-    firebaseApp.database().ref().child('result').push(3)
 
     var updates = {};
     updates['/entities/ingredients/' + formData.ingredients[0].id] = normalizedData.entities.ingredients[formData.ingredients[0].id];

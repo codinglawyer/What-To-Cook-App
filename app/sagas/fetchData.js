@@ -1,5 +1,5 @@
 import { channel } from 'redux-saga';
-import { put, takeEvery, take } from 'redux-saga/effects';
+import { put, take, call } from 'redux-saga/effects';
 import firebaseApp from '../api/firebase';
 import * as actions from '../actions/index';
 
@@ -31,5 +31,5 @@ function connectionStatusWrapper(channel) {
 }
 
 export default function* watchFetchData() {
-    yield takeEvery('FETCH_DATA_REQUEST', connectionStatusChange);
+    yield call(connectionStatusChange);
 }

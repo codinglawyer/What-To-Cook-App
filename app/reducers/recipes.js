@@ -4,11 +4,8 @@ const byId = (state = {}, action) => {
     const {payload} = action;
     switch(action.type) {
         case 'FETCH_DATA_SUCCESS':
-        case 'ADD_RECIPE_SUCCESS':
-            return {
-                ...state,
-                ...payload.entities.recipes,
-            };
+        //case 'ADD_RECIPE_SUCCESS':
+            return { ...payload.entities.recipes };
         case 'DELETE_RECIPE_SUCCESS':
             return payload.entities.recipes;
         default:
@@ -20,9 +17,9 @@ const allIds = (state = [], action) => {
     const {payload} = action;
     switch(action.type) {
         case 'FETCH_DATA_SUCCESS':
-            return [...state, ...payload.result];
-        case 'ADD_RECIPE_SUCCESS':
-            return [...state, payload.result];
+            return [...payload.result];
+        //case 'ADD_RECIPE_SUCCESS':
+        //    return [...state, payload.result];
         case 'DELETE_RECIPE_SUCCESS':
             return payload.result;
         default:
