@@ -5,22 +5,15 @@ import * as actions from '../actions/index';
 import watchConnectionStatus from './databaseConnection';
 import watchDatabaseUpdate from './databaseUpdate';
 import watchAddRecipe from './addRecipe'
+import firebaseApp from '../api/firebase';
 
 
-export function deleteRecipeApi(recipeData) {
-    return api.deleteRecipe(recipeData)
-        .then(response => ({ response }))
-        .catch(error => ({ error }));
-}
+
 
 function* deleteRecipe({ payload }) {
-    const { response, error } = yield call(deleteRecipeApi, payload);
-    if (response) {
-        yield put(actions.deleteRecipeSuccess({ response }));
-    }
-    else {
-        yield put(actions.deleteRecipeFailure({ error }));
-    }
+    firebaseApp.database().ref().remove('entities');
+
+
 }
 
 export function* watchDeleteRecipe() {

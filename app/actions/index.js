@@ -20,10 +20,9 @@ export const addRecipeRequest = () => ({
     type: 'ADD_RECIPE_REQUEST',
 });
 
-export const addRecipeSuccess = ({ response }) => ({
+export const addRecipeSuccess = () => ({
     type: 'ADD_RECIPE_SUCCESS',
-    payload: normalize(response, schema.recipe),
-});
+})
 
 export const addRecipeFailure = ({ error }) => ({
     type: 'ADD_RECIPE_FAILURE',
