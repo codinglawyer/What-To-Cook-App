@@ -1,32 +1,11 @@
-import { put, takeEvery, call, select, take } from 'redux-saga/effects';
+import { put, takeEvery, call } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import * as api from '../api/index';
 import * as actions from '../actions/index';
 import watchConnectionStatus from './databaseConnection';
-import watchFetchData from './fetchData';
+import watchDatabaseUpdate from './databaseUpdate';
 import watchAddRecipe from './addRecipe'
 
-//export function addRecipeApi(recipeData) {
-//    return api.addRecipe(recipeData)
-//        .then(response => ({ response }))
-//        .catch(error => ({ error }));
-//}
-//
-//function* addRecipe() {
-//    const formData = yield select(state => state.form.form.values);
-//    const { response, error } = yield call(addRecipeApi, formData);
-//    if (response) {
-//        yield put(actions.addRecipeSuccess({ response }));
-//    }
-//    else {
-//        yield put(actions.addRecipeFailure({ error }));
-//    }
-//}
-//
-//export function* watchAddRecipe() {
-//    yield takeEvery('ADD_RECIPE_REQUEST', addRecipe);
-//}
-//
 
 export function deleteRecipeApi(recipeData) {
     return api.deleteRecipe(recipeData)
@@ -49,13 +28,11 @@ export function* watchDeleteRecipe() {
 }
 
 
-
-
 export default function* rootSaga() {
     yield [
         watchAddRecipe(),
         watchDeleteRecipe(),
         watchConnectionStatus(),
-        watchFetchData(),
+        watchDatabaseUpdate(),
     ];
 }

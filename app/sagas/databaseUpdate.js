@@ -5,21 +5,21 @@ import * as actions from '../actions/index';
 
 
 export function *databaseUpdate(){
-    const connectionStatusChannel = channel();
-    const connectionStatus = connectionStatusWrapper(connectionStatusChannel);
+    const databaseUpdateChannel = channel();
+    const databaseUpdate = databaseUpdateWrapper(databaseUpdateChannel);
     const connectionRef = firebaseApp.database().ref();
-    connectionRef.on('value', connectionStatus);
+    connectionRef.on('value', databaseUpdate);
 
 
     while (true) {
-        const action = yield take(connectionStatusChannel);
+        const action = yield take(databaseUpdateChannel);
         console.log("ACTION", action);
         yield put(action);
     }
 }
 
-function connectionStatusWrapper(channel) {
-    function connectionStatus(snapshot) {
+function databaseUpdateWrapper(channel) {
+    function databaseUpdate(snapshot) {
         if (snapshot.val() === true) {
             channel.put(actions.fetchDataSuccess(snapshot.val()));
         }
@@ -27,9 +27,9 @@ function connectionStatusWrapper(channel) {
             channel.put(actions.fetchDataSuccess(snapshot.val()));
         }
     }
-    return connectionStatus;
+    return databaseUpdate;
 }
 
-export default function* watchFetchData() {
+export default function* watchDatabaseUpdate() {
     yield call(databaseUpdate);
 }
