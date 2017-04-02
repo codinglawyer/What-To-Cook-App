@@ -39,6 +39,7 @@ function addRecipeWrapper(channel) {
         if (!snapshot) {
             channel.put(actions.addRecipeSuccess());
         }
+        // TODO test if error scenario works
         else {
             channel.put(actions.addRecipeFailure(snapshot.val()));
         }

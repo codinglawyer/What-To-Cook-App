@@ -1,13 +1,11 @@
 import { combineReducers } from 'redux';
 
 const byId = (state = {}, action) => {
-    const {payload} = action;
     switch(action.type) {
         case 'FETCH_DATA_SUCCESS':
-        //case 'ADD_RECIPE_SUCCESS':
+            const {payload} = action;
+            //case 'ADD_RECIPE_SUCCESS':
             return { ...payload.entities.recipes };
-        case 'DELETE_RECIPE_SUCCESS':
-            return payload.entities.recipes;
         default:
             return state;
     }
@@ -24,8 +22,6 @@ const allIds = (state = [], action) => {
             return allIds;
         //case 'ADD_RECIPE_SUCCESS':
         //    return [...state, payload.result];
-        case 'DELETE_RECIPE_SUCCESS':
-            return payload.result;
         default:
             return state;
     }

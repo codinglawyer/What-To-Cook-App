@@ -13,6 +13,7 @@ const mapStateToProps = (state, { params }) => {
     const recipe = getRecipe(state, params.id);
     const allIngredients = getAllIngredients(state);
     const recipeIngredients = recipe.ingredients.map(ingredient => allIngredients[ingredient]);
+    console.log("REC", recipe);
     return {
         recipe,
         recipeIngredients,
@@ -56,7 +57,7 @@ const DisplayedRecipeScreen = ({ recipe, recipeIngredients, params, deleteRecipe
             <FlatButton
                 label="Delete Recipe"
                 secondary={true}
-                onClick={() => deleteRecipeRequest(params.id)}
+                onClick={() => deleteRecipeRequest(params.id, recipe.ingredients)}
                 containerElement={<Link to={`/`} />}
             />
             <FlatButton
