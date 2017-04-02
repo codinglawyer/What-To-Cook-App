@@ -4,7 +4,6 @@ const byId = (state = {}, action) => {
     switch(action.type) {
         case 'FETCH_DATA_SUCCESS':
             const {payload} = action;
-            //case 'ADD_RECIPE_SUCCESS':
             return { ...payload.entities.recipes };
         default:
             return state;
@@ -20,8 +19,6 @@ const allIds = (state = [], action) => {
                 allIds.push(key);
             }
             return allIds;
-        //case 'ADD_RECIPE_SUCCESS':
-        //    return [...state, payload.result];
         default:
             return state;
     }
