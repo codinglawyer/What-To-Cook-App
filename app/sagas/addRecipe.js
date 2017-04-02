@@ -1,15 +1,10 @@
-import { channel } from 'redux-saga';
-import { put, takeEvery, take, select } from 'redux-saga/effects';
+import { takeEvery, select } from 'redux-saga/effects';
 import { v4 } from 'node-uuid';
 import firebaseApp from '../api/firebase';
-import * as actions from '../actions/index';
 
 
-export function *addRecipe(){
+function* addRecipe() {
     const formData = yield select(state => state.form.form.values);
-    const addRecipeChannel = channel();
-    const addRecipe = addRecipeWrapper(addRecipeChannel);
-
     let updates = {};
     let ingredientsIds = [];
     formData.ingredients.map(ingredient => {
@@ -26,25 +21,9 @@ export function *addRecipe(){
         ingredients: ingredientsIds,
     }
     updates['/entities/recipes/' + recipeId] = recipe;
-    firebaseApp.database().ref().update(updates, addRecipe);
-
-    while (true) {
-        const action = yield take(addRecipeChannel);
-        yield put(action);
-    }
-}
-
-function addRecipeWrapper(channel) {
-    function addRecipe(snapshot) {
-        if (!snapshot) {
-            channel.put(actions.addRecipeSuccess());
-        }
-        // TODO test if error scenario works
-        else {
-            channel.put(actions.addRecipeFailure(snapshot.val()));
-        }
-    }
-    return addRecipe;
+    firebaseApp.database().ref().update(updates, addRecipe)
+        .then(() => console.log("Recipes addition successful"))
+        .catch(() => console.log("Recipes addition failed"))
 }
 
 export default function* watchAddRecipe() {
