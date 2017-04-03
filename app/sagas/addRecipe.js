@@ -8,7 +8,7 @@ function * addRecipe () {
     const ingredientsIds = []
     formData.ingredients.map(ingredient => {
         const ingredientId = v4()
-        updates['/entities/ingredients/' + ingredientId] = ingredient
+        updates[`/entities/ingredients/${ingredientId}`] = ingredient
         ingredientsIds.push(ingredientId)
     })
     const recipeId = v4()
@@ -19,7 +19,7 @@ function * addRecipe () {
         servings: formData.servings,
         ingredients: ingredientsIds
     }
-    updates['/entities/recipes/' + recipeId] = recipe
+    updates[`/entities/recipes/${recipeId}`] = recipe
     firebaseApp.database().ref().update(updates, addRecipe)
         .then(() => console.log('Recipes addition successful'))
         .catch(() => console.log('Recipes addition failed'))
