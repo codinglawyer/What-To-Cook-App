@@ -1,44 +1,42 @@
-import React from 'react';
-import { Field, FieldArray, reduxForm } from 'redux-form';
-import { toArray } from 'lodash';
-import { connect } from 'react-redux';
-import { compose } from 'recompose';
+import React from 'react'
+import { Flex, Box } from 'reflexbox'
+import { Field, FieldArray, reduxForm } from 'redux-form'
+import { connect } from 'react-redux'
+import { compose } from 'recompose'
 
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import * as actions from '../../actions/index';
-import { getRecipe, getAllIngredients } from '../../reducers/index';
-import { Flex, Box } from 'reflexbox';
+import TextField from 'material-ui/TextField'
+import RaisedButton from 'material-ui/RaisedButton'
+import * as actions from '../../actions/index'
+import { getRecipe, getAllIngredients } from '../../reducers/index'
 
-import { Header } from '../../styles/global-styles';
-import { RecipeHeading, ButtonContainer, RelativeContainer, Button } from './styles';
-import TrashIcon from '../icons/TrashIcon';
-import PlusIcon from '../icons/PlusIcon';
-
+import { Header } from '../../styles/global-styles'
+import { RecipeHeading, ButtonContainer, RelativeContainer, Button } from './styles'
+import TrashIcon from '../icons/TrashIcon'
+import PlusIcon from '../icons/PlusIcon'
 
 const mapStateToProps = (state, { params }) => {
     if (!params.params.id) {
         return {
             initialValues: {
-                ingredients: [{name: '', amount: ''}],
-                directions: [''],
-            },
-        };
+                ingredients: [{ name: '', amount: '' }],
+                directions: ['']
+            }
+        }
     }
-    const recipe = getRecipe(state, params.params.id);
-    const allIngredients = getAllIngredients(state);
-    const ingredients = recipe.ingredients.map(ingredient => allIngredients[ingredient]);
+    const recipe = getRecipe(state, params.params.id)
+    const allIngredients = getAllIngredients(state)
+    const ingredients = recipe.ingredients.map(ingredient => allIngredients[ingredient])
     return {
-        initialValues: { ...recipe, ingredients: [...ingredients] },
-    };
-};
+        initialValues: { ...recipe, ingredients: [...ingredients] }
+    }
+}
 
 const renderField = ({
     input,
     label,
     multiLine,
     rows,
-    style,
+    style
 } = {}) => (
     <div>
         <label>{label}</label>
@@ -51,68 +49,65 @@ const renderField = ({
                 rows={rows}
                 className="textField"
                 style={style}
-        />
+            />
         </div>
     </div>
-);
+)
 
-const renderIngredients = ({ fields, style }) => {
-    console.log("FIELDS", fields);
-    return(
-        <RelativeContainer>
-            <ButtonContainer>
-                <Button
-                    type="button"
-                    onClick={() => fields.push()}
+const renderIngredients = ({ fields, style }) => (
+    <RelativeContainer>
+        <ButtonContainer>
+            <Button
+                type="button"
+                onClick={() => fields.push()}
+            >
+                <PlusIcon /> Add ingredient
+            </Button>
+        </ButtonContainer>
+        {fields.map((ingredient, index) =>
+            <Flex
+                wrap
+                key={index}
+            >
+                <Box
+                    col={12}
+                    lg={4}
+                    sm={6}
                 >
-                    <PlusIcon /> Add ingredient
-                </Button>
-            </ButtonContainer>
-            {fields.map((ingredient, index) =>
-                <Flex
-                    wrap
-                    key={index}
+                    <Field
+                        name={`${ingredient}.name`}
+                        type="text"
+                        component={renderField}
+                        label="Name"
+                        style={style}
+                    />
+                </Box>
+                <Box
+                    col={12}
+                    lg={4}
+                    sm={6}
                 >
-                    <Box
-                        col={12}
-                        lg={4}
-                        sm={6}
-                    >
-                        <Field
-                            name={`${ingredient}.name`}
-                            type="text"
-                            component={renderField}
-                            label="Name"
-                            style={style}
-                        />
-                    </Box>
-                    <Box
-                        col={12}
-                        lg={4}
-                        sm={6}
-                    >
-                        <Field
-                            name={`${ingredient}.amount`}
-                            type="text"
-                            component={renderField}
-                            label="Amount"
-                            style={style}
-                        />
-                    </Box>
-                    <Box
-                        col={12}
-                        lg={4}
-                        sm={6}
-                    >
-                        <Button onClick={() => fields.remove(index)}>
-                            <TrashIcon />
-                        </Button>
-                    </Box>
-                </Flex>
-            )}
-        </RelativeContainer>
-    );
-}
+                    <Field
+                        name={`${ingredient}.amount`}
+                        type="text"
+                        component={renderField}
+                        label="Amount"
+                        style={style}
+                    />
+                </Box>
+                <Box
+                    col={12}
+                    lg={4}
+                    sm={6}
+                >
+                    <Button onClick={() => fields.remove(index)}>
+                        <TrashIcon />
+                    </Button>
+                </Box>
+            </Flex>
+        )}
+    </RelativeContainer>
+)
 
 const renderDirections = ({ fields, style }) => (
     <RelativeContainer>
@@ -154,7 +149,7 @@ const renderDirections = ({ fields, style }) => (
             </Flex>
         )}
     </RelativeContainer>
-);
+)
 
 const renderRecipeForm = ({
     handleSubmit,
@@ -163,7 +158,7 @@ const renderRecipeForm = ({
     reset,
     isFormDisplayed = true,
     recipe,
-    params,
+    params
 }) => (
     <div className="recipeForm">
         {isFormDisplayed ? (
@@ -178,7 +173,7 @@ const renderRecipeForm = ({
                             label="Title"
                             style={{
                                 width: '30%',
-                                fontSize: '20px',
+                                fontSize: '20px'
                             }}
                         />
                     </RecipeHeading>
@@ -190,31 +185,31 @@ const renderRecipeForm = ({
                             label="Servings"
                             style={{
                                 width: '15%',
-                                fontSize: '20px',
+                                fontSize: '20px'
                             }}
                         />
                     </RecipeHeading>
                     <RecipeHeading>Ingredients</RecipeHeading>
-                        <FieldArray
-                            name="ingredients"
-                            component={renderIngredients}
-                            style={{
-                                fontSize: '20px',
-                                fontWeight: 300,
-                                marginBottom: '25px',
-                            }}
-                        />
+                    <FieldArray
+                        name="ingredients"
+                        component={renderIngredients}
+                        style={{
+                            fontSize: '20px',
+                            fontWeight: 300,
+                            marginBottom: '25px'
+                        }}
+                    />
                     <RecipeHeading>Directions</RecipeHeading>
-                        <FieldArray
-                            name="directions"
-                            component={renderDirections}
-                            style={{
-                                fontSize: '20px',
-                                fontWeight: 300,
-                                width: '90%',
-                                marginBottom: '25px',
-                            }}
-                        />
+                    <FieldArray
+                        name="directions"
+                        component={renderDirections}
+                        style={{
+                            fontSize: '20px',
+                            fontWeight: 300,
+                            width: '90%',
+                            marginBottom: '25px'
+                        }}
+                    />
                     <div>
                         <RaisedButton
                             className="submitButton"
@@ -222,7 +217,7 @@ const renderRecipeForm = ({
                             type="submit"
                             disabled={submitting}
                             backgroundColor="#e58f37"
-                            style={{ margin: '20px'}}
+                            style={{ margin: '20px' }}
                         />
                         <RaisedButton
                             className="clearButton"
@@ -232,25 +227,24 @@ const renderRecipeForm = ({
                             onClick={reset}
                             backgroundColor="#000000"
                             labelColor="#e58f37"
-                            style={{ margin: '20px'}}
+                            style={{ margin: '20px' }}
                         />
                     </div>
                 </form>
             </div>
         ) : null}
     </div>
-);
+)
 
-    const RecipeForm = compose(
-        connect(mapStateToProps, null),
-        reduxForm({
-            form: 'form',
-            fields: ['recipe', 'ingredients'],
-            onSubmit: (_, dispatch) => {
-                console.log("SUBMIT");
-                dispatch(actions.addRecipeRequest())
-            }
-        })
-    )(renderRecipeForm)
+const RecipeForm = compose(
+    connect(mapStateToProps, null),
+    reduxForm({
+        form: 'form',
+        fields: ['recipe', 'ingredients'],
+        onSubmit: (_, dispatch) => {
+            dispatch(actions.addRecipeRequest())
+        }
+    })
+)(renderRecipeForm)
 
-export default RecipeForm;
+export default RecipeForm

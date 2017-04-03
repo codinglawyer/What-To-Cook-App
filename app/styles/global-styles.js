@@ -1,5 +1,4 @@
-import { injectGlobal } from 'styled-components';
-import styled from 'styled-components';
+import styled, { injectGlobal } from 'styled-components'
 
 /* eslint no-unused-expressions: 0 */
 injectGlobal`
@@ -61,7 +60,7 @@ injectGlobal`
   .recipeDirections{
     font-style: italic;
   }
-`;
+`
 
 export const Header = styled.div`
     font-weight: 500;
