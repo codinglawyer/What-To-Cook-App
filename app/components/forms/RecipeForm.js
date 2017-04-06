@@ -212,7 +212,6 @@ const renderRecipeForm = ({
                     />
                     <div>
                         <RaisedButton
-                            className="submitButton"
                             label="Submit"
                             type="submit"
                             disabled={submitting}
@@ -220,7 +219,6 @@ const renderRecipeForm = ({
                             style={{ margin: '20px' }}
                         />
                         <RaisedButton
-                            className="clearButton"
                             label="Clear Values"
                             type="button"
                             disabled={pristine || submitting}

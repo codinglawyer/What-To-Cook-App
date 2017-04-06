@@ -2,11 +2,12 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router'
-import FlatButton from 'material-ui/FlatButton'
+import RaisedButton from 'material-ui/RaisedButton'
 
 import * as actions from '../../actions/index'
 import { getAllIngredients, getRecipe } from '../../reducers/index'
-import { Screen } from '../../styles/global-styles'
+import { Screen, Box } from '../../styles/global-styles'
+import { RecipeDirection, RecipeIngredients, Servings } from './styles'
 
 const mapStateToProps = (state, { params }) => {
     const recipe = getRecipe(state, params.id)
@@ -21,9 +22,9 @@ const mapStateToProps = (state, { params }) => {
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)
 
 const IngredientList = ({ children, ingredients }) => (
-    <div>
+    <ul>
         {children(ingredients)}
-    </div>
+    </ul>
 )
 
 const DisplayedRecipeScreen = ({
@@ -34,38 +35,44 @@ const DisplayedRecipeScreen = ({
 }) => (
     <Screen>
         <h1 className="recipeTitle">{recipe.title}</h1>
-        <div className="recipeDirectionsTitle">Directions:</div>
-        <ul className="directions">
-            {recipe.directions.map(direction => (
-                <li
-                    className="recipeDirections"
-                    key={direction}
-                >
-                    {direction}
-                </li>
-            ))}
-        </ul>
-        <br />
-        <div className="ingredientsTitle">Ingredients:</div>
-        <IngredientList ingredients={recipeIngredients}>
-            {ingredients => ingredients.map((ingredient, i) => (
-                <div
-                    key={`${i}-${ingredient}`}
-                    className="ingredients"
-                >
-                    {ingredient.name}
-                </div>
-            ))}
-        </IngredientList>
-        <FlatButton
+        <Box>
+            <Servings>{recipe.servings} servings</Servings>
+        </Box>
+        <Box>
+            <div className="subtitle">Directions:</div>
+            <ol>
+                {recipe.directions.map(direction => (
+                    <RecipeDirection key={direction}>{direction}</RecipeDirection>
+                ))}
+            </ol>
+        </Box>
+        <Box>
+            <div className="subtitle">Ingredients:</div>
+            <IngredientList ingredients={recipeIngredients}>
+                {ingredients => ingredients.map((ingredient, i) => (
+                    <RecipeIngredients
+                        key={`${i}-${ingredient}`}
+                        className="ingredients"
+                    >
+                        {ingredient.name} <span className="bold">{ingredient.amount}</span>
+                    </RecipeIngredients>
+                ))}
+            </IngredientList>
+        </Box>
+        <RaisedButton
             label="Delete Recipe"
-            secondary
+            backgroundColor="#e58f37"
             onClick={() => deleteRecipeRequest(params.id, recipe.ingredients)}
             containerElement={<Link to={`/`} />}
+            className="submitButton"
+            style={{ margin: '20px' }}
         />
-        <FlatButton
+        <RaisedButton
             label="Edit Recipe"
-            secondary
+            type="button"
+            backgroundColor="#000000"
+            labelColor="#e58f37"
+            style={{ margin: '20px' }}
             containerElement={<Link to={`/editRecipe/${params.id}`} />}
         />
     </Screen>

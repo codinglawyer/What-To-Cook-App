@@ -34,6 +34,16 @@ injectGlobal`
     font-size: 40px;
   }
   
+  .bold {
+    font-weight: 500
+  }
+  
+  .subtitle {
+      font-weight: 400;
+      font-size: 25px;
+      margin: 0 0 20px 0;
+  }
+  
   p,
   label {
     font-family: 'Roboto', Georgia, Times, 'Times New Roman', serif;
@@ -51,15 +61,6 @@ injectGlobal`
     font-size: 50px;
   }
   
-  .recipeDirectionsTitle, .ingredientsTitle {
-    font-weight: 400;
-    font-size: 25px;
-    margin: 10px auto;
-  }
-  
-  .recipeDirections{
-    font-style: italic;
-  }
 `
 
 export const Header = styled.div`
@@ -72,4 +73,11 @@ export const Header = styled.div`
 
 export const Screen = styled.div`
     margin: 30px 200px
+`
+
+export const Box = styled.div`
+    background: #fefcfa;
+    padding: 20px;
+    border: 1px solid #f3caa0;
+    margin-bottom: 30px;
 `
