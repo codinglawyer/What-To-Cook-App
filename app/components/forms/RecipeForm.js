@@ -49,6 +49,7 @@ const renderField = ({
                 rows={rows}
                 className="textField"
                 style={style}
+                underlineFocusStyle={{borderColor: 'rgb(229, 143, 55)'}}
             />
         </div>
     </div>
@@ -84,7 +85,7 @@ const renderIngredients = ({ fields, style }) => (
                 </Box>
                 <Box
                     col={12}
-                    lg={4}
+                    lg={2}
                     sm={6}
                 >
                     <Field
@@ -92,12 +93,24 @@ const renderIngredients = ({ fields, style }) => (
                         type="text"
                         component={renderField}
                         label="Amount"
-                        style={style}
+                        style={{...style, width: '50%'}}
                     />
                 </Box>
                 <Box
                     col={12}
-                    lg={4}
+                    lg={2}
+                    sm={6}
+                >
+                    <Field
+                        name={`${ingredient}.units`}
+                        type="text"
+                        component={renderField}
+                        label="Units"
+                        style={{...style, width: '50%'}}
+                    />
+                </Box> <Box
+                    col={12}
+                    lg={3}
                     sm={6}
                 >
                     <Button onClick={() => fields.remove(index)}>
@@ -177,18 +190,62 @@ const renderRecipeForm = ({
                             }}
                         />
                     </RecipeHeading>
-                    <RecipeHeading>
-                        <Field
-                            name="servings"
-                            type="text"
-                            component={renderField}
-                            label="Servings"
-                            style={{
-                                width: '15%',
-                                fontSize: '20px'
-                            }}
-                        />
-                    </RecipeHeading>
+                    <Flex wrap>
+                        <Box
+                            col={12}
+                            lg={3}
+                            sm={6}
+                        >
+                            <RecipeHeading>
+                                <Field
+                                    name="servings"
+                                    type="text"
+                                    component={renderField}
+                                    label="Servings"
+                                    style={{
+                                        width: '40%',
+                                        fontSize: '20px'
+                                    }}
+                                />
+                            </RecipeHeading>
+                        </Box>
+                        <Box
+                            col={12}
+                            lg={3}
+                            sm={6}
+                        >
+                            <RecipeHeading>
+                                <Field
+                                    name="time"
+                                    type="text"
+                                    component={renderField}
+                                    label="Time"
+                                    style={{
+                                        width: '40%',
+                                        fontSize: '20px'
+                                    }}
+                                />
+                            </RecipeHeading>
+                        </Box>
+                        <Box
+                            col={12}
+                            lg={3}
+                            sm={6}
+                        >
+                            <RecipeHeading>
+                            <Field
+                                name="difficulty"
+                                type="text"
+                                component={renderField}
+                                label="Difficulty"
+                                style={{
+                                    width: '40%',
+                                    fontSize: '20px'
+                                }}
+                            />
+                            </RecipeHeading>
+                        </Box>
+                    </Flex>
                     <RecipeHeading>Ingredients</RecipeHeading>
                     <FieldArray
                         name="ingredients"
