@@ -6,6 +6,7 @@ import { compose } from 'recompose'
 
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
+import DropDownMenuOpenImmediateExample from './SelectField'
 import * as actions from '../../actions/index'
 import { getRecipe, getAllIngredients } from '../../reducers/index'
 
@@ -104,7 +105,7 @@ const renderIngredients = ({ fields, style }) => (
                     <Field
                         name={`${ingredient}.units`}
                         type="text"
-                        component={renderField}
+                        component={DropDownMenuOpenImmediateExample}
                         label="Units"
                         style={{...style, width: '50%'}}
                     />
