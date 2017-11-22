@@ -45,11 +45,11 @@ const renderField = ({ input, label, multiLine, rows, style } = {}) => (
     <div>
       <TextField
         {...input}
-        type='text'
+        type="text"
         placeholder={label}
         multiLine={multiLine}
         rows={rows}
-        className='textField'
+        className="textField"
         style={style}
         underlineFocusStyle={{ borderColor: 'rgb(229, 143, 55)' }}
       />
@@ -60,7 +60,7 @@ const renderField = ({ input, label, multiLine, rows, style } = {}) => (
 const renderIngredients = ({ fields, style }) => (
   <RelativeContainer>
     <ButtonContainer>
-      <Button type='button' onClick={() => fields.push()}>
+      <Button type="button" onClick={() => fields.push()}>
         <PlusIcon /> Add ingredient
       </Button>
     </ButtonContainer>
@@ -69,27 +69,27 @@ const renderIngredients = ({ fields, style }) => (
         <Box col={12} lg={4} sm={6}>
           <Field
             name={`${ingredient}.name`}
-            type='text'
+            type="text"
             component={renderField}
-            label='Name'
+            label="Name"
             style={style}
           />
         </Box>
         <Box col={12} lg={2} sm={6}>
           <Field
             name={`${ingredient}.amount`}
-            type='text'
+            type="text"
             component={renderField}
-            label='Amount'
+            label="Amount"
             style={{ ...style, width: '50%' }}
           />
         </Box>
         <Box col={12} lg={2} sm={6}>
           <Field
             name={`${ingredient}.units`}
-            type='text'
+            type="text"
             component={DropDownMenuOpenImmediateExample}
-            label='Units'
+            label="Units"
             style={{ ...style, width: '50%' }}
           />
         </Box>{' '}
@@ -106,7 +106,7 @@ const renderIngredients = ({ fields, style }) => (
 const renderDirections = ({ fields, style }) => (
   <RelativeContainer>
     <ButtonContainer>
-      <Button type='button' onClick={() => fields.push()}>
+      <Button type="button" onClick={() => fields.push()}>
         <PlusIcon /> Add direction
       </Button>
     </ButtonContainer>
@@ -115,9 +115,9 @@ const renderDirections = ({ fields, style }) => (
         <Box col={12} lg={7} sm={6}>
           <Field
             name={`${direction}`}
-            type='text'
+            type="text"
             component={renderField}
-            label='Direction'
+            label="Direction"
             style={style}
           />
         </Box>
@@ -140,17 +140,17 @@ const renderRecipeForm = ({
   recipe,
   params
 }) => (
-  <div className='recipeForm'>
+  <div className="recipeForm">
     {isFormDisplayed ? (
       <div>
         <Header>Fill Recipe Information</Header>
         <form onSubmit={handleSubmit}>
           <RecipeHeading>
             <Field
-              name='title'
-              type='text'
+              name="title"
+              type="text"
               component={renderField}
-              label='Title'
+              label="Title"
               style={{
                 width: '30%',
                 fontSize: '20px'
@@ -161,10 +161,10 @@ const renderRecipeForm = ({
             <Box col={12} lg={3} sm={6}>
               <RecipeHeading>
                 <Field
-                  name='servings'
-                  type='text'
+                  name="servings"
+                  type="text"
                   component={renderField}
-                  label='Servings'
+                  label="Servings"
                   style={{
                     width: '40%',
                     fontSize: '20px'
@@ -175,10 +175,10 @@ const renderRecipeForm = ({
             <Box col={12} lg={3} sm={6}>
               <RecipeHeading>
                 <Field
-                  name='time'
-                  type='text'
+                  name="time"
+                  type="text"
                   component={renderField}
-                  label='Time'
+                  label="Time"
                   style={{
                     width: '40%',
                     fontSize: '20px'
@@ -189,10 +189,10 @@ const renderRecipeForm = ({
             <Box col={12} lg={3} sm={6}>
               <RecipeHeading>
                 <Field
-                  name='difficulty'
-                  type='text'
+                  name="difficulty"
+                  type="text"
                   component={renderField}
-                  label='Difficulty'
+                  label="Difficulty"
                   style={{
                     width: '40%',
                     fontSize: '20px'
@@ -203,7 +203,7 @@ const renderRecipeForm = ({
           </Flex>
           <RecipeHeading>Ingredients</RecipeHeading>
           <FieldArray
-            name='ingredients'
+            name="ingredients"
             component={renderIngredients}
             style={{
               fontSize: '20px',
@@ -213,7 +213,7 @@ const renderRecipeForm = ({
           />
           <RecipeHeading>Directions</RecipeHeading>
           <FieldArray
-            name='directions'
+            name="directions"
             component={renderDirections}
             style={{
               fontSize: '20px',
@@ -224,19 +224,19 @@ const renderRecipeForm = ({
           />
           <div>
             <RaisedButton
-              label='Submit'
-              type='submit'
+              label="Submit"
+              type="submit"
               disabled={submitting}
-              backgroundColor='#e58f37'
+              backgroundColor="#e58f37"
               style={{ margin: '20px' }}
             />
             <RaisedButton
-              label='Clear Values'
-              type='button'
+              label="Clear Values"
+              type="button"
               disabled={pristine || submitting}
               onClick={reset}
-              backgroundColor='#000000'
-              labelColor='#e58f37'
+              backgroundColor="#000000"
+              labelColor="#e58f37"
               style={{ margin: '20px' }}
             />
           </div>

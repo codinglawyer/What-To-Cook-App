@@ -32,7 +32,9 @@ const DisplayedRecipeScreen = ({
   recipeIngredients,
   params,
   deleteRecipeRequest
-}) => (
+}) => {
+    console.log(recipeIngredients)
+    return(
   <Screen>
     <h1 className='recipeTitle'>{recipe.title}</h1>
     <Box>
@@ -57,6 +59,7 @@ const DisplayedRecipeScreen = ({
             >
               {ingredient.name}{' '}
               <span className='bold'>{ingredient.amount}</span>
+              <span className='bold'> {ingredient.units}</span>
             </RecipeIngredients>
           ))
         }
@@ -79,7 +82,7 @@ const DisplayedRecipeScreen = ({
       containerElement={<Link to={`/editRecipe/${params.id}`} />}
     />
   </Screen>
-)
+)}
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   DisplayedRecipeScreen
