@@ -1,5 +1,5 @@
 import { takeEvery, select } from 'redux-saga/effects'
-import { v4 } from 'node-uuid'
+import { v4 } from 'uuid'
 import firebaseApp from '../api/firebase'
 
 function * addRecipe () {
