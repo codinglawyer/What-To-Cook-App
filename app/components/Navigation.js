@@ -67,9 +67,11 @@ const renderNavigation = (
         listStyle={{
           color: '#fff',
           backgroundColor: '#291705',
-          border: '5px solid #e58f37'
+          border: '5px solid #e58f37',
+          marginLeft: '150px'
         }}
         selectedMenuItemStyle={{ color: '#e58f37' }}
+        style={{ width: '250px' }}
       >
         <MenuItem
           key={0}
