@@ -5,46 +5,44 @@ import { compose } from 'recompose'
 
 import FetchError from '../../components/FetchError'
 import * as actions from '../../actions/index'
-import { getAllRecipes, getIsFetching, getErrorMessage, getCompleteRecipes, getAllIngredients } from '../../reducers/index'
+import {
+  getAllRecipes,
+  getIsFetching,
+  getErrorMessage,
+  getCompleteRecipes,
+  getAllIngredients
+} from '../../reducers/index'
 
 import { HeaderPicture } from './styles'
 import { Header, Screen } from '../../styles/global-styles'
 
-const renderHomeScreen = ({
-    recipes,
-    isFetching,
-    errorMessage,
-    ...props,
-}) => (
-    <Screen>
-        <Header>What do you want to cook?</Header>
-        <HeaderPicture />
-        <div>
-            {isFetching && !recipes.allIds && (
-                <div>Loading</div>
-            )}
-        </div>
-        <div>
-            {errorMessage && !recipes.allIds && (
-                <FetchError
-                    message={errorMessage}
-                    onRetry={() => props.fetchDataRequest()}
-                />
-            )}
-        </div>
-    </Screen>
+const renderHomeScreen = ({ recipes, isFetching, errorMessage, ...props }) => (
+  <Screen>
+    <Header>What do you want to cook?</Header>
+    <HeaderPicture />
+    <div>{isFetching && !recipes.allIds && <div>Loading</div>}</div>
+    <div>
+      {errorMessage &&
+        !recipes.allIds && (
+          <FetchError
+            message={errorMessage}
+            onRetry={() => props.fetchDataRequest()}
+          />
+        )}
+    </div>
+  </Screen>
 )
 
 const mapStateToProps = state => ({
-    recipes: getCompleteRecipes(state, getAllRecipes, getAllIngredients),
-    isFetching: getIsFetching(state),
-    errorMessage: getErrorMessage(state)
+  recipes: getCompleteRecipes(state, getAllRecipes, getAllIngredients),
+  isFetching: getIsFetching(state),
+  errorMessage: getErrorMessage(state)
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)
 
-const HomeScreen = compose(
-    connect(mapStateToProps, mapDispatchToProps),
-)(renderHomeScreen)
+const HomeScreen = compose(connect(mapStateToProps, mapDispatchToProps))(
+  renderHomeScreen
+)
 
 export default HomeScreen

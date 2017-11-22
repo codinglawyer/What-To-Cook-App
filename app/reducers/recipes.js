@@ -1,60 +1,60 @@
 import { combineReducers } from 'redux'
 
 const byId = (state = {}, action) => {
-    switch (action.type) {
-        case 'FETCH_DATA_SUCCESS':
-            const { payload } = action
-            return { ...payload.entities.recipes }
-        default:
-            return state
-    }
+  switch (action.type) {
+    case 'FETCH_DATA_SUCCESS':
+      const { payload } = action
+      return { ...payload.entities.recipes }
+    default:
+      return state
+  }
 }
 
 const allIds = (state = [], action) => {
-    switch (action.type) {
-        case 'FETCH_DATA_SUCCESS':
-            const { payload } = action
-            const ids = []
-            for (const key in payload.entities.recipes) {
-                ids.push(key)
-            }
-            return ids
-        default:
-            return state
-    }
+  switch (action.type) {
+    case 'FETCH_DATA_SUCCESS':
+      const { payload } = action
+      const ids = []
+      for (const key in payload.entities.recipes) {
+        ids.push(key)
+      }
+      return ids
+    default:
+      return state
+  }
 }
 
 const isFetching = (state = false, action) => {
-    switch (action.type) {
-        case 'FETCH_DATA_REQUEST':
-            return true
-        case 'FETCH_DATA_SUCCESS':
-        case 'FETCH_DATA_FAILURE':
-            return false
-        default:
-            return state
-    }
+  switch (action.type) {
+    case 'FETCH_DATA_REQUEST':
+      return true
+    case 'FETCH_DATA_SUCCESS':
+    case 'FETCH_DATA_FAILURE':
+      return false
+    default:
+      return state
+  }
 }
 
 // TODO test if the error works with Firebase
 const errorMessage = (state = null, action) => {
-    const { payload } = action
-    switch (action.type) {
-        case 'FETCH_DATA_FAILURE':
-            return payload
-        case 'FETCH_DATA_REQUEST':
-        case 'FETCH_DATA_SUCCESS':
-            return null
-        default:
-            return state
-    }
+  const { payload } = action
+  switch (action.type) {
+    case 'FETCH_DATA_FAILURE':
+      return payload
+    case 'FETCH_DATA_REQUEST':
+    case 'FETCH_DATA_SUCCESS':
+      return null
+    default:
+      return state
+  }
 }
 
 const recipesEntity = combineReducers({
-    byId,
-    allIds,
-    isFetching,
-    errorMessage
+  byId,
+  allIds,
+  isFetching,
+  errorMessage
 })
 
 export default recipesEntity

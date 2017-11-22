@@ -4,10 +4,10 @@ import watchAddRecipe from './addRecipe'
 import watchDeleteRecipe from './deleteRecipe'
 
 export default function * rootSaga () {
-    yield [
-        watchAddRecipe(),
-        watchDeleteRecipe(),
-        watchConnectionStatus(),
-        watchDatabaseUpdate()
-    ]
+  yield [
+    watchAddRecipe(),
+    watchDeleteRecipe(),
+    watchConnectionStatus(),
+    watchDatabaseUpdate()
+  ]
 }

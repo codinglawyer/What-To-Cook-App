@@ -64,20 +64,20 @@ injectGlobal`
 `
 
 export const Header = styled.div`
-    font-weight: 500;
-    font-size: 2em;
-    text-align: center;
-    margin: 0;
-    padding: 20px 0;
+  font-weight: 500;
+  font-size: 2em;
+  text-align: center;
+  margin: 0;
+  padding: 20px 0;
 `
 
 export const Screen = styled.div`
-    margin: 30px 200px
+  margin: 30px 200px;
 `
 
 export const Box = styled.div`
-    background: #fefcfa;
-    padding: 20px;
-    border: 1px solid #f3caa0;
-    margin-bottom: 30px;
+  background: #fefcfa;
+  padding: 20px;
+  border: 1px solid #f3caa0;
+  margin-bottom: 30px;
 `

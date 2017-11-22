@@ -3,9 +3,9 @@ import RecipeForm from '../../components/forms/RecipeForm'
 import { Screen } from '../../styles/global-styles'
 
 const CreateRecipeScreen = ({ ...props }) => (
-    <Screen>
-        <RecipeForm params={props} />
-    </Screen>
+  <Screen>
+    <RecipeForm params={props} />
+  </Screen>
 )
 
 export default CreateRecipeScreen

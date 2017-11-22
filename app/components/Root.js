@@ -9,18 +9,18 @@ import CreateRecipeScreen from '../screens/CreateRecipeScreen'
 import RecipeDetailScreen from '../screens/RecipeDetailScreen'
 
 const Root = ({ store }) => (
-    <Provider store={store}>
-        <MuiThemeProvider>
-            <Router history={browserHistory}>
-                <Route path="/" component={Navigation}>
-                    <IndexRoute component={HomeScreen} />
-                    <Route path="/editRecipe/(:id)" component={CreateRecipeScreen} />
-                    <Route path="/createRecipe" component={CreateRecipeScreen} />
-                    <Route path="/:id" component={RecipeDetailScreen} />
-                </Route>
-            </Router>
-        </MuiThemeProvider>
-    </Provider>
+  <Provider store={store}>
+    <MuiThemeProvider>
+      <Router history={browserHistory}>
+        <Route path='/' component={Navigation}>
+          <IndexRoute component={HomeScreen} />
+          <Route path='/editRecipe/(:id)' component={CreateRecipeScreen} />
+          <Route path='/createRecipe' component={CreateRecipeScreen} />
+          <Route path='/:id' component={RecipeDetailScreen} />
+        </Route>
+      </Router>
+    </MuiThemeProvider>
+  </Provider>
 )
 
 export default Root
