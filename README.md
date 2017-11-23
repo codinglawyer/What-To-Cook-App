@@ -1,6 +1,6 @@
 ## What To Cook
 ##### (in the making)
-- the application for managing your favorite recipes (recipes are saved in the Firebase realtime database)
+- an application for managing your favorite recipes (recipes are saved in the Firebase realtime database)
 
 ### Getting Started
 
@@ -14,8 +14,8 @@
 
 3. **Start dev server**
 
-  `npm start`
+    `npm start`
 
 4. **Open your browser**
 
-  `http://localhost:3000/`
+    `http://localhost:3000/`
