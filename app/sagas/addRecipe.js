@@ -3,7 +3,7 @@ import { v4 } from 'uuid'
 import firebaseApp from '../api/firebase'
 
 function * addRecipe () {
-  const formData = yield select(state => state.form.form.values)
+  const formData = yield select(state => state.form.recipeForm.values)
   const updates = {}
   const ingredientsIds = []
   formData.ingredients.map(ingredient => {

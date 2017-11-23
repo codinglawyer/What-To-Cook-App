@@ -10,6 +10,7 @@ import { Screen, Box } from '../../styles/global-styles'
 import { RecipeDirection, RecipeIngredients, Servings } from './styles'
 
 const mapStateToProps = (state, { params }) => {
+    console.log("state", state)
   const recipe = getRecipe(state, params.id)
   const allIngredients = getAllIngredients(state)
   const recipeIngredients = recipe.ingredients.map(
@@ -32,7 +33,9 @@ const DisplayedRecipeScreen = ({
   recipeIngredients,
   params,
   deleteRecipeRequest
-}) => (
+}) => {
+    console.log("RECIPES", recipe)
+    return(
   <Screen>
     <h1 className='recipeTitle'>{recipe.title}</h1>
     <Box>
@@ -80,7 +83,7 @@ const DisplayedRecipeScreen = ({
       containerElement={<Link to={`/editRecipe/${params.id}`} />}
     />
   </Screen>
-)
+)}
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   DisplayedRecipeScreen
