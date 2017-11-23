@@ -1,5 +1,5 @@
 ## What To Cook
-#####(in the making)
+##### (in the making)
 - the application for managing your favorite recipes (recipes are saved in the Firebase realtime database)
 
 ### Getting Started
