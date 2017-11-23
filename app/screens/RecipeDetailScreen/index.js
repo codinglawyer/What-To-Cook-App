@@ -33,9 +33,7 @@ const DisplayedRecipeScreen = ({
   recipeIngredients,
   params,
   handleDeleteRecipe
-}) => {
-  console.log('RECIPES', recipe.ingredients)
-  return (
+}) =>
     <Screen>
       {recipe && (
         <div>
@@ -87,8 +85,6 @@ const DisplayedRecipeScreen = ({
         </div>
       )}
     </Screen>
-  )
-}
 
 export default compose(
   connect(mapStateToProps),

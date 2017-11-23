@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux'
+import { get as g, keys } from 'lodash'
 
 const byId = (state = {}, action) => {
   switch (action.type) {
     case 'FETCH_DATA_SUCCESS':
-      const { payload } = action
-      return { ...payload.entities.recipes }
+      const { recipes } = action.payload.entities
+      return { ...recipes }
     default:
       return state
   }
@@ -13,11 +14,8 @@ const byId = (state = {}, action) => {
 const allIds = (state = [], action) => {
   switch (action.type) {
     case 'FETCH_DATA_SUCCESS':
-      const { payload } = action
-      const ids = []
-      for (const key in payload.entities.recipes) {
-        ids.push(key)
-      }
+      const { recipes } = action.payload.entities
+      const ids = keys(recipes)
       return ids
     default:
       return state
@@ -38,9 +36,9 @@ const isFetching = (state = false, action) => {
 
 // TODO test if the error works with Firebase
 const errorMessage = (state = null, action) => {
-  const { payload } = action
   switch (action.type) {
     case 'FETCH_DATA_FAILURE':
+      const { payload } = action
       return payload
     case 'IS_DATA_BEING_FETCHED':
     case 'FETCH_DATA_SUCCESS':
@@ -59,7 +57,11 @@ const recipesEntity = combineReducers({
 
 export default recipesEntity
 
-export const getAllRecipes = state => state.allIds.map(id => state.byId[id])
-export const getRecipe = (state, recipeId) => state.byId[recipeId]
-export const getIsFetching = state => state.isFetching
-export const getErrorMessage = state => state.errorMessage
+const getFromState = (state, name) => g(state, name)
+// selectors
+export const getAllRecipes = state =>
+  getFromState(state, 'allIds').map(id => state.byId[id])
+export const getRecipe = (state, recipeId) =>
+  getFromState(state, 'byId')[recipeId]
+export const getIsFetching = state => getFromState(state, 'isFetching')
+export const getErrorMessage = state => getFromState(state, 'errorMessage')
