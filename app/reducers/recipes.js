@@ -26,7 +26,7 @@ const allIds = (state = [], action) => {
 
 const isFetching = (state = false, action) => {
   switch (action.type) {
-    case 'FETCH_DATA_REQUEST':
+    case 'IS_DATA_BEING_FETCHED':
       return true
     case 'FETCH_DATA_SUCCESS':
     case 'FETCH_DATA_FAILURE':
@@ -42,7 +42,7 @@ const errorMessage = (state = null, action) => {
   switch (action.type) {
     case 'FETCH_DATA_FAILURE':
       return payload
-    case 'FETCH_DATA_REQUEST':
+    case 'IS_DATA_BEING_FETCHED':
     case 'FETCH_DATA_SUCCESS':
       return null
     default:

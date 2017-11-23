@@ -1,10 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { compose } from 'recompose'
-
+import { compose, withHandlers } from 'recompose'
 import FetchError from '../../components/FetchError'
-import * as actions from '../../actions/index'
+import { isDataBeingFetched } from '../../actions/index'
 import {
   getAllRecipes,
   getIsFetching,
@@ -12,7 +10,6 @@ import {
   getCompleteRecipes,
   getAllIngredients
 } from '../../reducers/index'
-
 import { HeaderPicture } from './styles'
 import { Header, Screen } from '../../styles/global-styles'
 
@@ -26,7 +23,7 @@ const renderHomeScreen = ({ recipes, isFetching, errorMessage, ...props }) => (
         !recipes.allIds && (
           <FetchError
             message={errorMessage}
-            onRetry={() => props.fetchDataRequest()}
+            onRetry={() => props.isDataBeingFetched()}
           />
         )}
     </div>
@@ -39,10 +36,12 @@ const mapStateToProps = state => ({
   errorMessage: getErrorMessage(state)
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)
-
-const HomeScreen = compose(connect(mapStateToProps, mapDispatchToProps))(
-  renderHomeScreen
-)
+const HomeScreen = compose(
+  connect(mapStateToProps),
+  withHandlers({
+    handleIsDataBeingFetched: ({ dispatch }) => () =>
+      dispatch(isDataBeingFetched())
+  })
+)(renderHomeScreen)
 
 export default HomeScreen

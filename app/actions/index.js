@@ -9,8 +9,8 @@ export const disconnected = () => ({
   type: g(actionTypes, 'FIREBASE_DISCONNECTED')
 })
 
-export const fetchDataRequest = () => ({
-  type: g(actionTypes, 'FETCH_DATA_REQUEST')
+export const isDataBeingFetched = () => ({
+  type: g(actionTypes, 'IS_DATA_BEING_FETCHED')
 })
 
 export const fetchDataSuccess = response => ({

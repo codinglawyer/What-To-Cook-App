@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link, IndexLink } from 'react-router'
-import { bindActionCreators } from 'redux'
-import { compose, withState } from 'recompose'
+import { compose, withState, withHandlers } from 'recompose'
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 import {
@@ -14,20 +13,18 @@ import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
 import { lifecycle } from '../utils/lifecycle-fp'
 
-import * as actions from '../actions/index'
+import { isDataBeingFetched } from '../actions/index'
 import { getAllRecipes } from '../reducers/index'
 
-const mainLifecycle = {
-  componentDidMount ({ fetchDataRequest }) {
-    fetchDataRequest()
+const navigationLifecycle = {
+  componentDidMount ({ handleIsDataBeingFetched }) {
+    handleIsDataBeingFetched()
   }
 }
 
 const mapStateToProps = state => ({
   recipes: getAllRecipes(state)
 })
-
-const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)
 
 const renderNavigation = (
   { recipes, dropdownValue, setDropdownValue, children } = {}
@@ -97,8 +94,12 @@ const renderNavigation = (
 )
 
 const Navigation = compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  lifecycle(mainLifecycle),
+  connect(mapStateToProps),
+  withHandlers({
+    handleIsDataBeingFetched: ({ dispatch }) => () =>
+      dispatch(isDataBeingFetched())
+  }),
+  lifecycle(navigationLifecycle),
   withState('dropdownValue', 'setDropdownValue', 0)
 )(renderNavigation)
 
