@@ -1,50 +1,27 @@
 import React from 'react'
 import { Flex, Box } from 'reflexbox'
 import { Field, FieldArray, reduxForm } from 'redux-form'
-import { connect } from 'react-redux'
-import { compose } from 'recompose'
 
 import TextField from './TextField'
 import IngredientsForm from './IngredientsForm'
 import DirectionsForm from './DirectionsForm'
 
 import RaisedButton from 'material-ui/RaisedButton'
-import * as actions from '../../actions/index'
-import { getRecipe, getAllIngredients } from '../../reducers/index'
-
+import { addRecipeRequest } from '../../actions/index'
 import { Header } from '../../styles/global-styles'
 import { RecipeHeading } from './styles'
 
-const mapStateToProps = (state, { params: { params: { id } } }) => {
-  if (!id) {
-    return {
-      initialValues: {
-        ingredients: [{ name: '', amount: '' }],
-        directions: ['']
-      }
-    }
-  }
-  const recipe = getRecipe(state, id)
-  const allIngredients = getAllIngredients(state)
-  const ingredients = recipe.ingredients.map(
-    ingredient => allIngredients[ingredient]
-  )
-  return {
-    initialValues: { ...recipe, ingredients: [...ingredients] }
-  }
-}
-
-const renderRecipeForm = ({
+const RecipeForm = ({
   handleSubmit,
   pristine,
   submitting,
   reset,
-  isFormDisplayed = true,
   recipe,
-  params
+  params,
+  isFetching
 }) => (
   <div className="recipeForm">
-    {isFormDisplayed && (
+    {!isFetching && (
       <div>
         <Header>Fill Recipe Information</Header>
         <form onSubmit={handleSubmit}>
@@ -149,15 +126,11 @@ const renderRecipeForm = ({
   </div>
 )
 
-const RecipeForm = compose(
-  connect(mapStateToProps),
-  reduxForm({
-    form: 'recipeForm',
-    fields: ['recipe', 'ingredients'],
-    onSubmit: (_, dispatch) => {
-      dispatch(actions.addRecipeRequest())
-    }
-  })
-)(renderRecipeForm)
-
-export default RecipeForm
+export default reduxForm({
+  form: 'recipeForm',
+  fields: ['recipe', 'ingredients'],
+  enableReinitialize: true,
+  onSubmit: (_, dispatch) => {
+    dispatch(addRecipeRequest())
+  }
+})(RecipeForm)

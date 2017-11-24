@@ -12,12 +12,9 @@ import { RecipeDirection, RecipeIngredients, Servings } from './styles'
 const mapStateToProps = (state, { params }) => {
   const recipe = getRecipe(state, params.id)
   const allIngredients = getAllIngredients(state)
-  let recipeIngredients = []
-  if (recipe) {
-    recipeIngredients = recipe.ingredients.map(
+  const recipeIngredients = recipe ? recipe.ingredients.map(
       ingredient => allIngredients[ingredient]
-    )
-  }
+    ) : []
   return {
     recipe,
     recipeIngredients
