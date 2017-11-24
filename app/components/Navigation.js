@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, IndexLink } from 'react-router'
-import { compose, withState, withHandlers } from 'recompose'
+import { compose, withHandlers } from 'recompose'
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 import {
@@ -26,9 +26,7 @@ const mapStateToProps = state => ({
   recipes: getAllRecipes(state)
 })
 
-const renderNavigation = (
-  { recipes, dropdownValue, setDropdownValue, children } = {}
-) => (
+const renderNavigation = ({ recipes, children } = {}) => (
   <div>
     <Toolbar style={{ background: '#291705' }}>
       <IndexLink to='/'>
@@ -58,8 +56,7 @@ const renderNavigation = (
         <ToolbarSeparator style={{ backgroundColor: '#e58f37' }} />
       </ToolbarGroup>
       <DropDownMenu
-        value={dropdownValue}
-        onChange={(event, index, value) => setDropdownValue(value)}
+        value={0}
         labelStyle={{ color: '#fff' }}
         listStyle={{
           color: '#fff',
@@ -99,8 +96,7 @@ const Navigation = compose(
     handleIsDataBeingFetched: ({ dispatch }) => () =>
       dispatch(isDataBeingFetched())
   }),
-  lifecycle(navigationLifecycle),
-  withState('dropdownValue', 'setDropdownValue', 0)
+  lifecycle(navigationLifecycle)
 )(renderNavigation)
 
 export default Navigation
