@@ -23,44 +23,42 @@ injectGlobal`
         min-height: 100%;
         min-width: 100%;
     }
-  
+
     a {
-        text-decoration: none   
+        text-decoration: none
     }
-  
-  
+
+
   .title {
     font-weight: normal;
     font-size: 40px;
   }
-  
+
   .bold {
     font-weight: 500
   }
-  
+
   .subtitle {
       font-weight: 400;
       font-size: 25px;
       margin: 0 0 20px 0;
   }
-  
+
   p,
   label {
     font-family: 'Roboto', Georgia, Times, 'Times New Roman', serif;
     line-height: 1.5em;
   }
-  
 
-  
-  
- 
-
-  
   .recipeTitle {
     font-weight: 500;
     font-size: 50px;
   }
-  
+
+  .createLoader{
+    margin: 350px auto;
+  }
+
 `
 
 export const Header = styled.div`
