@@ -56,7 +56,7 @@ const renderRecipeForm = ({
                 name="time"
                 type="text"
                 component={TextField}
-                label="Time"
+                label="Time (min)"
                 style={{
                   width: '40%',
                   fontSize: '20px'

@@ -27,11 +27,12 @@ const renderSelect = ({ keyValue, setKeyValue, input: {onChange} } = {}) => (
       }}
     >
       <MenuItem value={1} primaryText="Select units" />
-      <MenuItem value={2} primaryText="gram" />
+      <MenuItem value={2} primaryText="g" />
+      <MenuItem value={2} primaryText="ml" />
       <MenuItem value={3} primaryText="cup" />
-      <MenuItem value={4} primaryText="ounce" />
-      <MenuItem value={5} primaryText="teaspoon" />
-      <MenuItem value={6} primaryText="tablespoon" />
+      <MenuItem value={4} primaryText="oz" />
+      <MenuItem value={5} primaryText="tsp" />
+      <MenuItem value={6} primaryText="tbs" />
     </SelectField>
   </div>
 )

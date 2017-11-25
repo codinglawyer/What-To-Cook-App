@@ -11,32 +11,33 @@ import {
 } from '../../reducers/index'
 
 const mapStateToProps = (state, { params: { id } }) => {
+  // new recipe being created
   if (!id) {
     return {
       initialValues: {
-        title: 'New recipe',
+        title: '',
         difficulty: '',
         servings: '',
         time: '',
-        ingredients: [{ name: '', amount: '' }],
+        ingredients: [{ name: '', amount: '', units: '' }],
         directions: ['']
       }
     }
   }
+  // recipe being edited
   const recipe = getRecipe(state, id)
   const allIngredients = getAllIngredients(state)
-  const ingredients = recipe
-    ? recipe.ingredients.map(ingredient => allIngredients[ingredient])
+  const recipeIngredients = recipe
+    ? recipe.ingredients.map(ingredientId => allIngredients[ingredientId])
     : []
   return {
     isFetching: getIsFetching(state),
-    initialValues: { ...recipe, ingredients: [...ingredients] }
+    initialValues: { ...recipe, ingredients: [...recipeIngredients] }
   }
 }
 
 const CreateRecipeScreen = ({
   initialValues,
-  dispatch,
   isFetching,
   routeParams,
   router: { push }
@@ -45,7 +46,6 @@ const CreateRecipeScreen = ({
     {!isFetching ? (
       <RecipeForm
         initialValues={initialValues}
-        dispatch={dispatch}
         isFetching={isFetching}
         isEdited={g(routeParams, 'id')}
         changeRoute={push}
