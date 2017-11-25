@@ -25,7 +25,7 @@ const renderHomeScreen = ({
   recipes,
   isFetching,
   errorMessage,
-  isDataBeingFetched
+  handleIsDataBeingFetched
 }) => (
   <Screen>
     {isFetching && !g(recipes, 'allIds') ? (
@@ -39,7 +39,7 @@ const renderHomeScreen = ({
             !g(recipes, 'allIds') && (
               <FetchError
                 message={errorMessage}
-                onRetry={() => isDataBeingFetched()}
+                onRetry={() => handleIsDataBeingFetched()}
               />
             )}
         </div>

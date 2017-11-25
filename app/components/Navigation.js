@@ -65,13 +65,17 @@ const renderNavigation = ({ recipes, children } = {}) => (
           marginLeft: '150px'
         }}
         selectedMenuItemStyle={{ color: '#e58f37' }}
-        style={{ width: '250px' }}
+        style={{ width: '250px', fontSize: '20px' }}
       >
         <MenuItem
           key={0}
           value={0}
-          primaryText='Select a Recipe'
-          style={{ backgroundColor: '#291705', color: '#fff' }}
+          primaryText='Select a recipe'
+          style={{
+            backgroundColor: '#291705',
+            color: '#fff',
+            fontSize: '20px'
+          }}
         />
         {recipes.map((recipe, index) => (
           <MenuItem
@@ -81,7 +85,12 @@ const renderNavigation = ({ recipes, children } = {}) => (
             containerElement={
               <Link to={recipe.id} activeClassName='activeLink' />
             }
-            style={{ backgroundColor: '#291705', color: '#fff' }}
+            style={{
+              backgroundColor: '#291705',
+              color: '#fff',
+              fontSize: '20px'
+            }}
+            hoverColor='black'
           />
         ))}
       </DropDownMenu>

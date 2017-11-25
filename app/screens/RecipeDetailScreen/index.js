@@ -5,9 +5,13 @@ import { Link } from 'react-router'
 import { Flex } from 'reflexbox'
 import RaisedButton from 'material-ui/RaisedButton'
 import { compose, withHandlers } from 'recompose'
-
+import ReactLoading from 'react-loading'
 import { deleteRecipeRequest } from '../../actions/index'
-import { getAllIngredients, getRecipe } from '../../reducers/index'
+import {
+  getAllIngredients,
+  getRecipe,
+  getIsFetching
+} from '../../reducers/index'
 import { Screen, Container } from '../../styles/global-styles'
 import { RecipeDirection, RecipeIngredients } from './styles'
 
@@ -19,7 +23,8 @@ const mapStateToProps = (state, { params }) => {
     : []
   return {
     recipe,
-    recipeIngredients
+    recipeIngredients,
+    isFetching: getIsFetching(state)
   }
 }
 
@@ -31,10 +36,11 @@ const renderRecipeDetailScreen = ({
   recipe,
   recipeIngredients,
   params: { id },
+  isFetching,
   handleDeleteRecipe
 }) => (
   <Screen>
-    {recipe && (
+    {!isFetching && recipe ? (
       <div>
         <h1 className="recipeTitle">{g(recipe, 'title')}</h1>
         <Container>
@@ -91,6 +97,8 @@ const renderRecipeDetailScreen = ({
           containerElement={<Link to={`/editRecipe/${id}`} />}
         />
       </div>
+    ) : (
+      <ReactLoading type="bars" color="#444" className="createLoader" />
     )}
   </Screen>
 )
