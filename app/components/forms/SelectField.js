@@ -1,4 +1,5 @@
 import React from 'react'
+import T from 'prop-types'
 import { compose, withState } from 'recompose'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
@@ -37,5 +38,13 @@ const renderSelect = (
 )
 
 const Select = compose(withState('keyValue', 'setKeyValue', 1))(renderSelect)
+
+SelectField.propTypes = {
+  keyValue: T.number,
+  setKeyValue: T.func,
+  options: T.array,
+  labelText: T.string,
+  input: T.object
+}
 
 export default Select

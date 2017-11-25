@@ -1,4 +1,5 @@
 import React from 'react'
+import T from 'prop-types'
 import { Link, IndexLink } from 'react-router'
 import { compose, withHandlers } from 'recompose'
 import { connect } from 'react-redux'
@@ -107,5 +108,10 @@ const Navigation = compose(
   }),
   lifecycle(navigationLifecycle)
 )(renderNavigation)
+
+Navigation.propTypes = {
+  recipe: T.object,
+  children: T.element
+}
 
 export default Navigation

@@ -1,4 +1,6 @@
 import { takeEvery } from 'redux-saga/effects'
+import { DELETE_RECIPE_REQUEST } from '../actions/actionTypes'
+
 import firebaseApp from '../api/firebase'
 
 function * deleteRecipe ({ recipeId, ingredientsIds }) {
@@ -27,5 +29,5 @@ function * deleteRecipe ({ recipeId, ingredientsIds }) {
 }
 
 export default function * watchDeleteRecipe () {
-  yield takeEvery('DELETE_RECIPE_REQUEST', deleteRecipe)
+  yield takeEvery(DELETE_RECIPE_REQUEST, deleteRecipe)
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import T from 'prop-types'
 import RecipeForm from '../../components/forms/RecipeForm'
 import ReactLoading from 'react-loading'
 import { get as g } from 'lodash'
@@ -55,5 +56,12 @@ const CreateRecipeScreen = ({
     )}
   </Screen>
 )
+
+CreateRecipeScreen.propTypes = {
+  initialValues: T.object.isRequired,
+  isFetching: T.bool,
+  routeParams: T.object,
+  router: T.object
+}
 
 export default connect(mapStateToProps)(CreateRecipeScreen)

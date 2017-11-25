@@ -1,4 +1,5 @@
 import React from 'react'
+import T from 'prop-types'
 import { Flex, Box } from 'reflexbox'
 import { Field, FieldArray, reduxForm } from 'redux-form'
 import { compose } from 'recompose'
@@ -131,5 +132,13 @@ const RecipeForm = compose(
     onSubmitSuccess: (_, __, { changeRoute }) => changeRoute('/')
   })
 )(renderRecipeForm)
+
+RecipeForm.propTypes = {
+  handleSubmit: T.func,
+  submitting: T.bool,
+  recipe: T.object,
+  isFetching: T.bool,
+  isEdited: T.string
+}
 
 export default RecipeForm

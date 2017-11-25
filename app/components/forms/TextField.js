@@ -1,4 +1,5 @@
 import React from 'react'
+import T from 'prop-types'
 import TextField from 'material-ui/TextField'
 
 const TextFieldForm = (
@@ -21,5 +22,14 @@ const TextFieldForm = (
     </div>
   </div>
 )
+
+TextField.propTypes = {
+  input: T.object,
+  label: T.string,
+  multiLine: T.bool.isRequired,
+  rows: T.number,
+  style: T.object,
+  meta: T.object
+}
 
 export default TextFieldForm

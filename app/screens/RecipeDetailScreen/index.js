@@ -1,4 +1,5 @@
 import React from 'react'
+import T from 'prop-types'
 import { get as g } from 'lodash'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
@@ -56,7 +57,7 @@ const renderRecipeDetailScreen = ({
           </Flex>
         </Container>
         <Container>
-          <Subtitle>Directions:</Subtitle >
+          <Subtitle>Directions:</Subtitle>
           <ol>
             {recipe.directions.map(direction => (
               <RecipeDirection key={direction}>{direction}</RecipeDirection>
@@ -64,7 +65,7 @@ const renderRecipeDetailScreen = ({
           </ol>
         </Container>
         <Container>
-          <Subtitle >Ingredients:</Subtitle >
+          <Subtitle>Ingredients:</Subtitle>
           <IngredientList ingredients={recipeIngredients}>
             {ingredients =>
               ingredients.map((ingredient, i) => (
@@ -110,5 +111,14 @@ const RecipeDetailScreen = compose(
       dispatch(deleteRecipeRequest(id, ingredientsIds))
   })
 )(renderRecipeDetailScreen)
+
+RecipeDetailScreen.propTypes = {
+  recipes: T.object,
+  recipeIngredient: T.object,
+  params: T.object,
+  isFetching: T.bool,
+  errorMessage: T.object,
+  handleDeleteRecipe: T.func
+}
 
 export default RecipeDetailScreen

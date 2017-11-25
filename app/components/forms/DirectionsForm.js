@@ -1,4 +1,5 @@
 import React from 'react'
+import T from 'prop-types'
 import { Flex, Box } from 'reflexbox'
 import { Field } from 'redux-form'
 import TrashIcon from '../icons/TrashIcon'
@@ -33,5 +34,10 @@ const DirectionsForm = ({ fields, style }) => (
     ))}
   </RelativeContainer>
 )
+
+DirectionsForm.propTypes = {
+  fields: T.object.isRequired,
+  style: T.object
+}
 
 export default DirectionsForm

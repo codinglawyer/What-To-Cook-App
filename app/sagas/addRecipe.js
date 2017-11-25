@@ -2,6 +2,7 @@ import { takeEvery, select } from 'redux-saga/effects'
 import { v4 } from 'uuid'
 import { get as g, map, keys } from 'lodash'
 import { pipe } from 'lodash/fp'
+import { ADD_RECIPE_REQUEST } from '../actions/actionTypes'
 import firebaseApp from '../api/firebase'
 
 const createNewIngredientsIds = ingredients =>
@@ -59,5 +60,5 @@ function * addRecipe () {
 }
 
 export default function * watchAddRecipe () {
-  yield takeEvery('ADD_RECIPE_REQUEST', addRecipe)
+  yield takeEvery(ADD_RECIPE_REQUEST, addRecipe)
 }

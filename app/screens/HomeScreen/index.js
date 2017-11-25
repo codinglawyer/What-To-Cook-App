@@ -1,4 +1,5 @@
 import React from 'react'
+import T from 'prop-types'
 import { get as g } from 'lodash'
 import { connect } from 'react-redux'
 import { compose, withHandlers } from 'recompose'
@@ -13,7 +14,7 @@ import {
 } from '../../reducers/index'
 import FetchError from '../../components/FetchError'
 import { HeaderPicture, SiteTitle } from './styles'
-import { Header, Screen } from '../../styles/global-styles'
+import { Screen } from '../../styles/global-styles'
 
 const mapStateToProps = state => ({
   recipes: getCompleteRecipes(state, getAllRecipes, getAllIngredients),
@@ -55,5 +56,12 @@ const HomeScreen = compose(
       dispatch(isDataBeingFetched())
   })
 )(renderHomeScreen)
+
+HomeScreen.propTypes = {
+  recipes: T.object,
+  isFetching: T.bool,
+  errorMessage: T.object,
+  handleIsDataBeingFetched: T.func
+}
 
 export default HomeScreen

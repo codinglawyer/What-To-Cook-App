@@ -1,4 +1,5 @@
 import React from 'react'
+import T from 'prop-types'
 import { Provider } from 'react-redux'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
@@ -22,5 +23,9 @@ const Root = ({ store }) => (
     </MuiThemeProvider>
   </Provider>
 )
+
+Root.propTypes = {
+  store: T.object.isRequired
+}
 
 export default Root
