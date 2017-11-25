@@ -12,6 +12,14 @@ import { addRecipeRequest } from '../../actions/index'
 import { Header } from '../../styles/global-styles'
 import { RecipeHeading } from './styles'
 
+const validate = values => {
+  const errors = {}
+  if (!values.title) {
+    errors.title = 'Required'
+  }
+  return errors
+}
+
 const renderRecipeForm = ({
   handleSubmit,
   submitting,
@@ -118,6 +126,7 @@ const RecipeForm = compose(
     form: 'recipeForm',
     fields: ['recipe', 'ingredients'],
     enableReinitialize: true,
+    validate,
     onSubmit: (_, dispatch) => {
       dispatch(addRecipeRequest())
     },
