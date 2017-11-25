@@ -1,7 +1,7 @@
 import React from 'react'
 import RecipeForm from '../../components/forms/RecipeForm'
 import ReactLoading from 'react-loading'
-import {get as g} from 'lodash'
+import { get as g } from 'lodash'
 import { Screen } from '../../styles/global-styles'
 import { connect } from 'react-redux'
 import {
@@ -34,7 +34,13 @@ const mapStateToProps = (state, { params: { id } }) => {
   }
 }
 
-const CreateRecipeScreen = ({ initialValues, dispatch, isFetching, routeParams }) => (
+const CreateRecipeScreen = ({
+  initialValues,
+  dispatch,
+  isFetching,
+  routeParams,
+  router: { push }
+}) => (
   <Screen>
     {!isFetching ? (
       <RecipeForm
@@ -42,6 +48,7 @@ const CreateRecipeScreen = ({ initialValues, dispatch, isFetching, routeParams }
         dispatch={dispatch}
         isFetching={isFetching}
         isEdited={g(routeParams, 'id')}
+        changeRoute={push}
       />
     ) : (
       <ReactLoading type="bars" color="#444" className="createLoader" />

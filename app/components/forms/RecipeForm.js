@@ -1,6 +1,13 @@
 import React from 'react'
 import { Flex, Box } from 'reflexbox'
-import { Field, FieldArray, reduxForm } from 'redux-form'
+import {
+  Field,
+  FieldArray,
+  reduxForm,
+  browserHistory,
+  withRouter
+} from 'redux-form'
+import { compose } from 'recompose'
 
 import TextField from './TextField'
 import IngredientsForm from './IngredientsForm'
@@ -11,7 +18,7 @@ import { addRecipeRequest } from '../../actions/index'
 import { Header } from '../../styles/global-styles'
 import { RecipeHeading } from './styles'
 
-const RecipeForm = ({
+const renderRecipeForm = ({
   handleSubmit,
   submitting,
   recipe,
@@ -112,11 +119,16 @@ const RecipeForm = ({
   </div>
 )
 
-export default reduxForm({
-  form: 'recipeForm',
-  fields: ['recipe', 'ingredients'],
-  enableReinitialize: true,
-  onSubmit: (_, dispatch) => {
-    dispatch(addRecipeRequest())
-  }
-})(RecipeForm)
+const RecipeForm = compose(
+  reduxForm({
+    form: 'recipeForm',
+    fields: ['recipe', 'ingredients'],
+    enableReinitialize: true,
+    onSubmit: (_, dispatch) => {
+      dispatch(addRecipeRequest())
+    },
+    onSubmitSuccess: (_, __, { changeRoute }) => changeRoute('/')
+  })
+)(renderRecipeForm)
+
+export default RecipeForm
