@@ -13,12 +13,10 @@ import { RecipeHeading } from './styles'
 
 const RecipeForm = ({
   handleSubmit,
-  pristine,
   submitting,
-  reset,
   recipe,
-  params,
-  isFetching
+  isFetching,
+  isEdited
 }) => (
   <div className="recipeForm">
     <div>
@@ -103,20 +101,10 @@ const RecipeForm = ({
         />
         <div>
           <RaisedButton
-            label="Submit"
+            label={isEdited ? 'Create a new copy' : 'Submit'}
             type="submit"
             disabled={submitting}
             backgroundColor="#e58f37"
-            style={{ margin: '20px' }}
-          />
-          <RaisedButton
-            label="Clear Values"
-            type="button"
-            disabled={pristine || submitting}
-            onClick={reset}
-            backgroundColor="#000000"
-            labelColor="#e58f37"
-            style={{ margin: '20px' }}
           />
         </div>
       </form>

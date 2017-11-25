@@ -1,14 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import { Flex, Box } from 'reflexbox'
+import { Flex } from 'reflexbox'
 import RaisedButton from 'material-ui/RaisedButton'
 import { compose, withHandlers } from 'recompose'
 
 import { deleteRecipeRequest } from '../../actions/index'
 import { getAllIngredients, getRecipe } from '../../reducers/index'
 import { Screen, Container } from '../../styles/global-styles'
-import { RecipeDirection, RecipeIngredients, Servings, Time, Difficulty } from './styles'
+import { RecipeDirection, RecipeIngredients } from './styles'
 
 const mapStateToProps = (state, { params }) => {
   const recipe = getRecipe(state, params.id)
