@@ -5,7 +5,7 @@ import TrashIcon from '../icons/TrashIcon'
 import PlusIcon from '../icons/PlusIcon'
 import TextField from './TextField'
 import { ButtonContainer, RelativeContainer, Button } from './styles'
-import DropDownMenuOpenImmediateExample from './SelectField'
+import SelectField from './SelectField'
 
 const IngredientsForm = ({ fields, style }) => (
   <RelativeContainer>
@@ -38,8 +38,10 @@ const IngredientsForm = ({ fields, style }) => (
           <Field
             name={`${ingredient}.units`}
             type="text"
-            component={DropDownMenuOpenImmediateExample}
+            component={SelectField}
             label="Units"
+            labelText="Units"
+            options={['g', 'ml', 'cup', 'oz', 'tsp', 'tbs', 'pieces']}
             style={{ ...style, width: '50%' }}
           />
         </Box>{' '}

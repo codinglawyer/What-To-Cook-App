@@ -2,11 +2,9 @@ import React from 'react'
 import { Flex, Box } from 'reflexbox'
 import { Field, FieldArray, reduxForm } from 'redux-form'
 import { compose } from 'recompose'
-
 import TextField from './TextField'
 import IngredientsForm from './IngredientsForm'
 import DirectionsForm from './DirectionsForm'
-
 import RaisedButton from 'material-ui/RaisedButton'
 import { addRecipeRequest } from '../../actions/index'
 import { Header } from '../../styles/global-styles'

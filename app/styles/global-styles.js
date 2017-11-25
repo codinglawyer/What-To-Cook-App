@@ -8,14 +8,7 @@ injectGlobal`
         width: 100%;
         font-size: 16px;
         margin: 0;
-    }
-
-    body {
         font-family: 'Roboto', Helvetica, Arial, sans-serif;
-    }
-
-    body.fontLoaded {
-        font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     }
 
     #app {
@@ -28,42 +21,30 @@ injectGlobal`
         text-decoration: none
     }
 
+    .title {
+        font-weight: normal;
+        font-size: 40px;
+    }
 
-  .title {
-    font-weight: normal;
-    font-size: 40px;
-  }
+    .bold {
+        font-weight: 500
+    }
 
-  .bold {
-    font-weight: 500
-  }
+    p,
+    label {
+        font-family: 'Roboto', Georgia, Times, 'Times New Roman', serif;
+        line-height: 1.5em;
+    }
 
-  .subtitle {
-      font-weight: 400;
-      font-size: 25px;
-      margin: 0 0 20px 0;
-  }
+    .createLoader{
+        margin: 350px auto;
+    }
 
-  p,
-  label {
-    font-family: 'Roboto', Georgia, Times, 'Times New Roman', serif;
-    line-height: 1.5em;
-  }
-
-  .recipeTitle {
-    font-weight: 500;
-    font-size: 50px;
-  }
-
-  .createLoader{
-    margin: 350px auto;
-  }
-
-`
+    `
 
 export const Header = styled.div`
   font-weight: 500;
-  font-size: 2em;
+  font-size: 3em;
   text-align: center;
   margin: 0;
   padding: 20px 0;
@@ -78,4 +59,10 @@ export const Container = styled.div`
   padding: 20px;
   border: 1px solid #f3caa0;
   margin-bottom: 30px;
+`
+
+export const Subtitle = styled.div`
+  font-weight: 400;
+  font-size: 25px;
+  margin: 0 0 20px 0;
 `

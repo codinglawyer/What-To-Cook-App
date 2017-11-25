@@ -12,7 +12,7 @@ import {
   getAllIngredients
 } from '../../reducers/index'
 import FetchError from '../../components/FetchError'
-import { HeaderPicture } from './styles'
+import { HeaderPicture, SiteTitle } from './styles'
 import { Header, Screen } from '../../styles/global-styles'
 
 const mapStateToProps = state => ({
@@ -32,7 +32,7 @@ const renderHomeScreen = ({
       <ReactLoading type="bars" color="#444" className="createLoader" />
     ) : (
       <div>
-        <Header>What do you want to cook?</Header>
+        <SiteTitle>What do you want to cook?</SiteTitle>
         <HeaderPicture />
         <div>
           {errorMessage &&

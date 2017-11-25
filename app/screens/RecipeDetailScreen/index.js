@@ -12,8 +12,8 @@ import {
   getRecipe,
   getIsFetching
 } from '../../reducers/index'
-import { Screen, Container } from '../../styles/global-styles'
-import { RecipeDirection, RecipeIngredients } from './styles'
+import { Screen, Container, Subtitle } from '../../styles/global-styles'
+import { RecipeDirection, RecipeIngredients, RecipeTitle } from './styles'
 
 const mapStateToProps = (state, { params }) => {
   const recipe = getRecipe(state, params.id)
@@ -42,21 +42,21 @@ const renderRecipeDetailScreen = ({
   <Screen>
     {!isFetching && recipe ? (
       <div>
-        <h1 className="recipeTitle">{g(recipe, 'title')}</h1>
+        <RecipeTitle>{g(recipe, 'title')}</RecipeTitle>
         <Container>
           <Flex justify="space-between">
             <div>
               {g(recipe, 'difficulty') &&
-                `${g(recipe, 'difficulty')} difficulty`}
+                `Difficulty: ${g(recipe, 'difficulty')}`}
             </div>
             <div>
-              {g(recipe, 'difficulty') && `${g(recipe, 'difficulty')} servings`}
+              {g(recipe, 'servings') && `${g(recipe, 'servings')} servings`}
             </div>
             <div>{g(recipe, 'time') && `${g(recipe, 'time')} minutes`}</div>
           </Flex>
         </Container>
         <Container>
-          <div className="subtitle">Directions:</div>
+          <Subtitle>Directions:</Subtitle >
           <ol>
             {recipe.directions.map(direction => (
               <RecipeDirection key={direction}>{direction}</RecipeDirection>
@@ -64,7 +64,7 @@ const renderRecipeDetailScreen = ({
           </ol>
         </Container>
         <Container>
-          <div className="subtitle">Ingredients:</div>
+          <Subtitle >Ingredients:</Subtitle >
           <IngredientList ingredients={recipeIngredients}>
             {ingredients =>
               ingredients.map((ingredient, i) => (

@@ -3,10 +3,12 @@ import { compose, withState } from 'recompose'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 
-const renderSelect = ({ keyValue, setKeyValue, input: {onChange} } = {}) => (
+const renderSelect = (
+  { keyValue, setKeyValue, options, labelText, input: { onChange } } = {}
+) => (
   <div>
     <SelectField
-      floatingLabelText="Units"
+      floatingLabelText={labelText}
       floatingLabelStyle={{
         fontSize: '22px',
         top: 21,
@@ -26,13 +28,10 @@ const renderSelect = ({ keyValue, setKeyValue, input: {onChange} } = {}) => (
         setKeyValue(payload)
       }}
     >
-      <MenuItem value={1} primaryText="Select units" />
-      <MenuItem value={2} primaryText="g" />
-      <MenuItem value={2} primaryText="ml" />
-      <MenuItem value={3} primaryText="cup" />
-      <MenuItem value={4} primaryText="oz" />
-      <MenuItem value={5} primaryText="tsp" />
-      <MenuItem value={6} primaryText="tbs" />
+      <MenuItem value={1} primaryText="Select option" />
+      {options.map((option, i) => (
+        <MenuItem key={`${option}-${i}`} value={i + 2} primaryText={option} />
+      ))}
     </SelectField>
   </div>
 )
