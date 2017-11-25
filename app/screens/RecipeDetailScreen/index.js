@@ -1,13 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import { Flex, Box } from 'reflexbox'
 import RaisedButton from 'material-ui/RaisedButton'
 import { compose, withHandlers } from 'recompose'
 
 import { deleteRecipeRequest } from '../../actions/index'
 import { getAllIngredients, getRecipe } from '../../reducers/index'
-import { Screen, Box } from '../../styles/global-styles'
-import { RecipeDirection, RecipeIngredients, Servings } from './styles'
+import { Screen, Container } from '../../styles/global-styles'
+import { RecipeDirection, RecipeIngredients, Servings, Time, Difficulty } from './styles'
 
 const mapStateToProps = (state, { params }) => {
   const recipe = getRecipe(state, params.id)
@@ -35,18 +36,22 @@ const DisplayedRecipeScreen = ({
       {recipe && (
         <div>
           <h1 className="recipeTitle">{recipe.title}</h1>
-          <Box>
-            <Servings>{recipe.servings} servings</Servings>
-          </Box>
-          <Box>
+          <Container>
+          <Flex justify='space-between'>
+            <div>{recipe.difficulty && `${recipe.difficulty} difficulty`}</div>
+            <div>{recipe.servings && `${recipe.servings} servings`}</div>
+            <div>{recipe.time && `${recipe.time} minutes`}</div>
+            </Flex>
+          </Container>
+          <Container>
             <div className="subtitle">Directions:</div>
             <ol>
               {recipe.directions.map(direction => (
                 <RecipeDirection key={direction}>{direction}</RecipeDirection>
               ))}
             </ol>
-          </Box>
-          <Box>
+          </Container>
+          <Container>
             <div className="subtitle">Ingredients:</div>
             <IngredientList ingredients={recipeIngredients}>
               {ingredients =>
@@ -62,7 +67,7 @@ const DisplayedRecipeScreen = ({
                 ))
               }
             </IngredientList>
-          </Box>
+          </Container>
           <RaisedButton
             label="Delete Recipe"
             backgroundColor="#e58f37"

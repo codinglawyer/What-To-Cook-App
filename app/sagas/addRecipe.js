@@ -17,6 +17,8 @@ function * addRecipe () {
     title: formData.title,
     directions: formData.directions,
     servings: formData.servings,
+    difficulty: formData.difficulty,
+    time: formData.time,
     ingredients: ingredientsIds
   }
   updates[`/entities/recipes/${recipeId}`] = recipe

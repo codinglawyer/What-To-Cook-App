@@ -1,4 +1,5 @@
 import React from 'react'
+import T from 'prop-types'
 
 const FetchError = ({ message, onRetry }) => (
   <div>
@@ -6,5 +7,10 @@ const FetchError = ({ message, onRetry }) => (
     <button onClick={onRetry}>Refresh</button>
   </div>
 )
+
+FetchError.propTypes = {
+  message: T.string,
+  onRetry: T.func
+}
 
 export default FetchError

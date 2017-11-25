@@ -13,6 +13,10 @@ const mapStateToProps = (state, { params: { id } }) => {
   if (!id) {
     return {
       initialValues: {
+        title: 'New recipe',
+        difficulty: '',
+        servings: '',
+        time: '',
         ingredients: [{ name: '', amount: '' }],
         directions: ['']
       }

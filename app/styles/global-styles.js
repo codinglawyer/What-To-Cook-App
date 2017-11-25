@@ -73,7 +73,7 @@ export const Screen = styled.div`
   margin: 30px 200px;
 `
 
-export const Box = styled.div`
+export const Container = styled.div`
   background: #fefcfa;
   padding: 20px;
   border: 1px solid #f3caa0;

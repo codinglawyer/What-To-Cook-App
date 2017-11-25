@@ -181,6 +181,7 @@
     "minimist": "1.2.0",
     "prettier": "^1.8.2",
     "prettier-standard": "^7.0.3",
+    "prop-types": "^15.6.0",
     "react": "15.4.1",
     "react-dom": "15.4.1",
     "react-helmet": "3.2.2",
