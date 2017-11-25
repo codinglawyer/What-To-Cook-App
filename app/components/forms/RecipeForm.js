@@ -1,12 +1,6 @@
 import React from 'react'
 import { Flex, Box } from 'reflexbox'
-import {
-  Field,
-  FieldArray,
-  reduxForm,
-  browserHistory,
-  withRouter
-} from 'redux-form'
+import { Field, FieldArray, reduxForm } from 'redux-form'
 import { compose } from 'recompose'
 
 import TextField from './TextField'
