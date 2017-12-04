@@ -41,9 +41,7 @@ const createRecipe = (
   ingredients: ingredientsIds
 })
 
-export function * addRecipe () {
-  const formData = yield select(state => state.form.recipeForm.values)
-  const ingredientsIds = createNewIngredientsIds(formData.ingredients)
+const getUpdates = (formData, ingredientsIds) => {
   const ingredientsUpdates = pipe(getIngredientsUpdates, arrayToObject)(
     formData.ingredients,
     ingredientsIds
@@ -52,8 +50,13 @@ export function * addRecipe () {
     formData,
     ingredientsIds
   )
+  return { ...ingredientsUpdates, ...recipesUpdates }
+}
 
-  const updates = { ...ingredientsUpdates, ...recipesUpdates }
+export function * addRecipe () {
+  const formData = yield select(state => state.form.recipeForm.values)
+  const ingredientsIds = createNewIngredientsIds(formData.ingredients)
+  const updates = yield call(getUpdates, formData, ingredientsIds)
 
   try {
     const ref = firebaseApp.database().ref()
