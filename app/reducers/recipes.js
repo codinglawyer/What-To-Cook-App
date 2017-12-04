@@ -1,9 +1,7 @@
 import { combineReducers } from 'redux'
 import { get as g, keys } from 'lodash'
 import {
-  FETCH_DATA_SUCCESS,
-  FETCH_DATA_FAILURE,
-  IS_DATA_BEING_FETCHED
+  FETCH_DATA_SUCCESS
 } from '../actions/actionTypes'
 
 const byId = (state = {}, action) => {
@@ -27,36 +25,9 @@ const allIds = (state = [], action) => {
   }
 }
 
-const isFetching = (state = false, action) => {
-  switch (action.type) {
-    case IS_DATA_BEING_FETCHED:
-      return true
-    case FETCH_DATA_SUCCESS:
-    case FETCH_DATA_FAILURE:
-      return false
-    default:
-      return state
-  }
-}
-
-const errorMessage = (state = '', action) => {
-  switch (action.type) {
-    case FETCH_DATA_FAILURE:
-      const { error } = action.payload
-      return error
-    case IS_DATA_BEING_FETCHED:
-    case FETCH_DATA_SUCCESS:
-      return ''
-    default:
-      return state
-  }
-}
-
 const recipesEntity = combineReducers({
   byId,
-  allIds,
-  isFetching,
-  errorMessage
+  allIds
 })
 
 export default recipesEntity

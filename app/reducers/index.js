@@ -2,6 +2,9 @@ import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
 import { get as g } from 'lodash'
 import {
+  FETCH_DATA_SUCCESS,
+  FETCH_DATA_FAILURE,
+  IS_DATA_BEING_FETCHED,
   FIREBASE_CONNECTED,
   FIREBASE_DISCONNECTED,
   ADD_RECIPE_REQUEST,
@@ -22,7 +25,21 @@ const connectionStatus = (state = false, action) => {
   }
 }
 
-const recipeSaving = (state = false, action) => {
+const dataFetching = (state = { fetching: false, error: '' }, action) => {
+  switch (action.type) {
+    case IS_DATA_BEING_FETCHED:
+      return { fetching: true, error: '' }
+    case FETCH_DATA_SUCCESS:
+      return { fetching: false, error: '' }
+    case FETCH_DATA_FAILURE:
+      const { error } = action.payload
+      return { fetching: false, error }
+    default:
+      return state
+  }
+}
+
+const recipeSaving = (state = { saving: false, error: '' }, action) => {
   switch (action.type) {
     case ADD_RECIPE_REQUEST:
       return { saving: true, error: '' }
@@ -40,6 +57,7 @@ const RootReducer = combineReducers({
   recipesEntity,
   ingredientsEntity,
   connectionStatus,
+  dataFetching,
   recipeSaving,
   form: formReducer
 })
