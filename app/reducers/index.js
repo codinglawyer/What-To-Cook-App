@@ -65,19 +65,17 @@ const RootReducer = combineReducers({
 export default RootReducer
 
 const getRecipesFromState = state => g(state, 'recipesEntity')
+const getFromState = (state, name) => g(state, name)
 
 // selectors
+export const getIsDataFetching = state => getFromState(state, 'dataFetching')
+export const getIsRecipeSaving = state => getFromState(state, 'recipeSaving')
+
 export const getAllRecipes = state =>
   fromRecipes.getAllRecipes(getRecipesFromState(state))
 
 export const getRecipe = (state, recipeId) =>
   fromRecipes.getRecipe(getRecipesFromState(state), recipeId)
-
-export const getIsFetching = state =>
-  fromRecipes.getIsFetching(getRecipesFromState(state))
-
-export const getErrorMessage = state =>
-  fromRecipes.getErrorMessage(getRecipesFromState(state))
 
 export const getAllIngredients = state =>
   fromIngredients.getAllIngredients(g(state, 'ingredientsEntity'))

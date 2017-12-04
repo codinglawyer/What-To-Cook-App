@@ -7,8 +7,7 @@ import ReactLoading from 'react-loading'
 import { isDataBeingFetched } from '../../actions/index'
 import {
   getAllRecipes,
-  getIsFetching,
-  getErrorMessage,
+  getIsDataFetching,
   getCompleteRecipes,
   getAllIngredients
 } from '../../reducers/index'
@@ -16,11 +15,14 @@ import FetchError from '../../components/FetchError'
 import { HeaderPicture, SiteTitle } from './styles'
 import { Screen } from '../../styles/global-styles'
 
-const mapStateToProps = state => ({
-  recipes: getCompleteRecipes(state, getAllRecipes, getAllIngredients),
-  isFetching: getIsFetching(state),
-  errorMessage: getErrorMessage(state)
-})
+const mapStateToProps = state => {
+  const dataFetchingInfo = getIsDataFetching(state)
+  return {
+    recipes: getCompleteRecipes(state, getAllRecipes, getAllIngredients),
+    isFetching: g(dataFetchingInfo, 'fetching'),
+    errorMessage: g(dataFetchingInfo, 'error')
+  }
+}
 
 const renderHomeScreen = ({
   recipes,
@@ -28,26 +30,26 @@ const renderHomeScreen = ({
   errorMessage,
   handleIsDataBeingFetched
 }) => (
-  <Screen>
-    {isFetching && !g(recipes, 'allIds') ? (
-      <ReactLoading type="bars" color="#444" className="createLoader" />
-    ) : (
-      <div>
-        <SiteTitle>What do you want to cook?</SiteTitle>
-        <HeaderPicture />
+    <Screen>
+      {isFetching && !g(recipes, 'allIds') ? (
+        <ReactLoading type="bars" color="#444" className="createLoader" />
+      ) : (
         <div>
-          {errorMessage &&
-            !g(recipes, 'allIds') && (
-              <FetchError
-                message={errorMessage}
-                onRetry={() => handleIsDataBeingFetched()}
-              />
-            )}
+          <SiteTitle>What do you want to cook?</SiteTitle>
+          <HeaderPicture />
+          <div>
+            {errorMessage &&
+              !g(recipes, 'allIds') && (
+                <FetchError
+                  message={errorMessage}
+                  onRetry={() => handleIsDataBeingFetched()}
+                />
+              )}
+          </div>
         </div>
-      </div>
-    )}
-  </Screen>
-)
+      )}
+    </Screen>
+  )
 
 const HomeScreen = compose(
   connect(mapStateToProps),

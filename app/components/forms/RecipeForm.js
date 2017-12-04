@@ -23,7 +23,7 @@ const renderRecipeForm = ({
   handleSubmit,
   submitting,
   recipe,
-  isFetching,
+  isDataFetching,
   isEdited
 }) => (
   <div className="recipeForm">
@@ -137,7 +137,7 @@ RecipeForm.propTypes = {
   handleSubmit: T.func,
   submitting: T.bool,
   recipe: T.object,
-  isFetching: T.bool,
+  isDataFetching: T.bool,
   isEdited: T.string
 }
 

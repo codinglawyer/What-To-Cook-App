@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import {
   getRecipe,
   getAllIngredients,
-  getIsFetching
+  getIsDataFetching
 } from '../../reducers/index'
 
 const mapStateToProps = (state, { params: { id } }) => {
@@ -32,7 +32,7 @@ const mapStateToProps = (state, { params: { id } }) => {
     ? recipe.ingredients.map(ingredientId => allIngredients[ingredientId])
     : []
   return {
-    isFetching: getIsFetching(state),
+    isFetching: g(getIsDataFetching(state), 'fetching'),
     initialValues: { ...recipe, ingredients: [...recipeIngredients] }
   }
 }

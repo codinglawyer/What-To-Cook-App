@@ -11,7 +11,7 @@ import { deleteRecipeRequest } from '../../actions/index'
 import {
   getAllIngredients,
   getRecipe,
-  getIsFetching
+  getIsDataFetching
 } from '../../reducers/index'
 import { Screen, Container, Subtitle } from '../../styles/global-styles'
 import { RecipeDirection, RecipeIngredients, RecipeTitle } from './styles'
@@ -25,7 +25,7 @@ const mapStateToProps = (state, { params }) => {
   return {
     recipe,
     recipeIngredients,
-    isFetching: getIsFetching(state)
+    isFetching: g(getIsDataFetching(state), 'fetching')
   }
 }
 

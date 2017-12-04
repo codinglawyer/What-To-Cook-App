@@ -38,5 +38,3 @@ export const getAllRecipes = state =>
   getFromState(state, 'allIds').map(id => state.byId[id])
 export const getRecipe = (state, recipeId) =>
   getFromState(state, 'byId')[recipeId]
-export const getIsFetching = state => getFromState(state, 'isFetching')
-export const getErrorMessage = state => getFromState(state, 'errorMessage')
