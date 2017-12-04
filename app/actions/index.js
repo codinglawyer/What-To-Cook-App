@@ -18,9 +18,9 @@ export const fetchDataSuccess = response => ({
   payload: response
 })
 
-export const fetchDataFailure = (error) => ({
+export const fetchDataFailure = error => ({
   type: g(actionTypes, 'FETCH_DATA_FAILURE'),
-  payload: { error }
+  payload: { error: g(error, 'message') }
 })
 
 export const addRecipeRequest = () => {
@@ -29,16 +29,13 @@ export const addRecipeRequest = () => {
   }
 }
 
-export const addRecipeSuccess = () => {
-  console.log('SUC')
-  return {
-    type: g(actionTypes, 'ADD_RECIPE_SUCCESS')
-  }
-}
+export const addRecipeSuccess = () => ({
+  type: g(actionTypes, 'ADD_RECIPE_SUCCESS')
+})
 
-export const addRecipeFailure = (error) => ({
+export const addRecipeFailure = error => ({
   type: g(actionTypes, 'ADD_RECIPE_FAILURE'),
-  payload: { error }
+  payload: { error: g(error, 'message') }
 })
 
 export const deleteRecipeRequest = (recipeId, ingredientsIds) => ({
