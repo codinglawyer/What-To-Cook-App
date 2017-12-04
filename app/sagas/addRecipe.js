@@ -1,8 +1,10 @@
-import { takeEvery, select } from 'redux-saga/effects'
+import 'regenerator-runtime/runtime'
+import { takeEvery, select, call, put } from 'redux-saga/effects'
 import { v4 } from 'uuid'
 import { get as g, map, keys } from 'lodash'
 import { pipe } from 'lodash/fp'
 import { ADD_RECIPE_REQUEST } from '../actions/actionTypes'
+import { addRecipeSuccess, addRecipeFailure } from '../actions/index'
 import firebaseApp from '../api/firebase'
 
 const createNewIngredientsIds = ingredients =>
@@ -39,7 +41,7 @@ const createRecipe = (
   ingredients: ingredientsIds
 })
 
-function * addRecipe () {
+export function * addRecipe () {
   const formData = yield select(state => state.form.recipeForm.values)
   const ingredientsIds = createNewIngredientsIds(formData.ingredients)
   const ingredientsUpdates = pipe(getIngredientsUpdates, arrayToObject)(
@@ -50,13 +52,16 @@ function * addRecipe () {
     formData,
     ingredientsIds
   )
+
   const updates = { ...ingredientsUpdates, ...recipesUpdates }
-  firebaseApp
-    .database()
-    .ref()
-    .update(updates, addRecipe)
-    .then(() => console.log('Recipes addition successful'))
-    .catch(() => console.log('Recipes addition failed'))
+
+  try {
+    const ref = firebaseApp.database().ref()
+    yield call([ref, ref.update], updates, addRecipe)
+    yield put(addRecipeSuccess())
+  } catch (error) {
+    yield put(addRecipeFailure(error))
+  }
 }
 
 export default function * watchAddRecipe () {

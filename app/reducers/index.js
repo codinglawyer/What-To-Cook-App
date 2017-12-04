@@ -1,15 +1,36 @@
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
 import { get as g } from 'lodash'
+import {
+  FIREBASE_CONNECTED,
+  FIREBASE_DISCONNECTED,
+  ADD_RECIPE_REQUEST,
+  ADD_RECIPE_SUCCESS,
+  ADD_RECIPE_FAILURE
+} from '../actions/actionTypes'
 import recipesEntity, * as fromRecipes from './recipes'
 import ingredientsEntity, * as fromIngredients from './ingredients'
 
 const connectionStatus = (state = false, action) => {
-  switch (action.tyoe) {
-    case 'FIREBASE_CONNECTED':
+  switch (action.type) {
+    case FIREBASE_CONNECTED:
       return true
-    case 'FIREBASE_DISCONNECTED':
+    case FIREBASE_DISCONNECTED:
       return false
+    default:
+      return state
+  }
+}
+
+const recipeSaving = (state = false, action) => {
+  switch (action.type) {
+    case ADD_RECIPE_REQUEST:
+      return { saving: true, error: '' }
+    case ADD_RECIPE_SUCCESS:
+      return { saving: false, error: '' }
+    case ADD_RECIPE_FAILURE:
+      const { error } = action.payload
+      return { saving: false, error }
     default:
       return state
   }
@@ -19,6 +40,7 @@ const RootReducer = combineReducers({
   recipesEntity,
   ingredientsEntity,
   connectionStatus,
+  recipeSaving,
   form: formReducer
 })
 
