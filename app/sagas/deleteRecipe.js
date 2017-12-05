@@ -4,9 +4,9 @@ import { deleteRecipeSuccess, deleteRecipeFailure } from '../actions/index'
 
 import firebaseApp from '../api/firebase'
 
-const getRecipesPath = recipeId => `/entities/recipes/${recipeId}`
+export const getRecipesPath = recipeId => `/entities/recipes/${recipeId}`
 
-const getIngredientsPath = ingredientId =>
+export const getIngredientsPath = ingredientId =>
   `/entities/ingredients/${ingredientId}`
 
 export function * deleteRecipe ({ recipeId, ingredientsIds }) {
@@ -21,7 +21,7 @@ export function * deleteRecipe ({ recipeId, ingredientsIds }) {
     yield call([ref, ref.remove])
     yield put(deleteRecipeSuccess())
   } catch (error) {
-    yield put(deleteRecipeFailure())
+    yield put(deleteRecipeFailure(error))
   }
 }
 
