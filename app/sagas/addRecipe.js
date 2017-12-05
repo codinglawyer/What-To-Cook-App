@@ -41,7 +41,7 @@ const createRecipe = (
   ingredients: ingredientsIds
 })
 
-const getUpdates = (formData, ingredientsIds) => {
+export const getUpdates = (formData, ingredientsIds) => {
   const ingredientsUpdates = pipe(getIngredientsUpdates, arrayToObject)(
     formData.ingredients,
     ingredientsIds
@@ -53,8 +53,10 @@ const getUpdates = (formData, ingredientsIds) => {
   return { ...ingredientsUpdates, ...recipesUpdates }
 }
 
+export const formValuesSelector = state => state.form.recipeForm.values
+
 export function * addRecipe () {
-  const formData = yield select(state => state.form.recipeForm.values)
+  const formData = yield select(formValuesSelector)
   const ingredientsIds = createNewIngredientsIds(formData.ingredients)
   const updates = yield call(getUpdates, formData, ingredientsIds)
 
