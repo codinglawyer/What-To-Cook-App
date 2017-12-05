@@ -9,7 +9,10 @@ import {
   FIREBASE_DISCONNECTED,
   ADD_RECIPE_REQUEST,
   ADD_RECIPE_SUCCESS,
-  ADD_RECIPE_FAILURE
+  ADD_RECIPE_FAILURE,
+  DELETE_RECIPE_REQUEST,
+  DELETE_RECIPE_SUCCESS,
+  DELETE_RECIPE_FAILURE
 } from '../actions/actionTypes'
 import recipesEntity, * as fromRecipes from './recipes'
 import ingredientsEntity, * as fromIngredients from './ingredients'
@@ -53,12 +56,27 @@ const recipeSaving = (state = { saving: false, error: '' }, action) => {
   }
 }
 
+const recipeDeleting = (state = { deleting: false, error: '' }, action) => {
+  switch (action.type) {
+    case DELETE_RECIPE_REQUEST:
+      return { deleting: true, error: '' }
+    case DELETE_RECIPE_SUCCESS:
+      return { deleting: false, error: '' }
+    case DELETE_RECIPE_FAILURE:
+      const { error } = action.payload
+      return { deleting: false, error }
+    default:
+      return state
+  }
+}
+
 const RootReducer = combineReducers({
   recipesEntity,
   ingredientsEntity,
   connectionStatus,
   dataFetching,
   recipeSaving,
+  recipeDeleting,
   form: formReducer
 })
 
@@ -70,6 +88,7 @@ const getFromState = (state, name) => g(state, name)
 // selectors
 export const getIsDataFetching = state => getFromState(state, 'dataFetching')
 export const getIsRecipeSaving = state => getFromState(state, 'recipeSaving')
+export const getIsRecipeDeleting = state => getFromState(state, 'recipeDeleting')
 
 export const getAllRecipes = state =>
   fromRecipes.getAllRecipes(getRecipesFromState(state))

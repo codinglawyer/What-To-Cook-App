@@ -23,11 +23,9 @@ export const fetchDataFailure = error => ({
   payload: { error: g(error, 'message') }
 })
 
-export const addRecipeRequest = () => {
-  return {
-    type: g(actionTypes, 'ADD_RECIPE_REQUEST')
-  }
-}
+export const addRecipeRequest = () => ({
+  type: g(actionTypes, 'ADD_RECIPE_REQUEST')
+})
 
 export const addRecipeSuccess = () => ({
   type: g(actionTypes, 'ADD_RECIPE_SUCCESS')
@@ -42,4 +40,13 @@ export const deleteRecipeRequest = (recipeId, ingredientsIds) => ({
   type: g(actionTypes, 'DELETE_RECIPE_REQUEST'),
   ingredientsIds,
   recipeId
+})
+
+export const deleteRecipeSuccess = () => ({
+  type: g(actionTypes, 'DELETE_RECIPE_SUCCESS')
+})
+
+export const deleteRecipeFailure = error => ({
+  type: g(actionTypes, 'DELETE_RECIPE_FAILURE'),
+  payload: { error: g(error, 'message') }
 })

@@ -1,31 +1,28 @@
-import { takeEvery } from 'redux-saga/effects'
+import { takeEvery, call, put } from 'redux-saga/effects'
 import { DELETE_RECIPE_REQUEST } from '../actions/actionTypes'
+import { deleteRecipeSuccess, deleteRecipeFailure } from '../actions/index'
 
 import firebaseApp from '../api/firebase'
 
-function * deleteRecipe ({ recipeId, ingredientsIds }) {
-  ingredientsIds.map(
-    id =>
-      setTimeout(() =>
-        firebaseApp
-          .database()
-          .ref()
-          .child('entities')
-          .child('ingredients')
-          .child(id)
-          .remove()
-      ),
-    100
-  )
-  firebaseApp
-    .database()
-    .ref()
-    .child('entities')
-    .child('recipes')
-    .child(recipeId)
-    .remove()
-    .then(() => console.log('Recipe deletion successful'))
-    .catch(() => console.log('Recipe deletion failed'))
+const getRecipesPath = recipeId => `/entities/recipes/${recipeId}`
+
+const getIngredientsPath = ingredientId =>
+  `/entities/ingredients/${ingredientId}`
+
+export function * deleteRecipe ({ recipeId, ingredientsIds }) {
+  for (let i = 0; ingredientsIds.length > i; i++) {
+    const ref = firebaseApp
+      .database()
+      .ref(getIngredientsPath(ingredientsIds[i]))
+    yield call([ref, ref.remove])
+  }
+  try {
+    const ref = firebaseApp.database().ref(getRecipesPath(recipeId))
+    yield call([ref, ref.remove])
+    yield put(deleteRecipeSuccess())
+  } catch (error) {
+    yield put(deleteRecipeFailure())
+  }
 }
 
 export default function * watchDeleteRecipe () {
