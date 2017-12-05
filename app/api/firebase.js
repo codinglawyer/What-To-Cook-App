@@ -9,6 +9,7 @@ const config = {
   messagingSenderId: '269947495972'
 }
 
-const firebaseApp = firebase.initializeApp(config)
+// make sure that Firebase is not initialized more than once
+const firebaseApp = !firebase.apps.length ? firebase.initializeApp(config) : firebase.app()
 
 export default firebaseApp
