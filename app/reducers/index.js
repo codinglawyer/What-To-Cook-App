@@ -9,7 +9,7 @@ import recipesEntity, * as fromRecipes from './recipes'
 import ingredientsEntity, * as fromIngredients from './ingredients'
 import dataStatuses, * as fromDataStatuses from './dataStatuses'
 
-const connectionStatus = (state = false, action) => {
+export const connectionStatus = (state = false, action) => {
   switch (action.type) {
     case FIREBASE_CONNECTED:
       return true
