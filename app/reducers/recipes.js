@@ -4,7 +4,7 @@ import {
   FETCH_DATA_SUCCESS
 } from '../actions/actionTypes'
 
-const byId = (state = {}, action) => {
+export const byId = (state = {}, action) => {
   switch (action.type) {
     case FETCH_DATA_SUCCESS:
       const { recipes } = action.payload.entities
@@ -14,7 +14,7 @@ const byId = (state = {}, action) => {
   }
 }
 
-const allIds = (state = [], action) => {
+export const allIds = (state = [], action) => {
   switch (action.type) {
     case FETCH_DATA_SUCCESS:
       const { recipes } = action.payload.entities
