@@ -4,9 +4,10 @@ import firebaseApp from '../api/firebase'
 import * as actions from '../actions/index'
 
 export function * connectionStatusChange () {
-  const connectionStatusChannel = channel()
+  const connectionStatusChannel = yield call(channel)
   const connectionStatus = connectionStatusWrapper(connectionStatusChannel)
   const connectionRef = firebaseApp.database().ref('.info/connected')
+  // connectionStatus callback will be triggered for the initial data and again whenever the data changes
   connectionRef.on('value', connectionStatus)
 
   while (true) {
@@ -15,16 +16,12 @@ export function * connectionStatusChange () {
   }
 }
 
-function connectionStatusWrapper (channel) {
-  function connectionStatus (snapshot) {
-    if (snapshot.val() === true) {
-      channel.put(actions.connected())
-    } else {
-      channel.put(actions.disconnected())
-    }
+export const connectionStatusWrapper = channel => snapshot => {
+  if (snapshot.val() === true) {
+    channel.put(actions.connected())
+  } else {
+    channel.put(actions.disconnected())
   }
-
-  return connectionStatus
 }
 
 export default function * watchConnectionStatus () {
