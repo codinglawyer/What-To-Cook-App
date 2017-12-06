@@ -1,6 +1,7 @@
 ## What To Cook
 ##### (in the making)
 - an application for managing your favorite recipes (recipes are saved in the Firebase realtime database)
+- tests included
 
 ### Getting Started
 
