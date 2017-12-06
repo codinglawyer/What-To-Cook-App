@@ -2,11 +2,11 @@ import test from 'tape'
 import sagaWrapper from '../utils/sagaWrapper'
 import { channel } from 'redux-saga'
 import { call, put, take } from 'redux-saga/effects'
-import { connectionStatusChange } from '../../../sagas/databaseConnection'
+import { databaseUpdate } from '../../../sagas/databaseUpdate'
 
-test('app/sagas/databaseConnection', t => {
+test('app/sagas/databaseUpdate', t => {
   let chan = channel()
-  const saga = sagaWrapper(connectionStatusChange())
+  const saga = sagaWrapper(databaseUpdate())
 
   t.deepEqual(saga.next(chan).value, call(channel), 'should spawn a Channel')
 

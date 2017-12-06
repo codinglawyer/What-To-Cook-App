@@ -4,7 +4,7 @@ import firebaseApp from '../api/firebase'
 import * as actions from '../actions/index'
 
 export function * databaseUpdate () {
-  const databaseUpdateChannel = channel()
+  const databaseUpdateChannel = yield call(channel)
   const databaseUpdate = databaseUpdateWrapper(databaseUpdateChannel)
   const connectionRef = firebaseApp.database().ref()
   connectionRef.on('value', databaseUpdate)
@@ -15,15 +15,12 @@ export function * databaseUpdate () {
   }
 }
 
-function databaseUpdateWrapper (channel) {
-  function databaseUpdate (snapshot) {
-    if (snapshot.val()) {
-      channel.put(actions.fetchDataSuccess(snapshot.val()))
-    } else {
-      channel.put(actions.fetchDataFailure(snapshot.val()))
-    }
+const databaseUpdateWrapper = channel => snapshot => {
+  if (snapshot.val()) {
+    channel.put(actions.fetchDataSuccess(snapshot.val()))
+  } else {
+    channel.put(actions.fetchDataFailure(snapshot.val()))
   }
-  return databaseUpdate
 }
 
 export default function * watchDatabaseUpdate () {
