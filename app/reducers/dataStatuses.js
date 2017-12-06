@@ -12,7 +12,7 @@ import {
   DELETE_RECIPE_FAILURE
 } from '../actions/actionTypes'
 
-const dataFetching = (state = { fetching: false, error: '' }, action) => {
+export const dataFetching = (state = {}, action) => {
   switch (action.type) {
     case IS_DATA_BEING_FETCHED:
       return { fetching: true, error: '' }
@@ -26,7 +26,7 @@ const dataFetching = (state = { fetching: false, error: '' }, action) => {
   }
 }
 
-const recipeSaving = (state = { saving: false, error: '' }, action) => {
+export const recipeSaving = (state = {}, action) => {
   switch (action.type) {
     case ADD_RECIPE_REQUEST:
       return { saving: true, error: '' }
@@ -40,7 +40,7 @@ const recipeSaving = (state = { saving: false, error: '' }, action) => {
   }
 }
 
-const recipeDeleting = (state = { deleting: false, error: '' }, action) => {
+export const recipeDeleting = (state = {}, action) => {
   switch (action.type) {
     case DELETE_RECIPE_REQUEST:
       return { deleting: true, error: '' }
