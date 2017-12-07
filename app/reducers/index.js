@@ -31,14 +31,15 @@ const RootReducer = combineReducers({
 export default RootReducer
 
 const getRecipesFromState = state => g(state, 'recipesEntity')
+const getStatutesFromState = state => g(state, 'dataStatuses')
 
 // DataStatuses selectors
 export const getIsDataFetching = state =>
-  fromDataStatuses.getIsDataFetching(g(state, 'dataStatuses'))
+  fromDataStatuses.getIsDataFetching(getStatutesFromState(state))
 export const getIsRecipeSaving = state =>
-  fromDataStatuses.getIsRecipeSaving(g(state, 'dataStatuses'))
+  fromDataStatuses.getIsRecipeSaving(getStatutesFromState(state))
 export const getIsRecipeDeleting = state =>
-  fromDataStatuses.getIsRecipeDeleting(g(state, 'dataStatuses'))
+  fromDataStatuses.getIsRecipeDeleting(getStatutesFromState(state))
 
 // Recipes selectors
 export const getAllRecipes = state =>

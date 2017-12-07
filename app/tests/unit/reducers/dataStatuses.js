@@ -12,11 +12,11 @@ import {
   DELETE_RECIPE_FAILURE
 } from '../../../actions/actionTypes'
 
-const getInitialState = () => ({})
+const getInitialState = process => ({ [process]: false, error: '' })
 
 // dataFetching reducer tests
 test('app/reducers/dataStatuses/dataFetching: no action', t => {
-  const initialState = getInitialState()
+  const initialState = getInitialState('fetching')
   t.deepEqual(
     initialState,
     reducer.dataFetching(undefined, {}),
@@ -27,7 +27,7 @@ test('app/reducers/dataStatuses/dataFetching: no action', t => {
 })
 
 test(`app/reducers/dataStatuses/dataFetching: ${IS_DATA_BEING_FETCHED}`, t => {
-  const initialState = getInitialState()
+  const initialState = getInitialState('fetching')
   const actual = reducer.dataFetching(initialState, {
     type: IS_DATA_BEING_FETCHED
   })
@@ -40,7 +40,7 @@ test(`app/reducers/dataStatuses/dataFetching: ${IS_DATA_BEING_FETCHED}`, t => {
 })
 
 test(`app/reducers/dataStatuses/dataFetching: ${FETCH_DATA_SUCCESS}`, t => {
-  const initialState = getInitialState()
+  const initialState = getInitialState('fetching')
   const actual = reducer.dataFetching(initialState, {
     type: FETCH_DATA_SUCCESS
   })
@@ -53,7 +53,7 @@ test(`app/reducers/dataStatuses/dataFetching: ${FETCH_DATA_SUCCESS}`, t => {
 })
 
 test(`app/reducers/dataStatuses/dataFetching: ${FETCH_DATA_FAILURE}`, t => {
-  const initialState = getInitialState()
+  const initialState = getInitialState('fetching')
   const notFoundError = {
     code: 404,
     message: 'Not found'
@@ -78,7 +78,7 @@ test(`app/reducers/dataStatuses/dataFetching: ${FETCH_DATA_FAILURE}`, t => {
 
 // recipeSaving reducer tests
 test('app/reducers/dataStatuses/recipeSaving: no action', t => {
-  const initialState = getInitialState()
+  const initialState = getInitialState('saving')
   t.deepEqual(
     initialState,
     reducer.recipeSaving(undefined, {}),
@@ -89,7 +89,7 @@ test('app/reducers/dataStatuses/recipeSaving: no action', t => {
 })
 
 test(`app/reducers/dataStatuses/recipeSaving: ${ADD_RECIPE_REQUEST}`, t => {
-  const initialState = getInitialState()
+  const initialState = getInitialState('saving')
   const actual = reducer.recipeSaving(initialState, {
     type: ADD_RECIPE_REQUEST
   })
@@ -102,7 +102,7 @@ test(`app/reducers/dataStatuses/recipeSaving: ${ADD_RECIPE_REQUEST}`, t => {
 })
 
 test(`app/reducers/dataStatuses/recipeSaving: ${ADD_RECIPE_SUCCESS}`, t => {
-  const initialState = getInitialState()
+  const initialState = getInitialState('saving')
   const actual = reducer.recipeSaving(initialState, {
     type: ADD_RECIPE_SUCCESS
   })
@@ -115,7 +115,7 @@ test(`app/reducers/dataStatuses/recipeSaving: ${ADD_RECIPE_SUCCESS}`, t => {
 })
 
 test(`app/reducers/dataStatuses/recipeSaving: ${ADD_RECIPE_FAILURE}`, t => {
-  const initialState = getInitialState()
+  const initialState = getInitialState('saving')
   const notFoundError = {
     code: 404,
     message: 'Not found'
@@ -140,7 +140,7 @@ test(`app/reducers/dataStatuses/recipeSaving: ${ADD_RECIPE_FAILURE}`, t => {
 
 // dataDeleting reducer tests
 test('app/reducers/dataStatuses/recipeDeleting: no action', t => {
-  const initialState = getInitialState()
+  const initialState = getInitialState('deleting')
   t.deepEqual(
     initialState,
     reducer.recipeDeleting(undefined, {}),
@@ -153,7 +153,7 @@ test('app/reducers/dataStatuses/recipeDeleting: no action', t => {
 test(`app/reducers/dataStatuses/recipeDeleting: ${
   DELETE_RECIPE_REQUEST
 }`, t => {
-  const initialState = getInitialState()
+  const initialState = getInitialState('deleting')
   const actual = reducer.recipeDeleting(initialState, {
     type: DELETE_RECIPE_REQUEST
   })
@@ -168,7 +168,7 @@ test(`app/reducers/dataStatuses/recipeDeleting: ${
 test(`app/reducers/dataStatuses/recipeDeleting: ${
   DELETE_RECIPE_SUCCESS
 }`, t => {
-  const initialState = getInitialState()
+  const initialState = getInitialState('deleting')
   const actual = reducer.recipeDeleting(initialState, {
     type: DELETE_RECIPE_SUCCESS
   })
@@ -183,7 +183,7 @@ test(`app/reducers/dataStatuses/recipeDeleting: ${
 test(`app/reducers/dataStatuses/recipeDeleting: ${
   DELETE_RECIPE_FAILURE
 }`, t => {
-  const initialState = getInitialState()
+  const initialState = getInitialState('deleting')
   const notFoundError = {
     code: 404,
     message: 'Not found'
