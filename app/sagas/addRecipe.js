@@ -16,17 +16,15 @@ const getIngredientsUpdates = (ingredients, ingredientIds) =>
   }))
 
 const arrayToObject = arr =>
-  arr.reduce((acc, item, i) => {
+  arr.reduce((acc, item) => {
     let key = keys(item)
     acc[key] = item[key]
     return acc
   }, {})
 
-const getRecipesUpdates = recipe => {
-  const updates = {}
-  updates[`/entities/recipes/${g(recipe, 'id')}`] = recipe
-  return updates
-}
+const getRecipesUpdates = recipe => ({
+  [`/entities/recipes/${g(recipe, 'id')}`]: recipe
+})
 
 const createRecipe = (
   { title, directions, servings, difficulty, time },

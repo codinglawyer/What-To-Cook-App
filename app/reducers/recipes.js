@@ -18,8 +18,7 @@ export const allIds = (state = [], action) => {
   switch (action.type) {
     case FETCH_DATA_SUCCESS:
       const { recipes } = action.payload.entities
-      const ids = keys(recipes)
-      return ids
+      return keys(recipes)
     default:
       return state
   }

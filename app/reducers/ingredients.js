@@ -3,8 +3,8 @@ import { FETCH_DATA_SUCCESS } from '../actions/actionTypes'
 const ingredientsEntity = (state = {}, action) => {
   switch (action.type) {
     case FETCH_DATA_SUCCESS:
-      const { payload } = action
-      return { ...payload.entities.ingredients }
+      const { ingredients } = action.payload.entities
+      return { ...ingredients }
     default:
       return state
   }

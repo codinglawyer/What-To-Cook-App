@@ -59,8 +59,8 @@ const renderRecipeDetailScreen = ({
         <Container>
           <Subtitle>Directions:</Subtitle>
           <ol>
-            {recipe.directions.map(direction => (
-              <RecipeDirection key={direction}>{direction}</RecipeDirection>
+            {recipe.directions.map((direction, i) => (
+              <RecipeDirection key={`${i}-${direction}`}>{direction}</RecipeDirection>
             ))}
           </ol>
         </Container>

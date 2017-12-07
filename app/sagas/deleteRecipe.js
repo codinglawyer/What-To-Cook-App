@@ -14,10 +14,12 @@ export function * deleteRecipe ({ recipeId, ingredientsIds }) {
     const ref = firebaseApp
       .database()
       .ref(getIngredientsPath(ingredientsIds[i]))
+    // delete ingredients
     yield call([ref, ref.remove])
   }
   try {
     const ref = firebaseApp.database().ref(getRecipesPath(recipeId))
+    // delete recipe
     yield call([ref, ref.remove])
     yield put(deleteRecipeSuccess())
   } catch (error) {
