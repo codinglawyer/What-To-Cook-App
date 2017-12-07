@@ -188,7 +188,7 @@ test('app/reducers/index: getCompleteRecipes', t => {
   t.end()
 })
 
-test('app/reducers/index: getCompleteRecipes - undefined', t => {
+test('app/reducers/index: getCompleteRecipes - empty', t => {
   const actual = getCompleteRecipes(
     {
       recipesEntity: {
