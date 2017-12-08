@@ -6,6 +6,7 @@ const getInitialState = () => ({})
 
 test('app/reducers/ingredients: no action', t => {
   const initialState = getInitialState()
+
   t.deepEqual(
     initialState,
     reducer(undefined, {}),

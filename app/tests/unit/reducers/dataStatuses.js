@@ -17,6 +17,7 @@ const getInitialState = process => ({ [process]: false, error: '' })
 // dataFetching reducer tests
 test('app/reducers/dataStatuses/dataFetching: no action', t => {
   const initialState = getInitialState('fetching')
+
   t.deepEqual(
     initialState,
     reducer.dataFetching(undefined, {}),
@@ -79,6 +80,7 @@ test(`app/reducers/dataStatuses/dataFetching: ${FETCH_DATA_FAILURE}`, t => {
 // recipeSaving reducer tests
 test('app/reducers/dataStatuses/recipeSaving: no action', t => {
   const initialState = getInitialState('saving')
+
   t.deepEqual(
     initialState,
     reducer.recipeSaving(undefined, {}),
@@ -138,9 +140,10 @@ test(`app/reducers/dataStatuses/recipeSaving: ${ADD_RECIPE_FAILURE}`, t => {
   t.end()
 })
 
-// dataDeleting reducer tests
+// recipeDeleting reducer tests
 test('app/reducers/dataStatuses/recipeDeleting: no action', t => {
   const initialState = getInitialState('deleting')
+
   t.deepEqual(
     initialState,
     reducer.recipeDeleting(undefined, {}),

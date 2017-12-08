@@ -18,7 +18,7 @@ test('app/reducers/index: getIsDataFetching', t => {
   })
   const expected = { fetching: false, error: '' }
 
-  t.deepEqual(actual, expected, 'should get data fetching from the state')
+  t.deepEqual(actual, expected, 'should get data fetching status from the state')
 
   t.end()
 })
@@ -30,7 +30,7 @@ test('app/reducers/index: getIsDataFetching - undefined', t => {
   t.deepEqual(
     actual,
     expected,
-    'should return `undefined` if data fetching not found'
+    'should return `undefined` if data fetching status not found'
   )
 
   t.end()
@@ -44,7 +44,7 @@ test('app/reducers/index: getIsRecipeSaving', t => {
   })
   const expected = { saving: false, error: '' }
 
-  t.deepEqual(actual, expected, 'should get recipe saving from the state')
+  t.deepEqual(actual, expected, 'should get recipe saving status from the state')
 
   t.end()
 })
@@ -56,7 +56,7 @@ test('app/reducers/index: getIsRecipeSaving - undefined', t => {
   t.deepEqual(
     actual,
     expected,
-    'should return `undefined` if recipe saving not found'
+    'should return `undefined` if recipe saving status not found'
   )
 
   t.end()
@@ -70,7 +70,7 @@ test('app/reducers/index: getIsRecipeDeleting', t => {
   })
   const expected = { fetching: false, error: '' }
 
-  t.deepEqual(actual, expected, 'should get recipe deleting from the state')
+  t.deepEqual(actual, expected, 'should get recipe deleting status from the state')
 
   t.end()
 })
@@ -82,7 +82,7 @@ test('app/reducers/index: getIsRecipeDeleting - undefined', t => {
   t.deepEqual(
     actual,
     expected,
-    'should return `undefined` if recipe deleting not found'
+    'should return `undefined` if recipe deleting status not found'
   )
 
   t.end()
@@ -115,7 +115,7 @@ test('app/reducers/index: getAllRecipes - empty', t => {
   t.deepEqual(
     actual,
     expected,
-    'should return an empty array if the are no recipes'
+    'should return an empty array if there are no recipes'
   )
 
   t.end()

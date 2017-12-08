@@ -21,7 +21,7 @@ test('app/sagas/addRecipe: success', t => {
   t.deepEqual(
     saga.next(formData).value,
     select(formValuesSelector),
-    'should select `formData` from state'
+    'should select `formData` from the state'
   )
 
   t.deepEqual(
@@ -39,7 +39,7 @@ test('app/sagas/addRecipe: success', t => {
   t.deepEqual(
     saga.next().value,
     put(addRecipeSuccess()),
-    'should dispatch recipe success action'
+    'should dispatch add recipe success action'
   )
 
   t.ok(saga.next().done, 'should finish saga')
@@ -62,7 +62,7 @@ test('app/sagas/addRecipe: failure', t => {
   t.deepEqual(
     saga.next(formData).value,
     select(formValuesSelector),
-    'should select `formData` from state'
+    'should select `formData` from the state'
   )
 
   t.deepEqual(
@@ -74,13 +74,13 @@ test('app/sagas/addRecipe: failure', t => {
   t.deepEqual(
     saga.throw(notFoundError).value,
     call([ref, ref.update], updates, addRecipe),
-    'should throw an error when trying to save data to Firebase'
+    'should throw an error when saving data to Firebase fails'
   )
 
   t.deepEqual(
     saga.next(notFoundError).value,
     put(addRecipeFailure(notFoundError)),
-    'should dispatch recipe success action'
+    'should dispatch add recipe failure action'
   )
 
   t.ok(saga.next().done, 'should finish saga')

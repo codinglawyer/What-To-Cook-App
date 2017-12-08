@@ -34,6 +34,7 @@ test('app/sagas/deleteRecipe: success', t => {
   }
 
   const ref = firebaseApp.database().ref(getRecipesPath(recipeId))
+
   t.deepEqual(
     saga.next(transferResult).value,
     call([ref, ref.remove]),
@@ -81,7 +82,7 @@ test('app/sagas/deleteRecipe: failure', t => {
   t.deepEqual(
     saga.throw(notFoundError).value,
     call([ref, ref.remove]),
-    'should throw an error when trying to delete recipe from Firebase'
+    'should throw an error when delete recipe from Firebase fails'
   )
 
   t.deepEqual(

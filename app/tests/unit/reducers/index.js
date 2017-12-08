@@ -9,6 +9,7 @@ const getInitialState = () => false
 
 test('app/reducers/index/connectionStatus: no action', t => {
   const initialState = getInitialState()
+
   t.deepEqual(
     initialState,
     reducer.connectionStatus(undefined, {}),
