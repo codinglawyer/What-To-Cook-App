@@ -7,10 +7,9 @@
     "build": "webpack --env production",
     "dev": "webpack-dev-server",
     "lint": "eslint ./app/",
-    "precommit": "npm run lint",
+    "precommit": "lint-staged",
     "test": "babel-tape-runner \"app/tests/unit/**/*.js\"",
-    "prepush": "npm run test",
-    "lint:staged": "lint-staged"
+    "prepush": "npm run test"
   },
   "lint-staged": {
     "*.js": "lint:eslint"
