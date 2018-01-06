@@ -14,6 +14,9 @@
   "lint-staged": {
     "*.js": "lint:eslint"
   },
+  "pre-commit": [
+    "lint"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -52,6 +55,7 @@
     "eslint-plugin-standard": "^3.0.1",
     "file-loader": "^1.1.6",
     "postcss-loader": "^2.0.9",
+    "pre-commit": "^1.2.2",
     "react-tap-event-plugin": "^3.0.2",
     "style-loader": "^0.19.1",
     "tape": "^4.8.0",
