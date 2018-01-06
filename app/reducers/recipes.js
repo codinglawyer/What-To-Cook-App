@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux'
 import { get as g, keys } from 'lodash'
-import {
-  FETCH_DATA_SUCCESS
-} from '../actions/actionTypes'
+import { FETCH_DATA_SUCCESS } from '../actions/actionTypes'
 
 export const byId = (state = {}, action) => {
   switch (action.type) {

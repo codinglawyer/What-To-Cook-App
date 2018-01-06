@@ -10,6 +10,8 @@ const config = {
 }
 
 // make sure that Firebase is not initialized more than once
-const firebaseApp = !firebase.apps.length ? firebase.initializeApp(config) : firebase.app()
+const firebaseApp = !firebase.apps.length
+  ? firebase.initializeApp(config)
+  : firebase.app()
 
 export default firebaseApp
