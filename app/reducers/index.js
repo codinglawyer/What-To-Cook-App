@@ -63,4 +63,4 @@ export const getCompleteRecipes = (state, getRecipes, getIngredients) => {
 
 // Ingredients selectors
 export const getAllIngredients = state =>
-fromIngredients.getAllIngredients(g(state, 'ingredientsEntity'))
+  fromIngredients.getAllIngredients(g(state, 'ingredientsEntity'))

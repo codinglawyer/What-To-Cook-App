@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "standard",
+    "plugin:react/recommended"
+  ],
+  "rules": {
+    "react/jsx-uses-vars": [
+      "error"
+    ],
+    "react/prop-types": 0
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true,
+    "es6": true
+  },
+  "plugins": [
+    "redux-saga",
+    "react",
+    "jsx-a11y"
+  ]
+}
