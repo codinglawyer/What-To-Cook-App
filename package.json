@@ -9,7 +9,11 @@
     "lint": "eslint ./app/",
     "precommit": "npm run lint",
     "test": "babel-tape-runner \"app/tests/unit/**/*.js\"",
-    "prepush": "npm run test"
+    "prepush": "npm run test",
+    "lint:staged": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": "lint:eslint"
   },
   "author": "",
   "license": "ISC",
