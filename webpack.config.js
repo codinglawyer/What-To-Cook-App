@@ -13,6 +13,15 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/build/'
   },
+  devServer: {
+    historyApiFallback: true
+  },
+  resolve: {
+    alias: {
+      'react': path.join(__dirname, 'node_modules/react'),
+      'react-dom': path.join(__dirname, 'node_modules/react-dom')
+    }
+  },
   module: {
     loaders: [
       {
@@ -30,12 +39,12 @@ module.exports = {
       {
         test: /\.(jpg|png|svg)$/,
         use: {
-          loader: "url-loader",
+          loader: 'url-loader',
           options: {
-            limit: 25000,
-          },
-        },
-      },
+            limit: 25000
+          }
+        }
+      }
     ]
   }
 }
