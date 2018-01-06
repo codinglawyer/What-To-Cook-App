@@ -16,6 +16,7 @@ module.exports = {
   devServer: {
     historyApiFallback: true
   },
+  // prevents react versions collision when using material-ui
   resolve: {
     alias: {
       'react': path.join(__dirname, 'node_modules/react'),
