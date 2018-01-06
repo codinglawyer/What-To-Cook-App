@@ -7,7 +7,9 @@
     "build": "webpack --env production",
     "dev": "webpack-dev-server",
     "lint": "eslint ./app/",
-    "test": "babel-tape-runner \"app/tests/unit/**/*.js\""
+    "precommit": "npm run lint",
+    "test": "babel-tape-runner \"app/tests/unit/**/*.js\"",
+    "prepush": "npm run test"
   },
   "author": "",
   "license": "ISC",
