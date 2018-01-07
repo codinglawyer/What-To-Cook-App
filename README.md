@@ -15,8 +15,8 @@
 
 3. **Start dev server**
 
-    `npm start`
+    `npm run dev`
 
 4. **Open your browser**
 
-    `http://localhost:3000/`
+    `http://localhost:8080/`
