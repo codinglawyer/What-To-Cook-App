@@ -1,10 +1,11 @@
+import Immutable from 'seamless-immutable'
 import { FETCH_DATA_SUCCESS } from '../actions/actionTypes'
 
-const ingredientsEntity = (state = {}, action) => {
+const ingredientsEntity = (state = Immutable({}), action) => {
   switch (action.type) {
     case FETCH_DATA_SUCCESS:
       const { ingredients } = action.payload.entities
-      return { ...ingredients }
+      return state.merge(ingredients)
     default:
       return state
   }

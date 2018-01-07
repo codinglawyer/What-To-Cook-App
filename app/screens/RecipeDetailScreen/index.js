@@ -19,6 +19,7 @@ import { RecipeDirection, RecipeIngredients, RecipeTitle } from './styles'
 const mapStateToProps = (state, { params }) => {
   const recipe = getRecipe(state, params.id)
   const allIngredients = getAllIngredients(state)
+  console.log(state)
   const recipeIngredients = recipe
     ? recipe.ingredients.map(ingredientId => allIngredients[ingredientId])
     : []
