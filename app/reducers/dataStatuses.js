@@ -1,4 +1,4 @@
-import Immutable from 'seamless-immutable'
+import createReducer from '../utils/createReducer'
 import { combineReducers } from 'redux'
 import { get as g } from 'lodash'
 import {
@@ -13,56 +13,53 @@ import {
   DELETE_RECIPE_FAILURE
 } from '../actions/actionTypes'
 
-export const dataFetching = (
-  state = Immutable({ fetching: false, error: '' }),
-  action
-) => {
-  switch (action.type) {
-    case IS_DATA_BEING_FETCHED:
+export const dataFetching = createReducer(
+  { fetching: false, error: '' },
+  {
+    [IS_DATA_BEING_FETCHED] (state, action) {
       return state.merge({ fetching: true, error: '' })
-    case FETCH_DATA_SUCCESS:
+    },
+    [FETCH_DATA_SUCCESS] (state, action) {
       return state.merge({ fetching: false, error: '' })
-    case FETCH_DATA_FAILURE:
+    },
+    [FETCH_DATA_FAILURE] (state, action) {
       const { error } = action.payload
       return state.merge({ fetching: false, error })
-    default:
-      return state
+    }
   }
-}
+)
 
-export const recipeSaving = (
-  state = Immutable({ saving: false, error: '' }),
-  action
-) => {
-  switch (action.type) {
-    case ADD_RECIPE_REQUEST:
+export const recipeSaving = createReducer(
+  { saving: false, error: '' },
+  {
+    [ADD_RECIPE_REQUEST] (state, action) {
       return state.merge({ saving: true, error: '' })
-    case ADD_RECIPE_SUCCESS:
+    },
+    [ADD_RECIPE_SUCCESS] (state, action) {
       return state.merge({ saving: false, error: '' })
-    case ADD_RECIPE_FAILURE:
+    },
+    [ADD_RECIPE_FAILURE] (state, action) {
       const { error } = action.payload
       return state.merge({ saving: false, error })
-    default:
-      return state
+    }
   }
-}
+)
 
-export const recipeDeleting = (
-  state = Immutable({ deleting: false, error: '' }),
-  action
-) => {
-  switch (action.type) {
-    case DELETE_RECIPE_REQUEST:
+export const recipeDeleting = createReducer(
+  { deleting: false, error: '' },
+  {
+    [DELETE_RECIPE_REQUEST] (state, action) {
       return state.merge({ deleting: true, error: '' })
-    case DELETE_RECIPE_SUCCESS:
+    },
+    [DELETE_RECIPE_SUCCESS] (state, action) {
       return state.merge({ deleting: false, error: '' })
-    case DELETE_RECIPE_FAILURE:
+    },
+    [DELETE_RECIPE_FAILURE] (state, action) {
       const { error } = action.payload
       return state.merge({ deleting: false, error })
-    default:
-      return state
+    }
   }
-}
+)
 
 const dataStatuses = combineReducers({
   dataFetching,
