@@ -1,3 +1,4 @@
+import createReducer from '../utils/createReducer'
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
 import { get as g } from 'lodash'
@@ -9,16 +10,14 @@ import recipesEntity, * as fromRecipes from './recipes'
 import ingredientsEntity, * as fromIngredients from './ingredients'
 import dataStatuses, * as fromDataStatuses from './dataStatuses'
 
-export const connectionStatus = (state = false, action) => {
-  switch (action.type) {
-    case FIREBASE_CONNECTED:
-      return true
-    case FIREBASE_DISCONNECTED:
-      return false
-    default:
-      return state
+export const connectionStatus = createReducer(false, {
+  [FIREBASE_CONNECTED] (state, action) {
+    return true
+  },
+  [FIREBASE_DISCONNECTED] (state, action) {
+    return false
   }
-}
+})
 
 const RootReducer = combineReducers({
   recipesEntity,

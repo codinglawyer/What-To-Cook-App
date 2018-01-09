@@ -1,15 +1,15 @@
-import Immutable from 'seamless-immutable'
+import createReducer from '../utils/createReducer'
 import { FETCH_DATA_SUCCESS } from '../actions/actionTypes'
 
-const ingredientsEntity = (state = Immutable({}), action) => {
-  switch (action.type) {
-    case FETCH_DATA_SUCCESS:
+const ingredientsEntity = createReducer(
+  {},
+  {
+    [FETCH_DATA_SUCCESS] (state, action) {
       const { ingredients } = action.payload.entities
       return state.merge(ingredients)
-    default:
-      return state
+    }
   }
-}
+)
 
 export default ingredientsEntity
 

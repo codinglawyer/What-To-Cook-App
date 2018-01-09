@@ -1,27 +1,25 @@
 import Immutable from 'seamless-immutable'
+import createReducer from '../utils/createReducer'
 import { combineReducers } from 'redux'
 import { get as g, keys } from 'lodash'
 import { FETCH_DATA_SUCCESS } from '../actions/actionTypes'
 
-export const byId = (state = Immutable({}), action) => {
-  switch (action.type) {
-    case FETCH_DATA_SUCCESS:
+export const byId = createReducer(
+  {},
+  {
+    [FETCH_DATA_SUCCESS] (state, action) {
       const { recipes } = action.payload.entities
       return state.merge(recipes)
-    default:
-      return state
+    }
   }
-}
+)
 
-export const allIds = (state = Immutable([]), action) => {
-  switch (action.type) {
-    case FETCH_DATA_SUCCESS:
-      const { recipes } = action.payload.entities
-      return Immutable(keys(recipes))
-    default:
-      return state
+export const allIds = createReducer([], {
+  [FETCH_DATA_SUCCESS](state, action) {
+    const { recipes } = action.payload.entities
+    return Immutable(keys(recipes))
   }
-}
+})
 
 const recipesEntity = combineReducers({
   byId,
