@@ -1,9 +1,17 @@
 import * as actionTypes from './actionTypes'
 import { get as g } from 'lodash'
 
-export const connected = () => ({
-  type: g(actionTypes, 'FIREBASE_CONNECTED')
+const createActionCreator = (type, ...argNames) =>  (...args) => ({
+  type,
+  ...args
 })
+
+
+export const connected = createActionCreator(g(actionTypes, 'FIREBASE_CONNECTED'))
+
+// export const connected = () => ({
+//   type: g(actionTypes, 'FIREBASE_CONNECTED')
+// })
 
 export const disconnected = () => ({
   type: g(actionTypes, 'FIREBASE_DISCONNECTED')
