@@ -1,60 +1,53 @@
 import * as actionTypes from './actionTypes'
+import createActionCreator from '../utils/createActionCreator'
 import { get as g } from 'lodash'
 
-const createActionCreator = (type, ...argNames) =>  (...args) => ({
-  type,
-  ...args
-})
+export const connected = createActionCreator(
+  g(actionTypes, 'FIREBASE_CONNECTED')
+)
 
+export const disconnected = createActionCreator(
+  g(actionTypes, 'FIREBASE_DISCONNECTED')
+)
 
-export const connected = createActionCreator(g(actionTypes, 'FIREBASE_CONNECTED'))
+export const isDataBeingFetched = createActionCreator(
+  g(actionTypes, 'IS_DATA_BEING_FETCHED')
+)
 
-// export const connected = () => ({
-//   type: g(actionTypes, 'FIREBASE_CONNECTED')
-// })
+export const fetchDataSuccess = createActionCreator(
+  g(actionTypes, 'FETCH_DATA_SUCCESS'),
+  'response'
+)
 
-export const disconnected = () => ({
-  type: g(actionTypes, 'FIREBASE_DISCONNECTED')
-})
+export const fetchDataFailure = createActionCreator(
+  g(actionTypes, 'FETCH_DATA_FAILURE'),
+  'error'
+)
 
-export const isDataBeingFetched = () => ({
-  type: g(actionTypes, 'IS_DATA_BEING_FETCHED')
-})
+export const addRecipeRequest = createActionCreator(
+  g(actionTypes, 'ADD_RECIPE_REQUEST')
+)
 
-export const fetchDataSuccess = response => ({
-  type: g(actionTypes, 'FETCH_DATA_SUCCESS'),
-  payload: response
-})
+export const addRecipeSuccess = createActionCreator(
+  g(actionTypes, 'ADD_RECIPE_SUCCESS')
+)
 
-export const fetchDataFailure = error => ({
-  type: g(actionTypes, 'FETCH_DATA_FAILURE'),
-  payload: { error: g(error, 'message') }
-})
+export const addRecipeFailure = createActionCreator(
+  g(actionTypes, 'ADD_RECIPE_FAILURE'),
+  'error'
+)
 
-export const addRecipeRequest = () => ({
-  type: g(actionTypes, 'ADD_RECIPE_REQUEST')
-})
+export const deleteRecipeRequest = createActionCreator(
+  g(actionTypes, 'DELETE_RECIPE_REQUEST'),
+  'recipeId',
+  'ingredientsIds'
+)
 
-export const addRecipeSuccess = () => ({
-  type: g(actionTypes, 'ADD_RECIPE_SUCCESS')
-})
+export const deleteRecipeSuccess = createActionCreator(
+  g(actionTypes, 'DELETE_RECIPE_SUCCESS')
+)
 
-export const addRecipeFailure = error => ({
-  type: g(actionTypes, 'ADD_RECIPE_FAILURE'),
-  payload: { error: g(error, 'message') }
-})
-
-export const deleteRecipeRequest = (recipeId, ingredientsIds) => ({
-  type: g(actionTypes, 'DELETE_RECIPE_REQUEST'),
-  ingredientsIds,
-  recipeId
-})
-
-export const deleteRecipeSuccess = () => ({
-  type: g(actionTypes, 'DELETE_RECIPE_SUCCESS')
-})
-
-export const deleteRecipeFailure = error => ({
-  type: g(actionTypes, 'DELETE_RECIPE_FAILURE'),
-  payload: { error: g(error, 'message') }
-})
+export const deleteRecipeFailure = createActionCreator(
+  g(actionTypes, 'DELETE_RECIPE_FAILURE'),
+  'error'
+)
