@@ -34,6 +34,7 @@
     "redux-saga": "^0.14.8",
     "reflexbox": "^2.2.3",
     "regenerator-runtime": "^0.10.3",
+    "reselect": "^3.0.1",
     "seamless-immutable": "^7.1.2",
     "styled-components": "1.1.2",
     "uuid": "^3.0.1"

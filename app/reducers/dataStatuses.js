@@ -1,6 +1,5 @@
 import createReducer from '../utils/createReducer'
 import { combineReducers } from 'redux'
-import { get as g } from 'lodash'
 import {
   FETCH_DATA_SUCCESS,
   FETCH_DATA_FAILURE,
@@ -68,13 +67,3 @@ const dataStatuses = combineReducers({
 })
 
 export default dataStatuses
-
-const getFromState = (state, name) => g(state, name)
-
-// selectors
-export const getIsDataFetching = state => {
-  return getFromState(state, 'dataFetching')
-}
-export const getIsRecipeSaving = state => getFromState(state, 'recipeSaving')
-export const getIsRecipeDeleting = state =>
-  getFromState(state, 'recipeDeleting')

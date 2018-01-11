@@ -12,6 +12,3 @@ const ingredientsEntity = createReducer(
 )
 
 export default ingredientsEntity
-
-// selectors
-export const getAllIngredients = state => state

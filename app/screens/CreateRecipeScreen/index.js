@@ -9,7 +9,7 @@ import {
   getRecipe,
   getAllIngredients,
   getIsDataFetching
-} from '../../reducers/index'
+} from '../../reducers/selectors'
 
 const mapStateToProps = (state, { params: { id } }) => {
   // new recipe being created

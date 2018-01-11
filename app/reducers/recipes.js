@@ -1,7 +1,7 @@
 import Immutable from 'seamless-immutable'
 import createReducer from '../utils/createReducer'
 import { combineReducers } from 'redux'
-import { get as g, keys } from 'lodash'
+import { keys } from 'lodash'
 import { FETCH_DATA_SUCCESS } from '../actions/actionTypes'
 
 export const byId = createReducer(
@@ -27,10 +27,3 @@ const recipesEntity = combineReducers({
 })
 
 export default recipesEntity
-
-const getFromState = (state, name) => g(state, name)
-// selectors
-export const getAllRecipes = state =>
-  getFromState(state, 'allIds').map(id => state.byId[id])
-export const getRecipe = (state, recipeId) =>
-  getFromState(state, 'byId')[recipeId]

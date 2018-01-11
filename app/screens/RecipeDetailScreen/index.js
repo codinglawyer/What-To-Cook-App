@@ -12,14 +12,13 @@ import {
   getAllIngredients,
   getRecipe,
   getIsDataFetching
-} from '../../reducers/index'
+} from '../../reducers/selectors'
 import { Screen, Container, Subtitle } from '../../styles/global-styles'
 import { RecipeDirection, RecipeIngredients, RecipeTitle } from './styles'
 
 const mapStateToProps = (state, { params }) => {
   const recipe = getRecipe(state, params.id)
   const allIngredients = getAllIngredients(state)
-  console.log(state)
   const recipeIngredients = recipe
     ? recipe.ingredients.map(ingredientId => allIngredients[ingredientId])
     : []

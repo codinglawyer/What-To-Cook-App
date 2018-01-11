@@ -12,7 +12,7 @@ import {
   getIsRecipeSaving,
   getCompleteRecipes,
   getAllIngredients
-} from '../../reducers/index'
+} from '../../reducers/selectors'
 import FetchError from '../../components/FetchError'
 import { HeaderPicture, SiteTitle } from './styles'
 import { Screen } from '../../styles/global-styles'

@@ -15,7 +15,7 @@ import MenuItem from 'material-ui/MenuItem'
 import { lifecycle } from '../utils/lifecycle-fp'
 
 import { isDataBeingFetched } from '../actions/index'
-import { getAllRecipes } from '../reducers/index'
+import { getAllRecipes } from '../reducers/selectors'
 
 const navigationLifecycle = {
   componentDidMount ({ handleIsDataBeingFetched }) {
