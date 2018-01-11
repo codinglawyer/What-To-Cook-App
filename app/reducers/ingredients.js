@@ -5,7 +5,7 @@ const ingredientsEntity = createReducer(
   {},
   {
     [FETCH_DATA_SUCCESS] (state, action) {
-      const { ingredients } = action.payload.entities
+      const { ingredients } = action.response.entities
       return state.merge(ingredients)
     }
   }

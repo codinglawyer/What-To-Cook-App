@@ -23,8 +23,8 @@ export const dataFetching = createReducer(
       return state.merge({ fetching: false, error: '' })
     },
     [FETCH_DATA_FAILURE] (state, action) {
-      const { error } = action.payload
-      return state.merge({ fetching: false, error })
+      const { message } = action.error
+      return state.merge({ fetching: false, error: message })
     }
   }
 )
@@ -39,8 +39,8 @@ export const recipeSaving = createReducer(
       return state.merge({ saving: false, error: '' })
     },
     [ADD_RECIPE_FAILURE] (state, action) {
-      const { error } = action.payload
-      return state.merge({ saving: false, error })
+      const { message } = action.error
+      return state.merge({ saving: false, error: message })
     }
   }
 )
@@ -55,8 +55,8 @@ export const recipeDeleting = createReducer(
       return state.merge({ deleting: false, error: '' })
     },
     [DELETE_RECIPE_FAILURE] (state, action) {
-      const { error } = action.payload
-      return state.merge({ deleting: false, error })
+      const { message } = action.error
+      return state.merge({ deleting: false, error: message })
     }
   }
 )

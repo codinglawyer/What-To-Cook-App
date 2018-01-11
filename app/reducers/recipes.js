@@ -8,15 +8,15 @@ export const byId = createReducer(
   {},
   {
     [FETCH_DATA_SUCCESS] (state, action) {
-      const { recipes } = action.payload.entities
+      const { recipes } = action.response.entities
       return state.merge(recipes)
     }
   }
 )
 
 export const allIds = createReducer([], {
-  [FETCH_DATA_SUCCESS](state, action) {
-    const { recipes } = action.payload.entities
+  [FETCH_DATA_SUCCESS] (state, action) {
+    const { recipes } = action.response.entities
     return Immutable(keys(recipes))
   }
 })
