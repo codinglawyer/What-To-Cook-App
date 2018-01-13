@@ -26,7 +26,7 @@ const mapStateToProps = (state, { params: { id } }) => {
     }
   }
   // recipe being edited
-  const recipe = getRecipe(state, id)
+  const recipe = getRecipe(id)(state)
   const allIngredients = getAllIngredients(state)
   const recipeIngredients = recipe
     ? recipe.ingredients.map(ingredientId => allIngredients[ingredientId])

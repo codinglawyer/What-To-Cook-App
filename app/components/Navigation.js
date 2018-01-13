@@ -27,6 +27,7 @@ const mapStateToProps = state => ({
   recipes: getAllRecipes(state)
 })
 
+// TODO: add what to do when database is in disconnected state
 const renderNavigation = ({ recipes, children } = {}) => (
   <div>
     <Toolbar style={{ background: '#291705' }}>

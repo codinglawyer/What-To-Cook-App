@@ -1,17 +1,14 @@
-import { get as g } from 'lodash'
+import { get as g, curry } from 'lodash'
+import { createSelector } from 'reselect'
 
 const getRecipesFromState = state => g(state, 'recipesEntity')
 const getStatutesFromState = state => g(state, 'dataStatuses')
-const getFromState = (state, name) => g(state, name)
 
 // DataStatuses selectors
-export const getIsDataFetchingHelper = state => {
-  return getFromState(state, 'dataFetching')
-}
-export const getIsRecipeSavingHelper = state =>
-  getFromState(state, 'recipeSaving')
-export const getIsRecipeDeletingHelper = state =>
-  getFromState(state, 'recipeDeleting')
+const getIsDataFetchingHelper = dataStatuses => g(dataStatuses, 'dataFetching')
+const getIsRecipeSavingHelper = dataStatuses => g(dataStatuses, 'recipeSaving')
+const getIsRecipeDeletingHelper = dataStatuses =>
+  g(dataStatuses, 'recipeDeleting')
 
 export const getIsDataFetching = state =>
   getIsDataFetchingHelper(getStatutesFromState(state))
@@ -20,31 +17,43 @@ export const getIsRecipeSaving = state =>
 export const getIsRecipeDeleting = state =>
   getIsRecipeDeletingHelper(getStatutesFromState(state))
 
-// Recipes selectors
-export const getAllRecipesHelper = state =>
-  getFromState(state, 'allIds').map(id => state.byId[id])
-export const getRecipeHelper = (state, recipeId) =>
-  getFromState(state, 'byId')[recipeId]
+// Ingredients selectors (memoized)
+const getAllIngredientsHelper = curry((entity, state) => g(state, entity))
+export const getAllIngredients = createSelector(
+  getAllIngredientsHelper('ingredientsEntity'),
+  ingredients => ingredients
+)
 
-export const getAllRecipes = state =>
-  getAllRecipesHelper(getRecipesFromState(state))
-export const getRecipe = (state, recipeId) =>
-  getRecipeHelper(getRecipesFromState(state), recipeId)
-export const getCompleteRecipes = (state, getRecipes, getIngredients) => {
-  const recipes = getRecipes(state)
-  const allIngredients = getIngredients(state)
-  const relevantIngredients = recipes.map(recipe =>
-    recipe.ingredients.map(elem => ({ [elem]: allIngredients[elem] }))
-  )
-  const recipesWithIngredients = relevantIngredients.map((ing, i) => ({
-    ...recipes[i],
-    ingredients: ing
-  }))
-  return recipesWithIngredients
+// Recipes selectors (memoized)
+// TODO: make it more functional
+const getAllRecipesHelper = selector => state => {
+  const recipesEntity = selector(state)
+  return g(recipesEntity, 'allIds').map(id => recipesEntity.byId[id])
 }
+export const getAllRecipes = createSelector(
+  getAllRecipesHelper(getRecipesFromState),
+  recipes => recipes
+)
 
-// Ingredients selectors
-export const getAllIngredientsHelper = state => state
+const getRecipeHelper = selector => recipeId => state => {
+  const recipesEntity = selector(state)
+  return g(recipesEntity, 'byId')[recipeId]
+}
+export const getRecipe = createSelector(
+  getRecipeHelper(getRecipesFromState),
+  recipe => recipe
+)
 
-export const getAllIngredients = state =>
-  getAllIngredientsHelper(g(state, 'ingredientsEntity'))
+export const getCompleteRecipes = createSelector(
+  [getAllRecipes, getAllIngredients],
+  (recipes, allIngredients) => {
+    const relevantIngredients = recipes.map(recipe =>
+      recipe.ingredients.map(elem => ({ [elem]: allIngredients[elem] }))
+    )
+    const recipesWithIngredients = relevantIngredients.map((ing, i) => ({
+      ...recipes[i],
+      ingredients: ing
+    }))
+    return recipesWithIngredients
+  }
+)
