@@ -1,10 +1,11 @@
 import React from 'react'
 import T from 'prop-types'
 import RecipeForm from '../../components/forms/RecipeForm'
-import ReactLoading from 'react-loading'
+import Spinner from '../../components/Spinner'
 import { get as g } from 'lodash'
 import { Screen } from '../../styles/global-styles'
 import { connect } from 'react-redux'
+import { compose, branch, renderComponent } from 'recompose'
 import {
   getRecipe,
   getAllIngredients,
@@ -37,25 +38,25 @@ const mapStateToProps = (state, { params: { id } }) => {
   }
 }
 
-const CreateRecipeScreen = ({
+const renderCreateRecipeScreen = ({
   initialValues,
   isFetching,
   routeParams,
   router: { push }
 }) => (
   <Screen>
-    {!isFetching ? (
-      <RecipeForm
-        initialValues={initialValues}
-        isFetching={isFetching}
-        isEdited={g(routeParams, 'id')}
-        changeRoute={push}
-      />
-    ) : (
-      <ReactLoading type="bars" color="#444" className="createLoader" />
-    )}
+    <RecipeForm
+      initialValues={initialValues}
+      isFetching={isFetching}
+      isEdited={g(routeParams, 'id')}
+      changeRoute={push}
+    />
   </Screen>
 )
+
+const CreateRecipeScreen = compose(
+  branch(({ isFetching }) => isFetching, renderComponent(Spinner))
+)(renderCreateRecipeScreen)
 
 CreateRecipeScreen.propTypes = {
   initialValues: T.object.isRequired,
