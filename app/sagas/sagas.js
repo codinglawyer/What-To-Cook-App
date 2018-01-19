@@ -1,4 +1,4 @@
-import watchConnectionStatus from './databaseConnection'
+import connectionStatus from './connectionStatus'
 import watchDatabaseUpdate from './databaseUpdate'
 import watchAddRecipe from './addRecipe'
 import watchDeleteRecipe from './deleteRecipe'
@@ -7,7 +7,7 @@ export default function * rootSaga () {
   yield [
     watchAddRecipe(),
     watchDeleteRecipe(),
-    watchConnectionStatus(),
+    connectionStatus(),
     watchDatabaseUpdate()
   ]
 }
