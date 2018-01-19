@@ -7,7 +7,7 @@ import { Flex } from 'reflexbox'
 import RaisedButton from 'material-ui/RaisedButton'
 import Spinner from '../../components/Spinner'
 import { compose, withHandlers, branch, renderComponent } from 'recompose'
-import { deleteRecipeRequest } from '../../actions/index'
+import { deleteRecipeRequest } from '../../actions'
 import {
   getAllIngredients,
   getRecipe,

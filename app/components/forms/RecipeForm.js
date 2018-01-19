@@ -7,7 +7,7 @@ import TextField from './TextField'
 import IngredientsForm from './IngredientsForm'
 import DirectionsForm from './DirectionsForm'
 import RaisedButton from 'material-ui/RaisedButton'
-import { addRecipeRequest } from '../../actions/index'
+import { addRecipeRequest } from '../../actions'
 import { Header } from '../../styles/global-styles'
 import { RecipeHeading } from './styles'
 

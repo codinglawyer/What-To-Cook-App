@@ -3,7 +3,7 @@ import T from 'prop-types'
 import { get as g, isEmpty } from 'lodash'
 import { connect } from 'react-redux'
 import { compose, withHandlers, branch, renderComponent } from 'recompose'
-import { isDataBeingFetched } from '../../actions/index'
+import { isDataBeingFetched } from '../../actions'
 import {
   getIsDataFetching,
   getIsRecipeDeleting,

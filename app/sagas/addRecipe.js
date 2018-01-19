@@ -4,7 +4,7 @@ import { v4 } from 'uuid'
 import { get as g, map, keys } from 'lodash'
 import { pipe } from 'lodash/fp'
 import { ADD_RECIPE_REQUEST } from '../actions/actionTypes'
-import { addRecipeSuccess, addRecipeFailure } from '../actions/index'
+import { addRecipeSuccess, addRecipeFailure } from '../actions'
 import firebaseApp from '../api/firebase'
 
 const createNewIngredientsIds = ingredients =>

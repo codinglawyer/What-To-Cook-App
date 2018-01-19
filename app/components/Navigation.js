@@ -14,7 +14,7 @@ import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
 import { lifecycle } from '../utils/lifecycle-fp'
 
-import { isDataBeingFetched } from '../actions/index'
+import { isDataBeingFetched } from '../actions'
 import { getAllRecipes } from '../reducers/selectors'
 
 const navigationLifecycle = {
