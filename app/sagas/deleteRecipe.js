@@ -1,6 +1,6 @@
 import { takeEvery, call, put } from 'redux-saga/effects'
 import { DELETE_RECIPE_REQUEST } from '../actions/actionTypes'
-import { deleteRecipeSuccess, deleteRecipeFailure } from '../actions'
+import { deleteRecipeSuccess, deleteRecipeFailure } from '../actions/index'
 
 import firebaseApp from '../api/firebase'
 

@@ -9,7 +9,9 @@ export const byId = createReducer(
   {
     [FETCH_DATA_SUCCESS] (state, action) {
       const { recipes } = action.response.entities
-      return state.merge(recipes)
+      // use emptu object if there are no recipes
+      // in such a case server will return no recipes attribute
+      return state.merge(recipes || {})
     }
   }
 )
