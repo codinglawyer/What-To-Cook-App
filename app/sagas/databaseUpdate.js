@@ -1,28 +1,22 @@
-import { channel } from 'redux-saga'
-import { put, take, call } from 'redux-saga/effects'
 import firebaseApp from '../api/firebase'
-import * as actions from '../actions/index'
+import { eventChannel, buffers } from 'redux-saga'
+import { put, take } from 'redux-saga/effects'
+import { fetchDataSuccess, fetchDataFailure } from '../actions/index'
 
-export function * databaseUpdate () {
-  const databaseUpdateChannel = yield call(channel)
-  const databaseUpdate = databaseUpdateWrapper(databaseUpdateChannel)
-  const connectionRef = firebaseApp.database().ref()
-  connectionRef.on('value', databaseUpdate)
+export default function * databaseUpdate () {
+  const chan = eventChannel(emit => {
+    const connectionRef = firebaseApp.database().ref()
+    connectionRef.on('value', snapshot => emit(snapshot.val()))
+    // don't stop the channel
+    return () => {}
+  }, buffers.expanding(1))
 
   while (true) {
-    const action = yield take(databaseUpdateChannel)
-    yield put(action)
+    let data = yield take(chan)
+    if (data) {
+      yield put(fetchDataSuccess(data))
+    } else {
+      yield put(fetchDataFailure(data))
+    }
   }
-}
-
-const databaseUpdateWrapper = channel => snapshot => {
-  if (snapshot.val()) {
-    channel.put(actions.fetchDataSuccess(snapshot.val()))
-  } else {
-    channel.put(actions.fetchDataFailure(snapshot.val()))
-  }
-}
-
-export default function * watchDatabaseUpdate () {
-  yield call(databaseUpdate)
 }
